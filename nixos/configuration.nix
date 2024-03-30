@@ -128,6 +128,8 @@
     bitwarden-cli
     yt-dlp
     ctop
+    croc
+    wormhole-william
 
     # Do install the docker CLI to talk to podman.
     # Not needed when virtualisation.docker.enable = true;
