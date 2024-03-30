@@ -6,22 +6,31 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
   };
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, nixpkgs-unstable }:
   let
     system = "x86_64-linux";
 
     pkgs = import nixpkgs {
-      inherit syste;
+      inherit system;
       
       config = {
         allowUnfree = true;
       };
     };
+
+    pkgs-unstable = import nixpkgs-unstable {
+      inherit system;
+      
+      config = {
+        allowUnfree = true;
+      };
+    };
+
   in
   {
     nixosConfigurations = {
       going-merry = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit system; };
+        specialArgs = { inherit system; inherit pkgs-unstable; };
         modules = [
           ./nixos/configuration.nix
         ];

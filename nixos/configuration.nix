@@ -2,10 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
-let
-  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
-in
+{ config, lib, pkgs, pkgs-unstable, ... }:
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -126,7 +123,7 @@ in
     unar
     unzip
     wakeonlan
-    unstable.rbw
+    pkgs-unstable.rbw
     pinentry # rbw dep
     bitwarden-cli
     yt-dlp
@@ -274,11 +271,6 @@ in
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  system.copySystemConfiguration = true;
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
