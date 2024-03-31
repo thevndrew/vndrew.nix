@@ -35,6 +35,13 @@
           ./nixos/going-merry/configuration.nix
         ];
       };
+
+      thousand-sunny = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit system; inherit pkgs-unstable; };
+        modules = [
+          ./nixos/thousand-sunny/configuration.nix
+        ];
+      };
     };
   };
 }
