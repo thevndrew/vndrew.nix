@@ -131,6 +131,8 @@
     croc
     wormhole-william
     starship
+    shellcheck
+    # shellharden
 
     # Do install the docker CLI to talk to podman.
     # Not needed when virtualisation.docker.enable = true;
