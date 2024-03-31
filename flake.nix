@@ -32,7 +32,7 @@
       going-merry = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit system; inherit pkgs-unstable; };
         modules = [
-          ./nixos/configuration.nix
+          ./nixos/going-merry/configuration.nix
         ];
       };
     };
