@@ -146,6 +146,8 @@
     cht-sh
     ngrep
     starship
+    pkgs-unstable.nix-output-monitor
+    pkgs-unstable.nvd
 
     # Do install the docker CLI to talk to podman.
     # Not needed when virtualisation.docker.enable = true;
