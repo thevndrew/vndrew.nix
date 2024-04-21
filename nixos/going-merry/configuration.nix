@@ -1,12 +1,12 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, lib, pkgs, pkgs-unstable, ... }:
+{ config, lib, pkgs, pkgs-unstable, inputs, ... }:
 {
+
+  disabledModules = [ "programs/nh.nix" ];
+
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      "${inputs.nixpkgs-unstable}/nixos/modules/programs/nh.nix"
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -133,11 +133,25 @@
     starship
     shellcheck
     # shellharden
+    pkgs-unstable.nix-output-monitor
+    pkgs-unstable.nvd
 
     # Do install the docker CLI to talk to podman.
     # Not needed when virtualisation.docker.enable = true;
     docker-client
   ];
+
+  environment.sessionVariables = {
+    FLAKE = "/home/andrew/nix-config";
+  };
+
+  programs.nh = {
+    enable = true;
+    package = pkgs-unstable.nh;
+    #clean.enable = true;
+    #clean.extraArgs = "--keep-since 4d --keep 3";
+    flake = "/home/andrew/nix-config";
+  };
 
   networking = {
     hostName = "going-merry";

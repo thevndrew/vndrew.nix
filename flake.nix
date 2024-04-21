@@ -6,7 +6,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable }:
+  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable }:
   let
     system = "x86_64-linux";
 
@@ -30,14 +30,14 @@
   {
     nixosConfigurations = {
       going-merry = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit system; inherit pkgs-unstable; };
+        specialArgs = { inherit system; inherit pkgs-unstable; inherit inputs; };
         modules = [
           ./nixos/going-merry/configuration.nix
         ];
       };
 
       thousand-sunny = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit system; inherit pkgs-unstable; };
+        specialArgs = { inherit system; inherit pkgs-unstable; inherit inputs; };
         modules = [
           ./nixos/thousand-sunny/configuration.nix
         ];
