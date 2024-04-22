@@ -21,6 +21,7 @@
   # environment.
   home.packages = [
     pkgs.hello
+    pkgs.glow
     #pkgs.cosmopolitan
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
