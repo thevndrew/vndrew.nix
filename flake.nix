@@ -59,14 +59,14 @@
   in
   {
     nixosConfigurations = {
-      going-merry = nixpkgs.lib.nixosSystem {
+      going-merry-old = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit system; inherit pkgs-unstable; inherit inputs; };
         modules = [
           ./hosts/going-merry/configuration.nix
         ];
       };
 
-      going-merry-hm = mkSystem "going-merry" rec {
+      going-merry = mkSystem "going-merry" rec {
         system = "x86_64-linux";
         user = "andrew";
       };
