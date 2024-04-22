@@ -6,6 +6,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      #inputs.home-manager.nixosModules.default
       "${inputs.nixpkgs-unstable}/nixos/modules/programs/nh.nix"
     ];
 
