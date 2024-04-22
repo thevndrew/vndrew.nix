@@ -71,11 +71,16 @@
         user = "andrew";
       };
 
-      thousand-sunny = nixpkgs.lib.nixosSystem {
+      thousand-sunny-old = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit system; inherit pkgs-unstable; inherit inputs; };
         modules = [
           ./hosts/thousand-sunny/configuration.nix
         ];
+      };
+
+      thousand-sunny = mkSystem "thousand-sunny" rec {
+        system = "x86_64-linux";
+        user = "andrew";
       };
     };
   };
