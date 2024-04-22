@@ -59,29 +59,17 @@
   in
   {
     nixosConfigurations = {
-      going-merry-old = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit system; inherit pkgs-unstable; inherit inputs; };
-        modules = [
-          ./hosts/going-merry/configuration.nix
-        ];
-      };
 
       going-merry = mkSystem "going-merry" rec {
         system = "x86_64-linux";
         user = "andrew";
       };
 
-      thousand-sunny-old = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit system; inherit pkgs-unstable; inherit inputs; };
-        modules = [
-          ./hosts/thousand-sunny/configuration.nix
-        ];
-      };
-
       thousand-sunny = mkSystem "thousand-sunny" rec {
         system = "x86_64-linux";
         user = "andrew";
       };
+
     };
   };
 }
