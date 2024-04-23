@@ -1,8 +1,4 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, inputs, lib, pkgs, pkgs-unstable, ... }:
+{ config, inputs, lib, pkgs, pkgs-unstable, currentSystemUser, ... }:
 
 {
   imports = [ 
@@ -72,7 +68,7 @@
   };
 
   users.groups.storage = {};
-  users.users.andrew.extraGroups = [ "wheel" "podman" "storage" ];
+  users.users.${currentSystemUser}.extraGroups = [ "wheel" "podman" "storage" ];
 
   environment.systemPackages = with pkgs; [
     docker-compose
