@@ -9,6 +9,16 @@
     FLAKE = "/home/${currentSystemUser}/nix-config";
   };
 
+  environment.systemPackages = with pkgs; [
+    mergerfs
+    tmux
+    vim
+    git
+    ethtool
+    pkgs-unstable.nix-output-monitor
+    pkgs-unstable.nvd
+  ];
+
   programs.nh = {
     enable = true;
     package = pkgs-unstable.nh;
@@ -33,12 +43,6 @@
   security.sudo.wheelNeedsPassword = false;
 
   services = {
-    #cron = {
-    #  enable = true;
-    #  systemCronJobs = [
-    #    "*/30 * * * *  andrew  /home/andrew/services/qbittorrent/restart.sh >> /tmp/qbittorrent_restart.log"
-    #  ];
-    #};
 
     openssh = {
       enable = true;

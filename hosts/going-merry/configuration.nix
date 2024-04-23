@@ -20,55 +20,6 @@
   users.users."${currentSystemUser}".extraGroups = [ "wheel" "podman" ];
   #extraGroups = [ "wheel" "docker" ];
 
-  environment.systemPackages = with pkgs; [
-    docker-compose
-    htop
-    hddtemp
-    iotop
-    mergerfs
-    ncdu
-    nmap
-    nvme-cli
-    tailscale
-    tdns-cli
-    tmux
-    tree
-    vim
-    neovim
-    wget
-    git
-    ethtool
-    jq
-    yq
-    nnn
-    rclone
-    btop
-    rsync
-    dig
-    lsof
-    cht-sh
-    unar
-    unzip
-    wakeonlan
-    pkgs-unstable.rbw
-    pinentry # rbw dep
-    bitwarden-cli
-    yt-dlp
-    ctop
-    croc
-    wormhole-william
-    starship
-    shellcheck
-    # shellharden
-    pkgs-unstable.nix-output-monitor
-    pkgs-unstable.nvd
-    #gost
-
-    # Do install the docker CLI to talk to podman.
-    # Not needed when virtualisation.docker.enable = true;
-    docker-client
-  ];
-
   networking = {
     hostName = "going-merry";
   };

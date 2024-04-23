@@ -1,12 +1,12 @@
-{ isWSL, inputs, ...}:
+{ isWSL, inputs, currentSystemUser, ...}:
 
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-unstable, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "andrew";
-  home.homeDirectory = "/home/andrew";
+  home.username = "${currentSystemUser}";
+  home.homeDirectory = "/home/${currentSystemUser}";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -17,12 +17,52 @@
   # release notes.
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
-  home.packages = [
-    pkgs.hello
-    pkgs.glow
-    #pkgs.cosmopolitan
+  home.packages = with pkgs; [
+    #bitwarden-cli
+    btop
+    cht-sh
+    #croc
+    ctop
+    dig
+    docker-compose
+    git
+    glow
+    #gost
+    hddtemp
+    htop
+    iotop
+    jq
+    lsof
+    ncdu
+    neovim
+    ngrep
+    nmap
+    nnn
+    nvme-cli
+    rclone
+    rsync
+    shellcheck
+    #shellharden
+    starship
+    tdns-cli
+    tmux
+    tree
+    unar
+    unzip
+    vim
+    wakeonlan
+    wget
+    #wormhole-william
+    yq
+    yt-dlp
+
+    #cosmopolitan
+    #pkgs-unstable.rbw
+    #pinentry # rbw dep
+
+    # Do install the docker CLI to talk to podman.
+    # Not needed when virtualisation.docker.enable = true;
+    docker-client
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the

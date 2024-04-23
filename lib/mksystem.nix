@@ -49,9 +49,10 @@ in systemFunc rec {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.users.${user} = import userHMConfig {
-        isWSL = isWSL;
-        isDesktop = desktop;
+        currentSystemUser = user;
         inputs = inputs;
+        isDesktop = desktop;
+        isWSL = isWSL;
       };
     }
 
