@@ -1,98 +1,24 @@
-{ config, lib, pkgs, pkgs-unstable, inputs, ... }:
+{ config, lib, pkgs, pkgs-unstable, inputs, currentSystemUser, ... }:
 {
-
-  disabledModules = [ "programs/nh.nix" ];
-
-  imports =
-    [ # Include the results of the hardware scan.
+  imports = [ 
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      #inputs.home-manager.nixosModules.default
-      "${inputs.nixpkgs-unstable}/nixos/modules/programs/nh.nix"
-    ];
+  ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernel.sysctl = {
-    "net.ipv4.ip_forward" = 1;
-    "net.ipv6.conf.all.forwarding" = 1;
-  };
-
-  nix = {
-    settings = {
-        experimental-features = [ "nix-command" "flakes" ];
-        warn-dirty = false;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
     };
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
+    kernel.sysctl = {
+      "net.ipv4.ip_forward" = 1;
+      "net.ipv6.conf.all.forwarding" = 1;
     };
   };
 
-  security.sudo.enable = true;
-  security.sudo.wheelNeedsPassword = false;
-
-  services = {
-    #cron = {
-    #  enable = true;
-    #  systemCronJobs = [
-    #    "*/30 * * * *  andrew  /home/andrew/services/qbittorrent/restart.sh >> /tmp/qbittorrent_restart.log"
-    #  ];
-    #};
-
-    openssh = {
-      enable = true;
-      settings.PasswordAuthentication = false;
-      settings.PermitRootLogin = "yes";
-      ports = [ 22 2222 ];
-    };
-
-    tailscale = {
-      enable = true;
-      useRoutingFeatures = "both";
-    };
-
-    vnstat.enable = true;
-
-    resolved = {
-      enable = false;
-      fallbackDns = [
-        "100.100.100.100"
-        "10.89.0.1"
-        "9.9.9.9"
-      ];
-      domains = [
-        "ainu-kanyu.ts.net"
-        "dns.podman"
-      ];
-    };
-  };
-
-  environment.variables = {
-    EDITOR = "nvim";
-    HISTSIZE = "";
-    HISTFILESIZE = "";
-    HISTCONTROL = "ignoreboth";
-    HISTTIMEFORMAT = "[%F %T] ";
-    HISTFILE = "/home/andrew/.bash_eternal_history";
-    PROMPT_COMMAND = "history -a; $PROMPT_COMMAND";
-  };
-
-  users.mutableUsers = false;
-  users.users.andrew = {
-    extraGroups = [ "wheel" "podman" ];
-    #extraGroups = [ "wheel" "docker" ];
-    initialPassword = "andrew";
-    home = "/home/andrew";
-    isNormalUser = true;
-    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHo+NCpecLu+vJrhgp0deaNXblILsmxxixpTg8pw+WAL" ];  
-  };
-
-  users.users.root.initialHashedPassword = "";
-  users.users.root.openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHo+NCpecLu+vJrhgp0deaNXblILsmxxixpTg8pw+WAL" ];
-
-  time.timeZone = "America/New_York";
+  users.users."${currentSystemUser}".extraGroups = [ "wheel" "podman" ];
+  #extraGroups = [ "wheel" "docker" ];
 
   environment.systemPackages = with pkgs; [
     docker-compose
@@ -143,81 +69,10 @@
     docker-client
   ];
 
-  environment.sessionVariables = {
-    FLAKE = "/home/andrew/nix-config";
-  };
-
-  programs.nh = {
-    enable = true;
-    package = pkgs-unstable.nh;
-    #clean.enable = true;
-    #clean.extraArgs = "--keep-since 4d --keep 3";
-    flake = "/home/andrew/nix-config";
-  };
-
   networking = {
     hostName = "going-merry";
-    # enableIPv6  = false;
-    firewall = {
-      # enable the firewall
-      enable = true;
-      
-      interfaces."podman+".allowedUDPPorts = [ 53 ];
-
-      # always allow traffic from your Tailscale network
-      trustedInterfaces = [ "tailscale0" ];
-
-      # allow the Tailscale UDP port through the firewall
-      allowedUDPPorts = [ config.services.tailscale.port ];
-
-      # allow you to SSH in over the public internet
-      allowedTCPPorts = [ 22 2222 ];
-    };
-    nameservers = [
-      "100.100.100.100"
-      "9.9.9.9"
-      "10.89.0.1"
-    ];
-    search = [
-      "ainu-kanyu.ts.net"
-      "dns.podman"
-    ];
   };
 
-  # Arion works with Docker, but for NixOS-based containers, you need Podman
-  # since NixOS 21.05.
-  virtualisation = {
-    containers = {
-      enable = true;
-      containersConf = {
-        settings = {
-          network = {
-            dns_bind_port = 54;
-          };
-          engine = {
-            network_cmd_options = [
-              "mtu=1280"
-              "outbound_addr=tailscale0"
-              "outbound_addr6=tailscale0"
-            ];
-          };
-        };
-      };
-    };
-    #oci-containers.backend = "podman";
-    docker.enable = false;
-    podman = {
-      enable = true;
-      autoPrune = {
-        enable = true;
-        dates = "weekly";
-      };
-      dockerSocket.enable = true;
-      defaultNetwork.settings.dns_enable = true;
-      # extraPackages = [ pkgs.zfs ]; # Required if the host is running ZFS
-    };
-  };
-  
   systemd.services.wol = {
     enable = true;
     description = "Wake-on-LAN service";
@@ -232,7 +87,6 @@
     wantedBy = [ "multi-user.target" ];
   };
 
-
   systemd.services."qbittorrent-restart" = {
     enable = true;
     description = "qbittorrent automatic restart";
@@ -241,8 +95,8 @@
       Type = "oneshot";
     };
     serviceConfig = {
-      ExecStart = "/bin/sh -c '/home/andrew/services/qbittorrent/restart.sh'";
-      User = "andrew";
+      ExecStart = "/bin/sh -c '/home/${currentSystemUser}/services/qbittorrent/restart.sh'";
+      User = "${currentSystemUser}";
       Group = "users";
     };
     startAt = "hourly";

@@ -5,25 +5,32 @@
 { config, inputs, lib, pkgs, pkgs-unstable, ... }:
 
 {
-  disabledModules = [ "programs/nh.nix" ];
-
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      "${inputs.nixpkgs-unstable}/nixos/modules/programs/nh.nix"
-    ];
+  imports = [ 
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot/efi";
+      };
+    };
 
-  boot.kernelParams = ["xhci_hcd.quirks=270336"];
-  #boot.kernel.sysctl = { "xhci_hcd.quirks" = 270336; };
-  boot.supportedFilesystems = [ "zfs" ];
-  boot.zfs = {
-    forceImportRoot = false;
-    extraPools = [ "tank00" "tank01" "tank02" ];
+    kernelParams = ["xhci_hcd.quirks=270336"];
+    #kernel.sysctl = { "xhci_hcd.quirks" = 270336; };
+    supportedFilesystems = [ "zfs" ];
+    zfs = {
+      forceImportRoot = false;
+      extraPools = [
+        "tank00" 
+        "tank01"
+        "tank02"
+      ];
+    };
   };
 
   services.zfs.autoScrub = {
@@ -34,7 +41,14 @@
   fileSystems."/mnt/storage" = {
     fsType = "fuse.mergerfs";
     device = "/mnt/tank00/storage:/mnt/tank01/storage:/mnt/tank02/storage";
-    options = ["cache.files=off" "dropcacheonclose=true" "category.create=mfs" "moveonenospc=true" "minfreespace=250G" "fsname=mergerfs" ];
+    options = [
+      "cache.files=off"
+      "dropcacheonclose=true"
+      "category.create=mfs"
+      "moveonenospc=true"
+      "minfreespace=250G"
+      "fsname=mergerfs"
+    ];
   };
 
   hardware.sensor.hddtemp = {
@@ -50,73 +64,15 @@
     unit = "C";
   };
 
-  powerManagement.cpuFreqGovernor = "powersave";
-  powerManagement.powertop.enable = true;
-  powerManagement.cpufreq.min = 800000; # 800 Mhz
-  powerManagement.cpufreq.max = 4400000; # 4.4 Ghz
-
-  nix = {
-    settings = {
-        experimental-features = [ "nix-command" "flakes" ];
-        warn-dirty = false;
-    };
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
-  };
-
-  security.sudo.enable = true;
-  security.sudo.wheelNeedsPassword = false;
-
-  services = {
-    openssh = {
-      enable = true;
-      settings.PasswordAuthentication = false;
-      settings.PermitRootLogin = "yes";
-      ports = [ 22 2222 ];
-    };
-
-    tailscale = {
-      enable = true;
-      useRoutingFeatures = "both";
-    };
-
-    vnstat.enable = true;
+  powerManagement = {
+    cpuFreqGovernor = "powersave";
+    powertop.enable = true;
+    cpufreq.min = 800000; # 800 Mhz
+    cpufreq.max = 4400000; # 4.4 Ghz
   };
 
   users.groups.storage = {};
-
-  users.mutableUsers = false;
-  users.users.andrew = {
-    extraGroups = [ "wheel" "podman" "storage" ];
-    initialPassword = "andrew";
-    home = "/home/andrew";
-    isNormalUser = true;
-    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHo+NCpecLu+vJrhgp0deaNXblILsmxxixpTg8pw+WAL" ];  
-  };
-
-  users.users.root.initialHashedPassword = "";
-  users.users.root.openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHo+NCpecLu+vJrhgp0deaNXblILsmxxixpTg8pw+WAL" ];
-  users.users.root.extraGroups = [ "storage" ];
-
-  environment.variables = {
-    EDITOR = "nvim";
-    HISTSIZE = "";
-    HISTFILESIZE = "";
-    HISTCONTROL = "ignoreboth";
-    HISTTIMEFORMAT = "[%F %T] ";
-    HISTFILE = "/home/andrew/.bash_eternal_history";
-    PROMPT_COMMAND = "history -a; $PROMPT_COMMAND";
-  };
-
-  programs.bash.interactiveShellInit = ''
-    shopt -s dotglob
-    shopt -s extglob
-  '';
-
-  time.timeZone = "America/New_York";
+  users.users.andrew.extraGroups = [ "wheel" "podman" "storage" ];
 
   environment.systemPackages = with pkgs; [
     docker-compose
@@ -154,63 +110,9 @@
     docker-client
   ];
 
-  environment.sessionVariables = {
-    FLAKE = "/home/andrew/nix-config";
-  };
-
-  programs.nh = {
-    enable = true;
-    package = pkgs-unstable.nh;
-    #clean.enable = true;
-    #clean.extraArgs = "--keep-since 4d --keep 3";
-    flake = "/home/andrew/nix-config";
-  };
-
   networking = {
     hostName = "thousand-sunny";
     hostId = "4a219e7f";
-
-    firewall = {
-      # enable the firewall
-      enable = true;
-
-      # always allow traffic from your Tailscale network
-      trustedInterfaces = [ "tailscale0" ];
-
-      # allow the Tailscale UDP port through the firewall
-      allowedUDPPorts = [ config.services.tailscale.port ];
-
-      # allow you to SSH in over the public internet
-      allowedTCPPorts = [ 22 2222 ];
-    };
-
-    nameservers = [ "100.100.100.100" "9.9.9.9" ];
-    search = [ "ainu-kanyu.ts.net" ];
-  };
-
-  # Arion works with Docker, but for NixOS-based containers, you need Podman
-  # since NixOS 21.05.
-  virtualisation = {
-    containers = {
-      enable = true;
-      containersConf = {
-        settings.network = {
-          dns_bind_port = 54;
-        };
-      };
-    };
-    #oci-containers.backend = "podman";
-    docker.enable = false;
-    podman = {
-      enable = true;
-      autoPrune = {
-        enable = true;
-        dates = "weekly";
-      };
-      dockerSocket.enable = true;
-      defaultNetwork.settings.dns_enable = true;
-      # extraPackages = [ pkgs.zfs ]; # Required if the host is running ZFS
-    };
   };
 
   systemd.services.wol = {
