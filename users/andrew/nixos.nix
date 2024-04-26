@@ -73,25 +73,11 @@
     };
   };
 
-  environment.variables = {
-    EDITOR = "nvim";
-    HISTSIZE = "";
-    HISTFILESIZE = "";
-    HISTCONTROL = "ignoreboth";
-    HISTTIMEFORMAT = "[%F %T] ";
-    HISTFILE = "/home/${currentSystemUser}/.bash_eternal_history";
-    PROMPT_COMMAND = "history -a; $PROMPT_COMMAND";
-  };
-
-  programs.bash.interactiveShellInit = ''
-    shopt -s dotglob
-    shopt -s extglob
-  '';
-
   users.mutableUsers = false;
   users.users.${currentSystemUser} = {
     initialPassword = "${currentSystemUser}";
     home = "/home/${currentSystemUser}";
+    shell = pkgs.zsh;
     isNormalUser = true;
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHo+NCpecLu+vJrhgp0deaNXblILsmxxixpTg8pw+WAL" ];  
   };
@@ -163,9 +149,21 @@
     ];
   };
 
-  # Add ~/.local/bin to PATH
-  environment.localBinInPath = true;
-  environment.pathsToLink = [ "/share/bash-completion" ];
+  programs = {
+    zsh.enable = true;
+  };
+
+  environment = {
+    # Add ~/.local/bin to PATH
+    localBinInPath = true;
+
+    pathsToLink = [ 
+      "/share/bash-completion"
+      "/share/zsh"
+    ];
+   
+    shells = [ pkgs.zsh pkgs.nushell ];
+  };
 
   #nixpkgs.overlays = import ../../lib/overlays.nix ++ [
   #  (import ./vim.nix { inherit inputs; })

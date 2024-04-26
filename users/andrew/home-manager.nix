@@ -1,7 +1,10 @@
 { isWSL, inputs, currentSystemUser, ...}:
 
 { config, pkgs, pkgs-unstable, ... }:
-
+let
+  configTheme = ../../config/zsh/p10k.zsh;
+  configThemeLean = ../../config/zsh/p10k_lean.zsh;
+in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -45,8 +48,74 @@
       PROMPT_COMMAND = "history -a; $PROMPT_COMMAND";
     };
     initExtra = ''
-      eval "$(starship init bash)"
+      # Nothing here for now...
     '';
+  };
+
+  programs.zsh = {
+    enable = true;
+    enableAutosuggestions = true;
+    enableCompletion = true;
+    dotDir = ".config/zsh";
+    history = {
+      extended = true;
+      ignoreDups = true;
+      ignoreSpace = true;
+      save = 1000000000;
+      size = 1000000000;
+      #path = "$HOME/.config/zsh/.zsh_history";
+      path = "$ZDOTDIR/.zsh_history";
+    };
+    initExtra = ''
+      ##{builtins.readFile ../config/zsh/functions.zsh}
+
+      [[ ! -f ${configTheme} ]] || source ${configTheme}
+
+      # Unload p10k and use starship
+      function basic() {
+        powerlevel10k_plugin_unload
+        eval "$(starship init zsh)"
+      }
+
+      # Use p10k lean theme
+      function lean() {
+        [[ ! -f ${configThemeLean} ]] || source ${configThemeLean}
+      }
+      bindkey "\e[1~" beginning-of-line
+      bindkey "\e[4~" end-of-line
+      bindkey "^[[3~" delete-char
+      bindkey -e
+    '';
+    historySubstringSearch = {
+      enable = true;
+      searchDownKey = [
+        "^[[B"
+      ];
+      searchUpKey = [
+        "^[[A"
+      ];
+    };
+    #initExtraBeforeCompInit
+    #initExtraFirst
+    #localVariables
+    plugins = [
+      {
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      }
+    ];
+    shellAliases = {
+      "reload_p10k"="[[ ! -f ${configTheme} ]] || source ~/.config/zsh/.zshrc";
+      "c" = "clear";
+      "ks" = "tmux kill-server";
+    };
+  };
+
+  programs.starship = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
   };
 
   programs.ssh = {
@@ -65,6 +134,7 @@
       co = "checkout";
       st = "status";
       wt = "worktree";
+      an = "commit --amend --no-edit";
     };
     lfs = {
       enable = true;
@@ -88,6 +158,7 @@
       rerere.enabled = true;
       user.signingkey = "~/.ssh/github.pub";
       user.gpgsign = true;
+      commit.gpgsign = true;
     };
   };
 
@@ -99,7 +170,6 @@
     ctop
     dig
     docker-compose
-    git
     glow
     #gost
     hddtemp
@@ -117,7 +187,6 @@
     rsync
     shellcheck
     #shellharden
-    starship
     tdns-cli
     tmux
     tree
@@ -151,6 +220,13 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
+
+  xdg = {
+    enable = true;
+    configFile = {
+      # Nothing here for now...
+    };
+  };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
