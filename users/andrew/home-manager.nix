@@ -17,6 +17,80 @@
   # release notes.
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
+  programs.bash = {
+    enable = true;
+    enableCompletion = true;
+    historyControl = [ "ignoredups" "ignorespace" ];
+    historyFile = "/home/${currentSystemUser}/.bash_eternal_history";
+    historyFileSize = -1;
+    historySize = -1;
+    bashrcExtra = ''
+      # No Extras for now
+    '';
+    shellOptions = [
+      #"checkjobs"
+      #"checkwinsize"
+      #"histappend"
+      "dotglob"
+      "extglob"
+      "globstar"
+    ];
+    sessionVariables = {
+      #HISTSIZE = "";
+      #HISTFILESIZE = "";
+      #HISTCONTROL = "ignoreboth";
+      #HISTFILE = "/home/${currentSystemUser}/.bash_eternal_history";
+      EDITOR = "nvim";
+      HISTTIMEFORMAT = "[%F %T] ";
+      PROMPT_COMMAND = "history -a; $PROMPT_COMMAND";
+    };
+    initExtra = ''
+      eval "$(starship init bash)"
+    '';
+  };
+
+  programs.ssh = {
+    enable = true;
+    extraConfig = ''
+      ${builtins.readFile ../../config/ssh/config}
+    '';
+  };
+
+  programs.git = {
+    enable = true;
+    userEmail = "69527486+thevndrew@users.noreply.github.com";
+    userName = "andrew";
+    aliases = {
+      br = "branch";
+      co = "checkout";
+      st = "status";
+      wt = "worktree";
+    };
+    lfs = {
+      enable = true;
+    };
+    delta.enable = true;
+    extraConfig = {
+      branch.sort = "-committerdate";
+      column.ui = "auto";
+      core = {
+        editor = "nvim";
+        fsmonitor = true;
+      };
+      fetch = {
+        prune = true;
+        writeCommitGraph = true;
+      };
+      gpg.format = "ssh";
+      init.defaultBranch = "main";
+      pull.rebase = true;
+      rebase.updateRefs = true;
+      rerere.enabled = true;
+      user.signingkey = "~/.ssh/github.pub";
+      user.gpgsign = true;
+    };
+  };
+
   home.packages = with pkgs; [
     #bitwarden-cli
     btop

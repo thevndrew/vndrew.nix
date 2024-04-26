@@ -53,6 +53,7 @@
 
     tailscale = {
       enable = true;
+      #package = pkgs-unstable.tailscale;
       useRoutingFeatures = "both";
     };
 
@@ -164,6 +165,7 @@
 
   # Add ~/.local/bin to PATH
   environment.localBinInPath = true;
+  environment.pathsToLink = [ "/share/bash-completion" ];
 
   #nixpkgs.overlays = import ../../lib/overlays.nix ++ [
   #  (import ./vim.nix { inherit inputs; })
