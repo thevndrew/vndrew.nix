@@ -21,6 +21,14 @@ let
 
   systemFunc = nixpkgs.lib.nixosSystem;
   home-manager = inputs.home-manager.nixosModules;
+  sops-nix = inputs.sops-nix.nixosModules;
+
+  pkgs = import nixpkgs {
+    inherit system;
+    config = {
+      allowUnfree = true;
+    };
+  };
 
   pkgs-unstable = import nixpkgs-unstable {
     inherit system;
@@ -43,6 +51,7 @@ in systemFunc rec {
     # Bring in WSL if this is a WSL build
     (if isWSL then inputs.nixos-wsl.nixosModules.wsl else {})
 
+    sops-nix.sops
     machineConfig
     userOSConfig
     home-manager.home-manager {

@@ -10,6 +10,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Manage secrets with sops
+    sops-nix.url = "github:Mic92/sops-nix";
+
     # Build a custom WSL installer
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
@@ -31,22 +34,6 @@
   let
     system = "x86_64-linux";
 
-    pkgs = import nixpkgs {
-      inherit system;
-      
-      config = {
-        allowUnfree = true;
-      };
-    };
-
-    pkgs-unstable = import nixpkgs-unstable {
-      inherit system;
-      
-      config = {
-        allowUnfree = true;
-      };
-    };
-
     overlays = [
       #inputs.neovim-nightly-overlay.overlay
       inputs.zig.overlays.default
@@ -56,20 +43,43 @@
       inherit overlays nixpkgs nixpkgs-unstable inputs;
     };
 
+    homeManagerSetup = { hostname, user }: (
+      let
+        specialArgs = inputs // {
+          inherit hostname user;
+          impurePaths = {
+            workingDir = "/home/${user}/.config/nix";
+          };
+        };
+      in
+      home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs { inherit system; };
+        modules = [ ./users/${user}/home-manager.nix ];
+        extraSpecialArgs = specialArgs;
+      }
+    );
+
   in
   {
     nixosConfigurations = {
 
       going-merry = mkSystem "going-merry" rec {
-        system = "x86_64-linux";
+	inherit system;
         user = "andrew";
       };
 
       thousand-sunny = mkSystem "thousand-sunny" rec {
-        system = "x86_64-linux";
+	inherit system;
         user = "andrew";
       };
 
+    };
+
+    homeConfigurations = {
+      ubuntu = homeManagerSetup {
+        hostname = "ubuntu-host";
+        user = "andrew";
+      };
     };
   };
 }
