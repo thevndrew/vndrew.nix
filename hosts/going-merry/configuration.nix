@@ -1,8 +1,14 @@
 { config, lib, pkgs, pkgs-unstable, inputs, currentSystemUser, ... }:
+
 {
   imports = [ 
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    
+    # Setup WOL systemd service
+    (import ../../modules/wol.nix {
+      wolCommand = "ethtool -s enp1s0 wol g && ethtool -s enp2s0 wol g";
+    })
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -22,20 +28,6 @@
 
   networking = {
     hostName = "going-merry";
-  };
-
-  systemd.services.wol = {
-    enable = true;
-    description = "Wake-on-LAN service";
-    after = [ "network.target" ];
-    requires = [ "network.target" ];
-    unitConfig = {
-      Type = "oneshot";
-    };
-    serviceConfig = {
-      ExecStart = "/bin/sh -c '${pkgs.ethtool}/sbin/ethtool -s enp1s0 wol g; ${pkgs.ethtool}/sbin/ethtool -s enp2s0 wol g'";
-    };
-    wantedBy = [ "multi-user.target" ];
   };
 
   systemd.services."qbittorrent_restart" = {

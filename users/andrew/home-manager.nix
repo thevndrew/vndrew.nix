@@ -204,6 +204,9 @@ in
       user.gpgsign = true;
       commit.gpgsign = true;
     };
+    ignores = [
+      "*.swp"
+    ];
   };
 
   home.packages = with pkgs; [

@@ -4,6 +4,11 @@
   imports = [ 
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+
+    # Setup WOL systemd service
+    (import ../../modules/wol.nix {
+      wolCommand = "ethtool -s eno1 wol g";
+    })
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -73,20 +78,6 @@
   networking = {
     hostName = "thousand-sunny";
     hostId = "4a219e7f";
-  };
-
-  systemd.services.wol = {
-    enable = true;
-    description = "Wake-on-LAN service";
-    after = [ "network.target" ];
-    requires = [ "network.target" ];
-    unitConfig = {
-      Type = "oneshot";
-    };
-    serviceConfig = {
-      ExecStart = "/bin/sh -c '${pkgs.ethtool}/sbin/ethtool -s eno1 wol g'";
-    };
-    wantedBy = [ "multi-user.target" ];
   };
 
   system.stateVersion = "23.11"; # Did you read the comment?
