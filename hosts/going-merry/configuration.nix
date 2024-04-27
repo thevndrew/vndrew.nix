@@ -38,7 +38,7 @@
     wantedBy = [ "multi-user.target" ];
   };
 
-  systemd.services."qbittorrent-restart" = {
+  systemd.services."qbittorrent_restart" = {
     enable = true;
     description = "qbittorrent automatic restart";
     path = [ pkgs.docker-client ];

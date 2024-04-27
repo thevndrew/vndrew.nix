@@ -1,15 +1,17 @@
 { isWSL, inputs, currentSystemUser, ...}:
 
-{ config, pkgs, pkgs-unstable, ... }:
+{ lib, config, pkgs, pkgs-unstable, ... }:
 let
   configTheme = ../../config/zsh/p10k.zsh;
   configThemeLean = ../../config/zsh/p10k_lean.zsh;
+  homeDir = "/home/${currentSystemUser}";
+  repoList = ../../config/repos/repos.yml;
 in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "${currentSystemUser}";
-  home.homeDirectory = "/home/${currentSystemUser}";
+  home.homeDirectory = "${homeDir}";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -19,6 +21,47 @@ in
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "23.11"; # Please read the comment before changing.
+
+  systemd.user.services.clone_repos = {
+    Unit = {
+      Description = "Clone repos to system";
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.writeShellScript "clone_repos" ''
+        #!/bin/bash
+
+        # Add yq to path
+        PATH=$PATH:${lib.makeBinPath [ pkgs.yq ]}
+
+        # Function to clone a repository if it doesn't already exist
+        clone_if_not_exists() {
+            local REPO_URL="$1"
+            local CLONE_DIR="$2"
+        
+            [ ! -d "$CLONE_DIR" ] && git clone "$REPO_URL" "$CLONE_DIR" || echo "Directory '$CLONE_DIR' already exists. Skipping clone."
+        }
+
+        mkdir_if_not_exists() {
+            local DIR=$(dirname "$1")
+
+            [ ! -d "$DIR" ] && mkdir -pv "$DIR"
+        }
+
+        REPOS=($(yq -r '.repo_list | keys[]' "${repoList}"))
+
+        for REPO in ''${REPOS[@]};
+        do
+            REPO_DIR=$(yq -r ".repo_list.$REPO.directory" "${repoList}")
+            REPO_URL=$(yq -r ".repo_list.$REPO.url" "${repoList}")
+            mkdir_if_not_exists "${homeDir}/$REPO_DIR"
+            clone_if_not_exists "$REPO_URL" "${homeDir}/$REPO_DIR"
+        done 
+      ''}";
+    };
+  };
 
   programs.bash = {
     enable = true;
