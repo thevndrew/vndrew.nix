@@ -69,18 +69,19 @@ in
     initExtra = ''
       ##{builtins.readFile ../config/zsh/functions.zsh}
 
-      [[ ! -f ${configTheme} ]] || source ${configTheme}
+      # [[ ! -f ${configTheme} ]] || source ${configTheme}
 
-      # Unload p10k and use starship
-      function basic() {
-        powerlevel10k_plugin_unload
-        eval "$(starship init zsh)"
-      }
+      ## Use p10k lean theme
+      #function lean() {
+      #  [[ ! -f ${configThemeLean} ]] || source ${configThemeLean}
+      #}
 
-      # Use p10k lean theme
-      function lean() {
-        [[ ! -f ${configThemeLean} ]] || source ${configThemeLean}
-      }
+      ## Unload p10k and use starship
+      #function basic() {
+      #  powerlevel10k_plugin_unload
+      #  eval "$(starship init zsh)"
+      #}
+
       bindkey "\e[1~" beginning-of-line
       bindkey "\e[4~" end-of-line
       bindkey "^[[3~" delete-char
@@ -99,11 +100,11 @@ in
     #initExtraFirst
     #localVariables
     plugins = [
-      {
-        name = "powerlevel10k";
-        src = pkgs.zsh-powerlevel10k;
-        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-      }
+      #{
+      #  name = "powerlevel10k";
+      #  src = pkgs.zsh-powerlevel10k;
+      #  file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      #}
     ];
     shellAliases = {
       "reload_p10k"="[[ ! -f ${configTheme} ]] || source ~/.config/zsh/.zshrc";
