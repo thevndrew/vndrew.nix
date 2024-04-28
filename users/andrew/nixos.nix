@@ -17,7 +17,7 @@ in
   environment.systemPackages = with pkgs; [
     mergerfs
     tmux
-    vim
+    neovim
     git
     ethtool
     pkgs-unstable.nix-output-monitor

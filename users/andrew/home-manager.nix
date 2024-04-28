@@ -26,6 +26,12 @@ in
   # release notes.
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
+  home.shellAliases = {
+    "c" = "clear";
+    "ks" = "tmux kill-server";
+    "vim" = "nvim";
+  };
+
   systemd.user.services.clone_repos = {
     Unit = {
       Description = "Clone repos to system";
@@ -155,8 +161,6 @@ in
     ];
     shellAliases = {
       "reload_p10k"="[[ ! -f ${configTheme} ]] || source ~/.config/zsh/.zshrc";
-      "c" = "clear";
-      "ks" = "tmux kill-server";
     };
   };
 
@@ -243,7 +247,6 @@ in
     tree
     unar
     unzip
-    vim
     wakeonlan
     wget
     #wormhole-william
