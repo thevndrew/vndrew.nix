@@ -16,7 +16,7 @@ let
 
   # The config files for this system.
   machineConfig = ../hosts/${name}/configuration.nix;
-  userOSConfig = ../users/${user}/nixos${if desktop then "desktop" else ""}.nix;
+  userOSConfig = ../users/${user}/nixos${if desktop then "-desktop" else ""}.nix;
   userHMConfig = ../users/${user}/home-manager.nix;
 
   systemFunc = nixpkgs.lib.nixosSystem;
@@ -57,6 +57,7 @@ in systemFunc rec {
     home-manager.home-manager {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
+      home-manager.extraSpecialArgs = { inherit pkgs-unstable; };
       home-manager.users.${user} = import userHMConfig {
         currentSystemUser = user;
         inputs = inputs;
@@ -69,12 +70,12 @@ in systemFunc rec {
     # better based on these values.
     {
       config._module.args = {
-        currentSystem = system;
         currentSystemName = name;
+        currentSystem = system;
         currentSystemUser = user;
-        isWSL = isWSL;
-        isDesktop = desktop;
         inputs = inputs;
+        isDesktop = desktop;
+        isWSL = isWSL;
       };
     }
   ];

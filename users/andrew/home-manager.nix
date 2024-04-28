@@ -1,4 +1,4 @@
-{ isWSL, inputs, currentSystemUser, ...}:
+{ isDesktop, isWSL, inputs, currentSystemUser }:
 
 { lib, config, pkgs, pkgs-unstable, ... }:
 let
@@ -71,6 +71,10 @@ in
         done 
       ''}";
     };
+  };
+
+  home.sessionVariables = {
+    FLAKE = "/home/${currentSystemUser}/nix-config";
   };
 
   programs.bash = {
@@ -252,6 +256,8 @@ in
     #wormhole-william
     yq
     yt-dlp
+    pkgs-unstable.nix-output-monitor
+    pkgs-unstable.nvd
 
     #cosmopolitan
     #pkgs-unstable.rbw

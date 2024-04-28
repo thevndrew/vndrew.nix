@@ -10,18 +10,12 @@ in
 
   imports = [ "${inputs.nixpkgs-unstable}/nixos/modules/programs/nh.nix" ];
 
-  environment.sessionVariables = {
-    FLAKE = "/home/${currentSystemUser}/nix-config";
-  };
-
   environment.systemPackages = with pkgs; [
     mergerfs
     tmux
     neovim
     git
     ethtool
-    pkgs-unstable.nix-output-monitor
-    pkgs-unstable.nvd
   ];
 
   programs.nh = {
