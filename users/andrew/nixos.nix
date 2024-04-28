@@ -1,8 +1,4 @@
-{ config, pkgs, pkgs-unstable, inputs, currentSystemUser, ... }:
-
-let
-  homeDir = "/home/${currentSystemUser}";
-in
+{ config, pkgs, pkgs-unstable, inputs, currentSystemUser, currentSystemHome, ... }:
 {
   disabledModules = [ "programs/nh.nix" ];
 
@@ -24,7 +20,7 @@ in
       package = pkgs-unstable.nh;
       #clean.enable = true;
       #clean.extraArgs = "--keep-since 4d --keep 3";
-      flake = "/home/${currentSystemUser}/nix-config";
+      flake = "${currentSystemHome}/nix-config";
     };
   };
 

@@ -1,19 +1,19 @@
 { isDesktop, isWSL }:
 
-{ mylib, lib, config, inputs, pkgs, pkgs-unstable, currentSystemUser, ... }:
-let
-  homeDir = "/home/${currentSystemUser}";
-in
+{ mylib, lib, config, inputs, pkgs, pkgs-unstable, currentSystemUser, currentSystemHome, ... }:
 {
   imports = [
-    inputs.sops-nix.homeManagerModules.sops
-    (import ./systemd/clone_repos.nix { inherit homeDir; })
-  ] ++ mylib.scanPaths ./programs;
+    ./files.nix
+    ./secrets.nix 
+    ./systemd/clone_repos.nix
+  ] ++ 
+  (mylib.scanPaths ./programs)
+  ;
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "${currentSystemUser}";
-  home.homeDirectory = "${homeDir}";
+  home.homeDirectory = "${currentSystemHome}";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -32,7 +32,7 @@ in
     extraConfig = ''${builtins.readFile (mylib.relativeToRoot "config/ssh/config")}'';
   };
 
-  home.packages = with pkgs; [
+  home.packages = (with pkgs; [
     #bitwarden-cli
     btop
     cht-sh
@@ -87,33 +87,12 @@ in
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-  ] ++ (with pkgs-unstable; [
+  ]) ++
+  (with pkgs-unstable; [
     just
     nix-output-monitor
     nvd
   ]);
-
-  xdg = {
-    enable = true;
-    configFile = {
-      # Nothing here for now...
-    };
-  };
-
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
-  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

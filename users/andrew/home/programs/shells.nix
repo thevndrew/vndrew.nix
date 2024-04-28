@@ -1,4 +1,4 @@
-{ mylib, currentSystemUser, ... }:
+{ mylib, currentSystemUser, currentSystemHome, ... }:
 {
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. If you don't want to manage your shell through Home
@@ -17,7 +17,7 @@
   #
   home.sessionVariables = {
     EDITOR = "nvim";
-    FLAKE = "/home/${currentSystemUser}/nix-config";
+    FLAKE = "${currentSystemHome}/nix-config";
   };
 
   home.shellAliases = {
@@ -47,7 +47,7 @@
       enable = true;
       enableCompletion = true;
       historyControl = [ "ignoredups" "ignorespace" ];
-      historyFile = "/home/${currentSystemUser}/.bash_eternal_history";
+      historyFile = "${currentSystemHome}/.bash_eternal_history";
       historyFileSize = -1;
       historySize = -1;
       bashrcExtra = ''

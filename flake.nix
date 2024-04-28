@@ -11,11 +11,22 @@
     };
 
     # Manage secrets with sops
-    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Use ssh protocol to authenticate via ssh-agent/ssh-key, and shallow clone
+    mysecrets = { 
+      url = "git+ssh://git@github.com/thevndrew/nix-secrets.git?shallow=1";
+      flake = false;
+    };
 
     # Build a custom WSL installer
-    nixos-wsl.url = "github:nix-community/NixOS-WSL";
-    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # I think technically you're not supposed to override the nixpkgs
     # used by neovim but recently I had failures if I didn't pin to my
@@ -27,7 +38,6 @@
 
     # Other packages
     zig.url = "github:mitchellh/zig-overlay";
-
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
@@ -54,7 +64,10 @@
       in
       home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs { inherit system; };
-        modules = [ ./users/${user}/home-manager.nix ];
+        modules = [
+	  inputs.sops-nix.homeManagerModules.sops
+	  ./users/${user}/home-manager.nix
+	];
         extraSpecialArgs = specialArgs;
       }
     );

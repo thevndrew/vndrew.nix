@@ -1,6 +1,4 @@
-# This function creates a NixOS system based on our VM setup for a
-# particular architecture.
-{ nixpkgs, nixpkgs-unstable, overlays, inputs }:
+{ nixpkgs, nixpkgs-unstable, overlays, inputs, ... }:
 
 name:
 {
@@ -40,7 +38,10 @@ let
   mylib = import ./mylib.nix { inherit (nixpkgs) lib; };
 
   moduleArgs = {
+     currentSystemHome = "/home/${user}";
+     currentSystemName = name;
      currentSystemUser = user;
+     sopsKey = "/home/${user}/.ssh/${name}";
      inherit inputs;
      inherit mylib;
      inherit pkgs-unstable;
@@ -68,6 +69,9 @@ in systemFunc rec {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.extraSpecialArgs = moduleArgs;
+      home-manager.sharedModules = [
+        inputs.sops-nix.homeManagerModules.sops
+      ];
       home-manager.users.${user} = import userHMConfig {
         isDesktop = desktop;
         isWSL = isWSL;

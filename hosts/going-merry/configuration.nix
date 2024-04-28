@@ -1,4 +1,4 @@
-{ config, mylib, lib, pkgs, pkgs-unstable, inputs, currentSystemUser, ... }:
+{ config, mylib, lib, pkgs, pkgs-unstable, inputs, currentSystemUser, currentSystemHome, ... }:
 
 {
   imports = [ 
@@ -38,7 +38,7 @@
       Type = "oneshot";
     };
     serviceConfig = {
-      ExecStart = "/bin/sh -c '/home/${currentSystemUser}/services/qbittorrent/restart.sh'";
+      ExecStart = "/bin/sh -c '${currentSystemHome}/services/qbittorrent/restart.sh'";
       User = "${currentSystemUser}";
       Group = "users";
     };
