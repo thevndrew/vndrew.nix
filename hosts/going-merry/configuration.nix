@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgs-unstable, inputs, currentSystemUser, ... }:
+{ config, mylib, lib, pkgs, pkgs-unstable, inputs, currentSystemUser, ... }:
 
 {
   imports = [ 
@@ -6,7 +6,7 @@
     ./hardware-configuration.nix
     
     # Setup WOL systemd service
-    (import ../../modules/wol.nix {
+    (import (mylib.relativeToRoot "modules/wol.nix") {
       wolCommand = "ethtool -s enp1s0 wol g && ethtool -s enp2s0 wol g";
     })
   ];

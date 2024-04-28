@@ -17,7 +17,7 @@ let
   # The config files for this system.
   machineConfig = ../hosts/${name}/configuration.nix;
   userOSConfig = ../users/${user}/nixos${if desktop then "-desktop" else ""}.nix;
-  userHMConfig = ../users/${user}/home-manager.nix;
+  userHMConfig = ../users/${user}/home/home-manager.nix;
 
   systemFunc = nixpkgs.lib.nixosSystem;
   home-manager = inputs.home-manager.nixosModules;
@@ -37,10 +37,20 @@ let
     };
   };
 
+  mylib = import ./mylib.nix { inherit (nixpkgs) lib; };
+
+  moduleArgs = {
+     currentSystemUser = user;
+     inherit inputs;
+     inherit mylib;
+     inherit pkgs-unstable;
+     inherit system;
+  };
+
 in systemFunc rec {
   inherit system;
 
-  specialArgs = { inherit inputs; inherit system; inherit pkgs-unstable; };
+  specialArgs = moduleArgs;
 
   modules = [
     # Apply our overlays. Overlays are keyed by system type so we have
@@ -57,10 +67,8 @@ in systemFunc rec {
     home-manager.home-manager {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.extraSpecialArgs = { inherit pkgs-unstable; };
+      home-manager.extraSpecialArgs = moduleArgs;
       home-manager.users.${user} = import userHMConfig {
-        currentSystemUser = user;
-        inputs = inputs;
         isDesktop = desktop;
         isWSL = isWSL;
       };
