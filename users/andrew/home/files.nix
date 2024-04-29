@@ -1,4 +1,7 @@
-{ ... }:
+{ config, currentSystemName, currentSystemHome, ... }:
+let
+  link = config.lib.file.mkOutOfStoreSymlink;
+in
 {
   xdg = {
     enable = true;
@@ -20,5 +23,10 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+
+    ".ssh/github_link".source = link "${currentSystemHome}/.ssh/${currentSystemName}";
+    ".ssh/github_link".onChange = ''cat ~/.ssh/github_link > ~/.ssh/github && chmod 600 ~/.ssh/github'';
+    ".ssh/github_link.pub".source = link "${currentSystemHome}/.ssh/${currentSystemName}.pub";
+    ".ssh/github_link.pub".onChange = ''cat ~/.ssh/github_link.pub > ~/.ssh/github.pub && chmod 600 ~/.ssh/github.pub'';
   };
 }
