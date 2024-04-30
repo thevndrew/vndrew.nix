@@ -24,9 +24,14 @@ in
     #   org.gradle.daemon.idletimeout=3600000
     # '';
 
-    ".ssh/github_link".source = link "${currentSystemHome}/.ssh/${currentSystemName}";
-    ".ssh/github_link".onChange = ''cat ~/.ssh/github_link > ~/.ssh/github && chmod 600 ~/.ssh/github'';
-    ".ssh/github_link.pub".source = link "${currentSystemHome}/.ssh/${currentSystemName}.pub";
-    ".ssh/github_link.pub".onChange = ''cat ~/.ssh/github_link.pub > ~/.ssh/github.pub && chmod 600 ~/.ssh/github.pub'';
+    ".ssh/.github" = {
+      source = link "${currentSystemHome}/.ssh/${currentSystemName}";
+      onChange = ''cat ~/.ssh/.github > ~/.ssh/github && chmod 600 ~/.ssh/github'';
+    };
+
+    ".ssh/.github.pub" = {
+      source = link "${currentSystemHome}/.ssh/${currentSystemName}.pub";
+      onChange = ''cat ~/.ssh/.github.pub > ~/.ssh/github.pub && chmod 600 ~/.ssh/github.pub'';
+    };
   };
 }
