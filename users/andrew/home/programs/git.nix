@@ -1,4 +1,4 @@
-{ currentSystemHome, ... }:
+{ currentSystemHome, currentSystemName, ... }:
 {
   programs.git = {
     enable = true;
@@ -32,7 +32,7 @@
       pull.rebase = true;
       rebase.updateRefs = true;
       rerere.enabled = true;
-      user.signingkey = "${currentSystemHome}/.ssh/github.pub";
+      user.signingkey = "${currentSystemHome}/.ssh/${currentSystemName}.pub";
       user.gpgsign = true;
       commit.gpgsign = true;
     };

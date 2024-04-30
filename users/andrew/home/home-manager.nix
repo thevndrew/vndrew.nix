@@ -1,6 +1,6 @@
 { isDesktop, isWSL }:
 
-{ mylib, lib, config, inputs, pkgs, pkgs-unstable, currentSystemUser, currentSystemHome, ... }:
+{ mylib, lib, config, inputs, pkgs, pkgs-unstable, currentSystemUser, currentSystemHome, currentSystemName, ... }:
 {
   imports = [
     ./files.nix
@@ -26,10 +26,13 @@
 
   programs.ssh = {
     enable = true;
-    #extraConfig = ''
-    #  ${builtins.readFile (mylib.relativeToRoot "config/ssh/config")}
-    #'';
-    extraConfig = ''${builtins.readFile (mylib.relativeToRoot "config/ssh/config")}'';
+    extraConfig = ''
+    Host github.com
+        HostName github.com
+        PreferredAuthentications publickey
+        IdentityFile ~/.ssh/${currentSystemName}
+    '';
+    #extraConfig = ''${builtins.readFile (mylib.relativeToRoot "config/ssh/config")}'';
   };
 
   home.packages = (with pkgs; [
