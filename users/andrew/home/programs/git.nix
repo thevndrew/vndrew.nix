@@ -1,4 +1,4 @@
-{ currentSystemHome, currentSystemName, ... }:
+{ currentSystemHome, currentSystemName, pkgs-unstable, ... }:
 {
   programs.git = {
     enable = true;
@@ -39,5 +39,18 @@
     ignores = [
       "*.swp"
     ];
+  };
+
+  programs.gh = {
+    enable = true;
+    package = pkgs-unstable.gh;
+    settings = {
+      git_protocol = "ssh";
+      #pager = "";
+      aliases = {
+	co = "pr checkout";
+        pv = "pr view";
+      };
+    };
   };
 }
