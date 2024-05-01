@@ -1,6 +1,6 @@
 { isDesktop, isWSL }:
 
-{ mylib, lib, config, inputs, pkgs, pkgs-unstable, currentSystemUser, currentSystemHome, currentSystemName, ... }:
+{ mylib, lib, config, inputs, pkgs, pkgs-unstable, systemInfo, ... }:
 {
   imports = [
     ./files.nix
@@ -12,8 +12,8 @@
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "${currentSystemUser}";
-  home.homeDirectory = "${currentSystemHome}";
+  home.username = "${systemInfo.user}";
+  home.homeDirectory = "${systemInfo.home}";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -30,7 +30,7 @@
     Host github.com
         HostName github.com
         PreferredAuthentications publickey
-        IdentityFile ~/.ssh/${currentSystemName}
+        IdentityFile ~/.ssh/${systemInfo.hostname}
     '';
     #extraConfig = ''${builtins.readFile (mylib.relativeToRoot "config/ssh/config")}'';
   };

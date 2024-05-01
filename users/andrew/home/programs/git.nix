@@ -1,4 +1,4 @@
-{ currentSystemHome, currentSystemName, pkgs-unstable, ... }:
+{ systemInfo, pkgs-unstable, ... }:
 {
   programs.git = {
     enable = true;
@@ -32,7 +32,7 @@
       pull.rebase = true;
       rebase.updateRefs = true;
       rerere.enabled = true;
-      user.signingkey = "${currentSystemHome}/.ssh/${currentSystemName}.pub";
+      user.signingkey = "${systemInfo.home}/.ssh/${systemInfo.hostname}.pub";
       user.gpgsign = true;
       commit.gpgsign = true;
     };

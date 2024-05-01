@@ -1,4 +1,4 @@
-{ mylib, lib, pkgs, currentSystemHome, ... }:
+{ mylib, lib, pkgs, systemInfo, ... }:
 let
   repoList = mylib.relativeToRoot "config/repos/repos.yml";
 in
@@ -37,8 +37,8 @@ in
         do
             REPO_DIR=$(yq -r ".repo_list.$REPO.directory" "${repoList}")
             REPO_URL=$(yq -r ".repo_list.$REPO.url" "${repoList}")
-            mkdir_if_not_exists "${currentSystemHome}/$REPO_DIR"
-            clone_if_not_exists "$REPO_URL" "${currentSystemHome}/$REPO_DIR"
+            mkdir_if_not_exists "${systemInfo.home}/$REPO_DIR"
+            clone_if_not_exists "$REPO_URL" "${systemInfo.home}/$REPO_DIR"
         done 
       ''}";
     };

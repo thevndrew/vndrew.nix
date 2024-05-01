@@ -1,4 +1,4 @@
-{ config, inputs, mylib, lib, pkgs, pkgs-unstable, currentSystemUser, ... }:
+{ config, inputs, mylib, lib, pkgs, pkgs-unstable, systemInfo, ... }:
 
 {
   imports = [ 
@@ -73,7 +73,7 @@
   };
 
   users.groups.storage = {};
-  users.users.${currentSystemUser}.extraGroups = [ "wheel" "podman" "storage" ];
+  users.users.${systemInfo.user}.extraGroups = [ "wheel" "podman" "storage" ];
 
   networking = {
     hostName = "thousand-sunny";

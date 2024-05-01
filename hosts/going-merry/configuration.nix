@@ -1,4 +1,4 @@
-{ config, mylib, lib, pkgs, pkgs-unstable, inputs, currentSystemUser, currentSystemHome, ... }:
+{ config, mylib, lib, pkgs, pkgs-unstable, inputs, systemInfo, ... }:
 
 {
   imports = [ 
@@ -23,7 +23,7 @@
     };
   };
 
-  users.users."${currentSystemUser}".extraGroups = [ "wheel" "podman" ];
+  users.users."${systemInfo.user}".extraGroups = [ "wheel" "podman" ];
   #extraGroups = [ "wheel" "docker" ];
 
   networking = {
@@ -38,8 +38,8 @@
       Type = "oneshot";
     };
     serviceConfig = {
-      ExecStart = "/bin/sh -c '${currentSystemHome}/services/qbittorrent/restart.sh'";
-      User = "${currentSystemUser}";
+      ExecStart = "/bin/sh -c '${systemInfo.home}/services/qbittorrent/restart.sh'";
+      User = "${systemInfo.user}";
       Group = "users";
     };
     startAt = "hourly";

@@ -37,15 +37,19 @@ let
 
   mylib = import ./mylib.nix { inherit (nixpkgs) lib; };
 
+  systemInfo = {
+    home = "/home/${user}";
+    hostname = name;
+    user = user;
+  };
+
   moduleArgs = {
-     currentSystemHome = "/home/${user}";
-     currentSystemName = name;
-     currentSystemUser = user;
      sopsKey = "/home/${user}/.ssh/${name}";
      inherit inputs;
      inherit mylib;
      inherit pkgs-unstable;
      inherit system;
+     inherit systemInfo;
   };
 
 in systemFunc rec {
@@ -82,12 +86,11 @@ in systemFunc rec {
     # better based on these values.
     {
       config._module.args = {
-        currentSystemName = name;
         currentSystem = system;
-        currentSystemUser = user;
         inputs = inputs;
         isDesktop = desktop;
         isWSL = isWSL;
+	systemInfo = systemInfo;
       };
     }
   ];

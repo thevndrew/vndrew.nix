@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, inputs, currentSystemUser, currentSystemHome, ... }:
+{ config, pkgs, pkgs-unstable, inputs, systemInfo, ... }:
 {
   disabledModules = [ "programs/nh.nix" ];
 
@@ -20,7 +20,7 @@
       package = pkgs-unstable.nh;
       #clean.enable = true;
       #clean.extraArgs = "--keep-since 4d --keep 3";
-      flake = "${currentSystemHome}/nix-config";
+      flake = "${systemInfo.home}/nix-config";
     };
   };
 

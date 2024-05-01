@@ -1,4 +1,4 @@
-{ config, currentSystemName, currentSystemHome, ... }:
+{ config, systemInfo, ... }:
 let
   link = config.lib.file.mkOutOfStoreSymlink;
 in
@@ -25,12 +25,12 @@ in
     # '';
 
     #".ssh/.github" = {
-    #  source = link "${currentSystemHome}/.ssh/${currentSystemName}";
+    #  source = link "${systemInfo.home}/.ssh/${systemInfo.hostname}";
     #  onChange = ''cat ~/.ssh/.github > ~/.ssh/github && chmod 600 ~/.ssh/github'';
     #};
 
     #".ssh/.github.pub" = {
-    #  source = link "${currentSystemHome}/.ssh/${currentSystemName}.pub";
+    #  source = link "${systemInfo.home}/.ssh/${systemInfo.hostname}.pub";
     #  onChange = ''cat ~/.ssh/.github.pub > ~/.ssh/github.pub && chmod 600 ~/.ssh/github.pub'';
     #};
   };

@@ -1,19 +1,19 @@
-{ config, inputs, pkgs, currentSystemUser, currentSystemHome, sopsKey, ... }:
+{ config, inputs, pkgs, systemInfo, sopsKey, ... }:
 {
   sops = {
     defaultSopsFile = "${inputs.mysecrets}/secrets/nix.yaml";
     age.sshKeyPaths = [ "${sopsKey}" ];
-    secrets."passwords/${currentSystemUser}" = {
+    secrets."passwords/${systemInfo.user}" = {
       neededForUsers = true;
     };
   };
 
   users = {
     mutableUsers = false;
-    users.${currentSystemUser} = {
-      hashedPasswordFile = config.sops.secrets."passwords/${currentSystemUser}".path;
-      #initialPassword = "${currentSystemUser}";
-      home = "${currentSystemHome}";
+    users.${systemInfo.user} = {
+      hashedPasswordFile = config.sops.secrets."passwords/${systemInfo.user}".path;
+      #initialPassword = "${systemInfo.user}";
+      home = "${systemInfo.home}";
       shell = pkgs.zsh;
       isNormalUser = true;
       openssh.authorizedKeys.keys = [ 
@@ -23,7 +23,7 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINGqG13rubr95t6Yepq745+TxYtyqR50BZhR33eDtlUX going-merry"
       ];  
     };
-    users.root.hashedPasswordFile = config.sops.secrets."passwords/${currentSystemUser}".path;
+    users.root.hashedPasswordFile = config.sops.secrets."passwords/${systemInfo.user}".path;
     #users.root.hashedPasswordFile = "";
     users.root.openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHo+NCpecLu+vJrhgp0deaNXblILsmxxixpTg8pw+WAL"
