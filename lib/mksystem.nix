@@ -1,4 +1,4 @@
-{ nixpkgs, nixpkgs-unstable, overlays, inputs, ... }:
+{ nixpkgs, overlays, inputs, ... }:
 
 name:
 {
@@ -29,7 +29,7 @@ let
   };
 
   other-pkgs = {
-    unstable = import nixpkgs-unstable {
+    unstable = import inputs.nixpkgs-unstable {
       inherit system;
       config = {
         allowUnfree = true;
@@ -43,6 +43,7 @@ let
     home = "/home/${user}";
     hostname = name;
     user = user;
+    arch = system;
   };
 
   moduleArgs = {
@@ -50,7 +51,6 @@ let
      inherit inputs;
      inherit mylib;
      inherit other-pkgs;
-     inherit system;
      inherit systemInfo;
   };
 
@@ -88,7 +88,6 @@ in systemFunc rec {
     # better based on these values.
     {
       config._module.args = {
-        currentSystem = system;
         inputs = inputs;
         isDesktop = desktop;
         isWSL = isWSL;

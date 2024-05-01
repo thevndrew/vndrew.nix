@@ -50,7 +50,7 @@
     ];
 
     mkSystem = import ./lib/mksystem.nix {
-      inherit overlays nixpkgs nixpkgs-unstable inputs;
+      inherit nixpkgs overlays inputs;
     };
 
     homeManagerSetup = { hostname, user }: (
