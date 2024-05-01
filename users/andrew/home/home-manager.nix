@@ -1,6 +1,6 @@
 { isDesktop, isWSL }:
 
-{ mylib, lib, config, inputs, pkgs, pkgs-unstable, systemInfo, ... }:
+{ mylib, lib, config, inputs, pkgs, other-pkgs, systemInfo, ... }:
 {
   imports = [
     ./files.nix
@@ -71,7 +71,7 @@
     yq
     yt-dlp
     #cosmopolitan
-    #pkgs-unstable.rbw
+    #other-pkgs.unstable.rbw
     #pinentry # rbw dep
 
     # Do install the docker CLI to talk to podman.
@@ -91,7 +91,7 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ]) ++
-  (with pkgs-unstable; [
+  (with other-pkgs.unstable; [
     just
     nix-output-monitor
     nvd

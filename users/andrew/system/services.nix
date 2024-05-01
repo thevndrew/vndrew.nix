@@ -1,4 +1,4 @@
-{ pkgs, pkgs-unstable, ... }:
+{ pkgs, other-pkgs, ... }:
 {
   services = {
     openssh = {
@@ -10,7 +10,7 @@
   
     tailscale = {
       enable = true;
-      #package = pkgs-unstable.tailscale;
+      #package = other-pkgs.unstable.tailscale;
       useRoutingFeatures = "both";
     };
   

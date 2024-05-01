@@ -28,10 +28,12 @@ let
     };
   };
 
-  pkgs-unstable = import nixpkgs-unstable {
-    inherit system;
-    config = {
-      allowUnfree = true;
+  other-pkgs = {
+    unstable = import nixpkgs-unstable {
+      inherit system;
+      config = {
+        allowUnfree = true;
+      };
     };
   };
 
@@ -47,7 +49,7 @@ let
      sopsKey = "/home/${user}/.ssh/${name}";
      inherit inputs;
      inherit mylib;
-     inherit pkgs-unstable;
+     inherit other-pkgs;
      inherit system;
      inherit systemInfo;
   };

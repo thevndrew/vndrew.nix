@@ -1,4 +1,4 @@
-{ systemInfo, pkgs-unstable, ... }:
+{ systemInfo, other-pkgs, ... }:
 {
   programs.git = {
     enable = true;
@@ -43,7 +43,7 @@
 
   programs.gh = {
     enable = true;
-    package = pkgs-unstable.gh;
+    package = other-pkgs.unstable.gh;
     settings = {
       git_protocol = "ssh";
       #pager = "";
