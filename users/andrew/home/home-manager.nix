@@ -95,6 +95,7 @@
     just
     nix-output-monitor
     nvd
+    fzf
   ]);
 
   # Let Home Manager install and manage itself.
