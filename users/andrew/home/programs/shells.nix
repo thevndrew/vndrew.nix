@@ -87,6 +87,7 @@
       initExtra = ''
         #''${builtins.readFile (mylib.relativeToRoot "config/zsh/load_p10k.zsh")}
         ${builtins.readFile (mylib.relativeToRoot "config/zsh/keybinds.zsh")}
+        ${builtins.readFile (mylib.relativeToRoot "config/zsh/functions.zsh")}
       '';
       historySubstringSearch = {
         enable = true;
