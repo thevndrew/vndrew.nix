@@ -6,7 +6,7 @@
     ./hardware-configuration.nix
 
     # Setup WOL systemd service
-    (import (mylib.relativeToRoot "modules/wol.nix") {
+    (import (mylib.relativeToRoot "hosts/shared/systemd/wol.nix") {
       wolCommand = "ethtool -s eno1 wol g";
     })
   ];

@@ -1,9 +1,9 @@
 # Currently not using this, using a home manager systemd service instead.
 # This is just here for reference on a nix systemd service.
 { homeDir }:
-{ config, pkgs, ... }:
+{ mylib, config, pkgs, ... }:
 let
-  repoList = ../config/repos/repos.yml;
+  repoList = mylib.relativeToRoot "config/repos/repos.yml";
 in
 {
   systemd.user.services.clone_repos = {
