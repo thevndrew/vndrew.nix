@@ -21,8 +21,10 @@
   };
 
   home.shellAliases = {
+    "cat" = "bat";
     "c" = "clear";
     "ks" = "tmux kill-server";
+    "nb" = "nix build --json --no-link --print-build-logs";
     "vim" = "nvim";
   };
 
@@ -75,6 +77,7 @@
       enableAutosuggestions = true;
       enableCompletion = true;
       dotDir = ".config/zsh";
+
       history = {
         extended = true;
         ignoreDups = true;
@@ -84,11 +87,13 @@
         #path = "$HOME/.config/zsh/.zsh_history";
         path = "$ZDOTDIR/.zsh_history";
       };
+
       initExtra = ''
         #''${builtins.readFile (mylib.relativeToRoot "config/zsh/load_p10k.zsh")}
         ${builtins.readFile (mylib.relativeToRoot "config/zsh/keybinds.zsh")}
         ${builtins.readFile (mylib.relativeToRoot "config/zsh/functions.zsh")}
       '';
+
       historySubstringSearch = {
         enable = true;
         searchDownKey = [
@@ -100,6 +105,13 @@
           "^[OA"
         ];
       };
+
+      oh-my-zsh = {
+        enable = true;
+        plugins = ["git"];
+        theme = "robbyrussell";
+      };
+
       #initExtraBeforeCompInit
       #initExtraFirst
       #localVariables
