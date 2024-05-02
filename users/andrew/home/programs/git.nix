@@ -1,7 +1,11 @@
 { systemInfo, other-pkgs, ... }:
+let
+  unstable = other-pkgs.unstable;
+in
 {
   programs.git = {
     enable = true;
+    package = unstable.git;
     userEmail = "69527486+thevndrew@users.noreply.github.com";
     userName = "andrew";
     aliases = {
@@ -43,7 +47,7 @@
 
   programs.gh = {
     enable = true;
-    package = other-pkgs.unstable.gh;
+    package = unstable.gh;
     settings = {
       git_protocol = "ssh";
       #pager = "";

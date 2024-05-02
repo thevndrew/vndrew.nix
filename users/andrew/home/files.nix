@@ -1,4 +1,4 @@
-{ config, systemInfo, ... }:
+{ mylib, config, systemInfo, ... }:
 let
   link = config.lib.file.mkOutOfStoreSymlink;
 in
@@ -33,5 +33,11 @@ in
     #  source = link "${systemInfo.home}/.ssh/${systemInfo.hostname}.pub";
     #  onChange = ''cat ~/.ssh/.github.pub > ~/.ssh/github.pub && chmod 600 ~/.ssh/github.pub'';
     #};
+
+    ".local/bin/dl_all_streams".source = mylib.relativeToRoot "config/scripts/dl_all_streams.sh";
+    ".local/bin/dl_stream".source = mylib.relativeToRoot "config/scripts/dl_stream.sh";
+    ".local/bin/kill_stream_dls".source = mylib.relativeToRoot "config/scripts/kill_stream_dls.sh";
+    ".local/bin/select_kill_stream_dl".source = mylib.relativeToRoot "config/scripts/select_kill_stream_dl.sh";
+    ".local/bin/select_stream_dl".source = mylib.relativeToRoot "config/scripts/select_stream_dl.sh";
   };
 }
