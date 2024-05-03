@@ -1,4 +1,9 @@
 { mylib, pkgs, other-pkgs, ... }:
+let
+  streamScriptsDir = "config/scripts/stream_downloader";
+  pathTo = mylib.relativeToRoot;
+  readFile = path: builtins.readFile (pathTo path);
+in
 {
   home.packages = (with pkgs; [
     dig
@@ -22,22 +27,6 @@
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
     # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    #(pkgs.writeShellScriptBin "dl_all_streams" ''
-    #  ${mylib.relativeToRoot "config/scripts/dl_all_streams.sh"}
-    #'')
-    #(pkgs.writeShellScriptBin "dl_stream" ''
-    #  ${mylib.relativeToRoot "config/scripts/dl_stream.sh"}
-    #'')
-    #(pkgs.writeShellScriptBin "kill_stream_dls" ''
-    #  ${mylib.relativeToRoot "config/scripts/kill_stream_dls.sh"}
-    #'')
-    #(pkgs.writeShellScriptBin "select_kill_stream_dl" ''
-    #  ${mylib.relativeToRoot "config/scripts/select_kill_stream_dl.sh"}
-    #'')
-    #(pkgs.writeShellScriptBin "select_stream_dl" ''
-    #  ${mylib.relativeToRoot "config/scripts/select_stream_dl.sh"}
-    #'')
   ]) ++
   (with other-pkgs.unstable; [
     btop
@@ -71,7 +60,8 @@
     #wormhole-william
     #rbw
     #pinentry # rbw dep
-
+  ]) ++
+  ([
     (pkgs.writeShellApplication {
       name = "update_input";
       runtimeInputs = with other-pkgs.unstable; [ fzf jq ];
@@ -80,6 +70,27 @@
              | jq -r ".locks.nodes.root.inputs | keys[]" \
              | fzf)
         nix flake lock --update-input "$input"
+      '';
+    })
+    (pkgs.writeShellApplication {
+      name = "rip_streams";
+      runtimeInputs = with other-pkgs.unstable; [ yq ];
+      text = ''
+        ${readFile "${streamScriptsDir}/rip_streams.sh"}
+      '';
+    })
+    (pkgs.writeShellApplication {
+      name = "rip_streams_stop";
+      runtimeInputs = with other-pkgs.unstable; [ yq ];
+      text = ''
+        ${readFile "${streamScriptsDir}/rip_streams_stop.sh"}
+      '';
+    })
+    (pkgs.writeShellApplication {
+      name = "rip_stream_helper";
+      runtimeInputs = with other-pkgs.unstable; [ yq yt-dlp ];
+      text = ''
+        ${readFile "${streamScriptsDir}/rip_stream_helper.sh"}
       '';
     })
   ]);
