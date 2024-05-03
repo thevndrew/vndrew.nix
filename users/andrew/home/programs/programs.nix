@@ -71,5 +71,16 @@
     #wormhole-william
     #rbw
     #pinentry # rbw dep
+
+    (pkgs.writeShellApplication {
+      name = "update_input";
+      runtimeInputs = with other-pkgs.unstable; [ fzf jq ];
+      text = ''
+        input=$(nix flake metadata --json                \
+             | jq -r ".locks.nodes.root.inputs | keys[]" \
+             | fzf)
+        nix flake lock --update-input "$input"
+      '';
+    })
   ]);
 }
