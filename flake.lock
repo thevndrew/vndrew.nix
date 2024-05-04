@@ -334,6 +334,22 @@
         "type": "github"
       }
     },
+    "nnn": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1714316873,
+        "narHash": "sha256-thuqQQj5W/PMX48YRlA6U2Pld0ToEv29vJdeVPw/JpY=",
+        "owner": "jarun",
+        "repo": "nnn",
+        "rev": "191e77ec5d03ec270054fdb95a8e82b648ac9dd9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jarun",
+        "repo": "nnn",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
@@ -342,6 +358,7 @@
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "nnn": "nnn",
         "sops-nix": "sops-nix",
         "zig": "zig"
       }

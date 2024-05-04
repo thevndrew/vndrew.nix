@@ -13,6 +13,7 @@
             (_type == "directory") # include directories
             || (
               (path != "default.nix") # ignore default.nix
+              && (!lib.strings.hasSuffix "settings.nix" path) # ignore *settings.nix
               && (lib.strings.hasSuffix ".nix" path) # include .nix files
             )
         )

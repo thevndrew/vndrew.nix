@@ -33,14 +33,15 @@ in
     cht-sh
     ctop
     fzf
+    fd
     glow
     htop
     jq
     just
+    lf
     ncdu
     neovim
     nix-output-monitor
-    nnn
     nvd
     rclone
     rsync
@@ -53,6 +54,7 @@ in
     unar
     unzip
     wget
+    yazi
     yq
     yt-dlp
     #bitwarden-cli

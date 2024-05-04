@@ -38,6 +38,11 @@
 
     # Other packages
     zig.url = "github:mitchellh/zig-overlay";
+
+    nnn = {
+      url = "github:jarun/nnn";
+      flake = false;
+    };
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:

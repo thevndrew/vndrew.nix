@@ -1,9 +1,8 @@
 { config, other-pkgs, ... }: {
-  programs.atuin = {
+  programs.atuin = import ../integration_settings.nix
+  //
+  {
     enable = true;
-    enableBashIntegration = true;
-    #enableNushellIntegration = true;
-    enableZshIntegration = true;
     package = other-pkgs.unstable.atuin;
     settings = {
       auto_sync = true;

@@ -18,6 +18,7 @@
   home.sessionVariables = {
     EDITOR = "nvim";
     FLAKE = "${systemInfo.home}/nix-config";
+    _ZO_ECHO = "1";
   };
 
   home.shellAliases = {
@@ -31,21 +32,6 @@
   };
 
   programs = {
-
-    direnv = {
-      enable = true;
-      enableBashIntegration = true;
-      #enableNushellIntegration = true;
-      enableZshIntegration = true;
-      nix-direnv.enable = true;
-    };
-
-    starship = {
-      enable = true;
-      enableBashIntegration = true;
-      #enableNushellIntegration = true;
-      enableZshIntegration = true;
-    };
 
     bash = {
       enable = true;
@@ -110,7 +96,7 @@
 
       oh-my-zsh = {
         enable = true;
-        plugins = ["git"];
+        plugins = [ "git" ];
         theme = "robbyrussell";
       };
 
