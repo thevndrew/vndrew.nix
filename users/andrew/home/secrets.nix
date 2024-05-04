@@ -18,5 +18,9 @@
       sopsFile = "${inputs.mysecrets}/secrets/ytdl.yaml";
       path = "${systemInfo.home}/.config/ytdl/streams.yaml"; 
     };
+
+    secrets."atuin_key" = {
+      sopsFile = "${inputs.mysecrets}/secrets/atuin.yaml";
+    };
   };
 }
