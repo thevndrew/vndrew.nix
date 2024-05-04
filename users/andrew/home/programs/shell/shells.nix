@@ -28,7 +28,6 @@
     "nb" = "nix build --json --no-link --print-build-logs";
     "vim" = "nvim";
     "find" = "fd";
-    "tmux" = "zellij";
     "get_secrets" = "source $(which get_secrets_key)";
     "remove_secrets" = "source $(which remove_secrets_key)";
   };
