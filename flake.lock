@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "bootdev": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1714766760,
+        "narHash": "sha256-wjNFYQkwRFTEaEiLxZhEYu7wrgM8kZpxXi6bkNjNJ8w=",
+        "owner": "bootdotdev",
+        "repo": "bootdev",
+        "rev": "f1948554ef1c7127962846ed1249454a755fb54e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "bootdotdev",
+        "repo": "bootdev",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -88,6 +104,24 @@
       "original": {
         "id": "flake-parts",
         "type": "indirect"
+      }
+    },
+    "flake-parts_3": {
+      "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib"
+      },
+      "locked": {
+        "lastModified": 1714641030,
+        "narHash": "sha256-yzcRNDoyVP7+SCNX0wmuDju1NUCt8Dz9+lyUXEI0dbI=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "e5d10a24b66c3ea8f150e47dfdb0416ab7c3390e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
       }
     },
     "flake-utils": {
@@ -286,6 +320,18 @@
         "type": "github"
       }
     },
+    "nixpkgs-lib": {
+      "locked": {
+        "lastModified": 1714640452,
+        "narHash": "sha256-QBx10+k6JWz6u7VsohfSw8g8hjdBZEf8CFzXH1/1Z94=",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/50eb7ecf4cd0a5756d7275c8ba36790e5bd53e33.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/50eb7ecf4cd0a5756d7275c8ba36790e5bd53e33.tar.gz"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1713638189,
@@ -318,7 +364,43 @@
         "type": "github"
       }
     },
+    "nixpkgs-vndrew": {
+      "inputs": {
+        "bootdev": "bootdev",
+        "flake-parts": "flake-parts_3",
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1714851878,
+        "narHash": "sha256-1KanjqL48A6XuHfTeYtL0/D4CSYa7dXsVxEoymLsHIk=",
+        "ref": "refs/heads/main",
+        "rev": "aed83b0a253a4a9488b1d5f04f226909c051c57d",
+        "revCount": 3,
+        "type": "git",
+        "url": "ssh://git@github.com/thevndrew/nix-packages.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/thevndrew/nix-packages.git"
+      }
+    },
     "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1714635257,
+        "narHash": "sha256-4cPymbty65RvF1DWQfc+Bc8B233A1BWxJnNULJKQ1EY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "63c3a29ca82437c87573e4c6919b09a24ea61b0f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1702350026,
         "narHash": "sha256-A+GNZFZdfl4JdDphYKBJ5Ef1HOiFsP18vQe9mqjmUis=",
@@ -358,6 +440,7 @@
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "nixpkgs-vndrew": "nixpkgs-vndrew",
         "nnn": "nnn",
         "sops-nix": "sops-nix",
         "zig": "zig"
@@ -418,7 +501,7 @@
       "inputs": {
         "flake-compat": "flake-compat_3",
         "flake-utils": "flake-utils_3",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
         "lastModified": 1714133353,

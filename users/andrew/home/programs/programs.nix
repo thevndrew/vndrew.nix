@@ -1,4 +1,4 @@
-{ mylib, pkgs, other-pkgs, ... }:
+{ inputs, mylib, pkgs, other-pkgs, ... }:
 let
   streamScriptsDir = "config/scripts/stream_downloader";
   pathTo = mylib.relativeToRoot;
@@ -64,6 +64,9 @@ in
     #wormhole-william
     #rbw
     #pinentry # rbw dep
+  ]) ++
+  (with other-pkgs.vndrew; [
+    bootdev
   ]) ++
   ([
     (pkgs.writeShellApplication {

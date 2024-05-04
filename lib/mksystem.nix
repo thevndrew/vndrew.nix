@@ -35,6 +35,7 @@ let
         allowUnfree = true;
       };
     };
+    vndrew = inputs.nixpkgs-vndrew.packages.${pkgs.system};
   };
 
   mylib = import ./mylib.nix { inherit (nixpkgs) lib; };
