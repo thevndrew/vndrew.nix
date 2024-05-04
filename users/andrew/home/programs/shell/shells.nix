@@ -27,6 +27,8 @@
     "ks" = "tmux kill-server";
     "nb" = "nix build --json --no-link --print-build-logs";
     "vim" = "nvim";
+    "find" = "fd";
+    "tmux" = "zellij";
     "get_secrets" = "source $(which get_secrets_key)";
     "remove_secrets" = "source $(which remove_secrets_key)";
   };
@@ -56,7 +58,8 @@
         PROMPT_COMMAND = "history -a; $PROMPT_COMMAND";
       };
       initExtra = ''
-        # Nothing here for now...
+	# Bootdev completions
+        source ${mylib.relativeToRoot "config/bash/bootdev.bash"}
       '';
     };
   
@@ -78,6 +81,9 @@
 
       initExtra = ''
         #''${builtins.readFile (mylib.relativeToRoot "config/zsh/load_p10k.zsh")}
+	# Bootdev completions
+        source ${mylib.relativeToRoot "config/zsh/bootdev.zsh"}
+
         ${builtins.readFile (mylib.relativeToRoot "config/zsh/keybinds.zsh")}
         ${builtins.readFile (mylib.relativeToRoot "config/zsh/functions.zsh")}
       '';
