@@ -41,7 +41,6 @@ in
     just
     lf
     ncdu
-    neovim
     nix-output-monitor
     nvd
     rclone
