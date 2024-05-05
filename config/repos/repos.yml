@@ -2,3 +2,12 @@ repo_list:
   services:
     url: "git@github.com:thevndrew/container-services.git"
     directory: "services"
+  secrets:
+    url: "git@github.com:thevndrew/nix-secrets.git"
+    directory: "repos/nix-secrets"
+  packages:
+    url: "git@github.com:thevndrew/nix-packages.git"
+    directory: "repos/nix-packages.nvim"
+  neovim:
+    url: "git@github.com:thevndrew/vndrew.nvim.git"
+    directory: "repos/vndrew.nvim"
