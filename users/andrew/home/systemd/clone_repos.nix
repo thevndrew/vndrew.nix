@@ -5,7 +5,7 @@ in
 {
   systemd.user.services.clone_repos = {
     Unit = {
-      Description = "Clone repos to system";
+      Description = "Clone repos to current system";
     };
     Install = {
       WantedBy = [ "default.target" ];

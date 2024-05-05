@@ -7,7 +7,7 @@ repo_list:
     directory: "repos/nix-secrets"
   packages:
     url: "git@github.com:thevndrew/nix-packages.git"
-    directory: "repos/nix-packages.nvim"
+    directory: "repos/nix-packages"
   neovim:
     url: "git@github.com:thevndrew/vndrew.nvim.git"
     directory: "repos/vndrew.nvim"

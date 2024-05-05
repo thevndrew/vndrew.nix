@@ -5,7 +5,7 @@
   imports = [
     ./files.nix
     ./secrets.nix 
-    ./systemd/clone_repos.nix
+    # ./systemd/clone_repos.nix
   ] ++ 
   (mylib.scanPaths ./programs)
   ;
