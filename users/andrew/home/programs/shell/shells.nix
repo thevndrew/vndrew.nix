@@ -79,7 +79,6 @@
       };
 
       initExtra = ''
-        #''${builtins.readFile (mylib.relativeToRoot "config/zsh/load_p10k.zsh")}
 	# Bootdev completions
         source ${mylib.relativeToRoot "config/zsh/bootdev.zsh"}
 
