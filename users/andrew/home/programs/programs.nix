@@ -3,6 +3,7 @@ let
   streamScriptsDir = "config/scripts/stream_downloader";
   pathTo = mylib.relativeToRoot;
   readFile = path: builtins.readFile (pathTo path);
+  inherit (other-pkgs) vndrew unstable;
 in
 {
   home.packages = (with pkgs; [
@@ -28,7 +29,7 @@ in
     # # fonts?
     # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
   ]) ++
-  (with other-pkgs.unstable; [
+  (with unstable; [
     btop
     cht-sh
     ctop
@@ -65,7 +66,7 @@ in
     #rbw
     #pinentry # rbw dep
   ]) ++
-  (with other-pkgs.vndrew; [
+  (with vndrew; [
     bootdev
   ]) ++
   ([
