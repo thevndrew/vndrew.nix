@@ -26,7 +26,6 @@
     "c" = "clear";
     "ks" = "tmux kill-server";
     "nb" = "nix build --json --no-link --print-build-logs";
-    "find" = "fd";
     "get_secrets" = "source $(which get_secrets_key)";
     "remove_secrets" = "source $(which remove_secrets_key)";
   };
