@@ -11,8 +11,10 @@ set +o errexit
 set +o nounset
 set +o pipefail
 
-echo Entering ouput directory \""$2"\"
-pushd "$2"
+if [ "$3" != "-l" ]; then
+    echo Entering ouput directory \""$2"\"
+fi
+pushd "$2" > /dev/null
 
 download_stream() {
     nohup rip_stream_helper "$1" "$2" &> "$2".log &
@@ -25,8 +27,13 @@ if [ $# -gt 2 ]
 then
     stream=$(yq -r "$yq_filter" "$1" | fzf)    
 
-    echo "Starting downloader for $stream"
-    download_stream "$1" "$stream"
+    if [ "$3" == "-i" ]; then
+        echo "Starting downloader for $stream"
+        download_stream "$1" "$stream"
+    else
+        # show log
+        echo "$2/$stream.log"
+    fi
 else
     streams=()
     while IFS='' read -r line;
@@ -40,5 +47,5 @@ else
 	download_stream "$1" "$stream"
     done;
 fi
-popd
+popd > /dev/null
 
