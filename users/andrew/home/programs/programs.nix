@@ -67,6 +67,7 @@ in
   ]) ++
   (with vndrew; [
     bootdev
+    megadl
   ]) ++
   ([
     (pkgs.writeShellApplication {

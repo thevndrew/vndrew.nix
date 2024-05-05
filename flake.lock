@@ -400,11 +400,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1714851878,
-        "narHash": "sha256-1KanjqL48A6XuHfTeYtL0/D4CSYa7dXsVxEoymLsHIk=",
+        "lastModified": 1714947468,
+        "narHash": "sha256-KgTt6HR3RLDlkWfUMcygg0xX6sE6xvdbUMpvKlxrmvc=",
         "ref": "refs/heads/main",
-        "rev": "aed83b0a253a4a9488b1d5f04f226909c051c57d",
-        "revCount": 3,
+        "rev": "50b22014731b40232ad6e9ec16d10a5b9cd53efb",
+        "revCount": 5,
         "type": "git",
         "url": "ssh://git@github.com/thevndrew/nix-packages.git"
       },
