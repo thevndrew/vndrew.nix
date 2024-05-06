@@ -237,10 +237,10 @@
     "mysecrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1714837657,
-        "narHash": "sha256-lpNhhADos4jW21oKAuqHMnDgrmcA9POTwOXUSYv802A=",
+        "lastModified": 1714948486,
+        "narHash": "sha256-ob1awnli13CoAb1UuRFhF51xerpllFMzpZT5yEryD88=",
         "ref": "refs/heads/main",
-        "rev": "e1aff35255f28edae58ba78bb1a8d2ffa34a6c2e",
+        "rev": "b2f2b239cf5b01e833e4f7bd7ac283a00595b8f9",
         "shallow": true,
         "type": "git",
         "url": "ssh://git@github.com/thevndrew/nix-secrets.git"
@@ -400,10 +400,10 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1714947468,
-        "narHash": "sha256-KgTt6HR3RLDlkWfUMcygg0xX6sE6xvdbUMpvKlxrmvc=",
+        "lastModified": 1714957084,
+        "narHash": "sha256-9wHXbF54SgqANrnDJUZ5XifTlrd0DUPtZAlo1cLJjSs=",
         "ref": "refs/heads/main",
-        "rev": "50b22014731b40232ad6e9ec16d10a5b9cd53efb",
+        "rev": "fc29adc34ae93b1568c5982e39d349193eae953d",
         "revCount": 5,
         "type": "git",
         "url": "ssh://git@github.com/thevndrew/nix-packages.git"
