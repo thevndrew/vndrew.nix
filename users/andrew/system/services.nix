@@ -10,7 +10,7 @@
   
     tailscale = {
       enable = true;
-      #package = other-pkgs.unstable.tailscale;
+      package = other-pkgs.unstable.tailscale;
       useRoutingFeatures = "both";
     };
   
