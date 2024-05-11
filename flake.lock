@@ -431,11 +431,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1714763106,
-        "narHash": "sha256-DrDHo74uTycfpAF+/qxZAMlP/Cpe04BVioJb6fdI0YY=",
+        "lastModified": 1715266358,
+        "narHash": "sha256-doPgfj+7FFe9rfzWo1siAV2mVCasW+Bh8I1cToAXEE4=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "e9be42459999a253a9f92559b1f5b72e1b44c13d",
+        "rev": "f1010e0469db743d14519a1efd37e23f8513d714",
         "type": "github"
       },
       "original": {
@@ -549,11 +549,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1714933921,
-        "narHash": "sha256-em6WqI5gHA7ZkY/BMdxrAV436FNq+Y2srk7CypnF750=",
+        "lastModified": 1715402872,
+        "narHash": "sha256-aHtdPUYWt2MqYlfBkTHCWetqdDs0hmEe5fmOXRnGNpQ=",
         "ref": "refs/heads/main",
-        "rev": "a9aa877796ca66bb3d570716f23a33ceffac6aa5",
-        "revCount": 3,
+        "rev": "1afad7399a4719540fd968720c643350c72cf803",
+        "revCount": 6,
         "type": "git",
         "url": "ssh://git@github.com/thevndrew/vndrew.nvim"
       },
