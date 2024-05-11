@@ -33,12 +33,23 @@ in
     # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
   ]) ++
   (with unstable; [
+    bfs
+    bottom # module avalible
+    broot
     btop
+    charm-freeze
+    choose
     cht-sh
     ctop
-    fzf
+    curlie
+    dog
+    duf
+    dust
+    eza
     fd
+    fzf
     glow
+    gping
     htop
     jq
     just
@@ -46,17 +57,23 @@ in
     ncdu
     nix-output-monitor
     nvd
+    parallel
+    procs
     rclone
     rsync
+    sd
     shellcheck
     shellharden
+    silver-searcher
     sops
     ssh-to-age 
     tmux
     tree
     unar
     unzip
+    #vhs # only install on desktop
     wget
+    xh
     yazi
     yq
     yt-dlp
@@ -64,6 +81,7 @@ in
     #cosmopolitan
     #croc
     #gost
+    #glances # python based
     #wormhole-william
     #rbw
     #pinentry # rbw dep

@@ -694,11 +694,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1715458347,
-        "narHash": "sha256-Hqg0xQgaVTblTSojKYne8HzxVgQIz/09Ld2BqybWGMA=",
+        "lastModified": 1715473535,
+        "narHash": "sha256-Dn9GbqJFJvhMxfZPizN4lTPHTOE+lv21aJqVYi0F+j4=",
         "ref": "refs/heads/main",
-        "rev": "fac21f461c64f47c820fbc76db043becea18eba6",
-        "revCount": 8,
+        "rev": "40590f55f2967457f84220abac0df2f605f62278",
+        "revCount": 9,
         "type": "git",
         "url": "ssh://git@github.com/thevndrew/vndrew.nvim"
       },
