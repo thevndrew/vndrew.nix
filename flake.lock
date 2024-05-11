@@ -299,6 +299,26 @@
         "type": "github"
       }
     },
+    "nix-index-database": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1714878592,
+        "narHash": "sha256-E68C03sYRsYFsK7wiGHUIJm8IsyPRALOrFoTL0glXnI=",
+        "owner": "nix-community",
+        "repo": "nix-index-database",
+        "rev": "a362555e9dbd4ecff3bb98969bbdb8f79fe87f10",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nix-index-database",
+        "type": "github"
+      }
+    },
     "nixos-wsl": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -482,6 +502,7 @@
         "home-manager": "home-manager",
         "mysecrets": "mysecrets",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
+        "nix-index-database": "nix-index-database",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
@@ -549,11 +570,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1715402872,
-        "narHash": "sha256-aHtdPUYWt2MqYlfBkTHCWetqdDs0hmEe5fmOXRnGNpQ=",
+        "lastModified": 1715448634,
+        "narHash": "sha256-QrZfNoZX57u9BBsnuhykRneGK1HNSKe5FizxyLWa78M=",
         "ref": "refs/heads/main",
-        "rev": "1afad7399a4719540fd968720c643350c72cf803",
-        "revCount": 6,
+        "rev": "795fffe86c953b8831a15e37f33138ab82731df6",
+        "revCount": 7,
         "type": "git",
         "url": "ssh://git@github.com/thevndrew/vndrew.nvim"
       },

@@ -78,6 +78,7 @@ in systemFunc rec {
       home-manager.extraSpecialArgs = moduleArgs;
       home-manager.sharedModules = [
         inputs.sops-nix.homeManagerModules.sops
+        inputs.nix-index-database.hmModules.nix-index
       ];
       home-manager.users.${user} = import userHMConfig {
         isDesktop = desktop;
