@@ -73,36 +73,5 @@ in
   (with vndrew; [
     bootdev
     megadl
-  ]) ++
-  ([
-    (import ./shell/scripts/update_input.nix { pkgs = unstable; })
-
-    (import ./shell/scripts/get_secrets_key.nix { pkgs = unstable; })
-
-    (import ./shell/scripts/remove_secrets_key.nix { pkgs = unstable; })
-
-    (import ./shell/scripts/clone_repos.nix { inherit mylib; inherit systemInfo; pkgs = unstable; })
-
-    (pkgs.writeShellApplication {
-      name = "rip_streams";
-      runtimeInputs = with other-pkgs.unstable; [ yq ];
-      text = ''
-        ${readFile "${streamScriptsDir}/rip_streams.sh"}
-      '';
-    })
-    (pkgs.writeShellApplication {
-      name = "rip_streams_stop";
-      runtimeInputs = with other-pkgs.unstable; [ yq ];
-      text = ''
-        ${readFile "${streamScriptsDir}/rip_streams_stop.sh"}
-      '';
-    })
-    (pkgs.writeShellApplication {
-      name = "rip_stream_helper";
-      runtimeInputs = with other-pkgs.unstable; [ yq yt-dlp ];
-      text = ''
-        ${readFile "${streamScriptsDir}/rip_stream_helper.sh"}
-      '';
-    })
   ]);
 }
