@@ -29,6 +29,7 @@ let
   };
 
   other-pkgs = {
+    nix-alien = inputs.nix-alien.packages.${pkgs.system};
     unstable = import inputs.nixpkgs-unstable {
       inherit system;
       config = {
