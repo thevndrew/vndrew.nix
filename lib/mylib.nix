@@ -7,14 +7,16 @@
   let
     excludeDirs = [
       "scripts"
+      "systemd"
     ];
 
     excludeNameSuffix = [
-      "settings"
+      "_settings"
+      "_module"
     ];
 
-    filterDir = path: builtins.any (dir: path != dir) excludeDirs;
-    filterFileSuffix = path: builtins.any (suffix: !lib.strings.hasSuffix "${suffix}.nix" path) excludeNameSuffix;
+    filterDir = path: builtins.all (dir: path != dir) excludeDirs;
+    filterFileSuffix = path: builtins.all (suffix: !lib.strings.hasSuffix "${suffix}.nix" path) excludeNameSuffix;
   in
     builtins.map
     (f: (path + "/${f}"))

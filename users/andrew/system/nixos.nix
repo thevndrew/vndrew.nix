@@ -1,11 +1,12 @@
-{ config, pkgs, other-pkgs, inputs, systemInfo, ... }:
+{ config, pkgs, other-pkgs, inputs, systemInfo, isDesktop, ... }:
 {
   disabledModules = [ "programs/nh.nix" ];
 
   imports = [ 
     "${inputs.nixpkgs-unstable}/nixos/modules/programs/nh.nix"
-    ./system
   ];
+
+  gui.enable = isDesktop;
 
   security.sudo.enable = true;
   security.sudo.wheelNeedsPassword = false;

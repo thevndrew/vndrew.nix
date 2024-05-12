@@ -14,8 +14,8 @@ let
 
   # The config files for this system.
   machineConfig = ../hosts/${name}/configuration.nix;
-  userOSConfig = ../users/${user}/nixos${if desktop then "-desktop" else ""}.nix;
-  userHMConfig = ../users/${user}/home/home-manager.nix;
+  userOSConfig = ../users/${user}/system/default.nix;
+  userHMConfig = ../users/${user}/home/home_manager.nix;
 
   systemFunc = nixpkgs.lib.nixosSystem;
   home-manager = inputs.home-manager.nixosModules;
@@ -50,6 +50,8 @@ let
 
   moduleArgs = {
      sopsKey = "/home/${user}/.ssh/${name}";
+     isDesktop = desktop;
+     isWSL = isWSL;
      inherit inputs;
      inherit mylib;
      inherit other-pkgs;
@@ -81,21 +83,7 @@ in systemFunc rec {
         inputs.sops-nix.homeManagerModules.sops
         inputs.nix-index-database.hmModules.nix-index
       ];
-      home-manager.users.${user} = import userHMConfig {
-        isDesktop = desktop;
-        isWSL = isWSL;
-      };
-    }
-
-    # We expose some extra arguments so that our modules can parameterize
-    # better based on these values.
-    {
-      config._module.args = {
-        inputs = inputs;
-        isDesktop = desktop;
-        isWSL = isWSL;
-	systemInfo = systemInfo;
-      };
+      home-manager.users.${user} = import userHMConfig;
     }
   ];
 }

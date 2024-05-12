@@ -1,14 +1,15 @@
-{ isDesktop, isWSL }:
-
-{ mylib, lib, config, inputs, pkgs, other-pkgs, systemInfo, ... }:
+{ mylib, lib, config, inputs, pkgs, other-pkgs, systemInfo, isDesktop, ... }:
 {
   imports = [
     ./files.nix
     ./secrets.nix 
     # ./systemd/clone_repos.nix
-  ] ++ 
+    ./gui/gui_module.nix
+  ] ++
   (mylib.scanPaths ./programs)
   ;
+
+  gui.enable = isDesktop;
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
