@@ -109,7 +109,7 @@
       thousand-sunny = mkSystem "thousand-sunny" rec {
 	inherit system;
         user = "andrew";
-        desktop = false;
+        desktop = true;
       };
 
     };

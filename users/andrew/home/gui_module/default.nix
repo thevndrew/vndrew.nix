@@ -1,11 +1,11 @@
-{ lib, mylib, config, pkgs, ... }:
+{ inputs, lib, mylib, config, pkgs, other-pkgs, ... }:
 let
   cfg = config.gui;
-  startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
+  startupScript = pkgs.writeShellScriptBin "start" ''
     ${pkgs.waybar}/bin/waybar &
-    ${pkgs.swww}/bin/swww init &
+    #${pkgs.swww}/bin/swww init &
     sleep 1
-    ${pkgs.swww}/bin/swww img ${./wallpaper.png} &
+    #${pkgs.swww}/bin/swww img ''${./wallpaper.png} &
   '';
 in
 {
@@ -21,7 +21,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    hello.enable = cfg.enable;
+    home.packages = [ other-pkgs.unstable.wayvnc ];
  
     wayland.windowManager.hyprland = {
       enable = true;
