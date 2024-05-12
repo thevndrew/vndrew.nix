@@ -1,4 +1,4 @@
-{ lib, mylib, config, pkgs, ... }:
+{ inputs, lib, mylib, config, pkgs, ... }:
 let
   cfg = config.gui;
 in
@@ -16,5 +16,7 @@ in
 
   config = lib.mkIf cfg.enable {
     hello.enable = cfg.enable;
+    programs.hyprland.enable = true;
+    programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
   };
 }

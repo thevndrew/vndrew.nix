@@ -6,7 +6,11 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
     # Window Manager
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
 
     # My package repo and neovim config
     nixpkgs-vndrew.url = "git+ssh://git@github.com/thevndrew/nix-packages.git";
@@ -105,6 +109,7 @@
       thousand-sunny = mkSystem "thousand-sunny" rec {
 	inherit system;
         user = "andrew";
+        desktop = false;
       };
 
     };

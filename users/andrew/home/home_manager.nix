@@ -4,12 +4,12 @@
     ./files.nix
     ./secrets.nix 
     # ./systemd/clone_repos.nix
-    ./gui/gui_module.nix
   ] ++
-  (mylib.scanPaths ./programs)
+  (mylib.scanPaths ./programs) ++
+  (mylib.scanPaths ./gui_module)
   ;
 
-  gui.enable = isDesktop;
+  #gui.enable = isDesktop;
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
