@@ -69,14 +69,15 @@ in
     ssh-to-age 
     tmux
     tree
+    tokei
     unar
     unzip
-    #vhs # only install on desktop
     wget
     xh
     yazi
     yq
     yt-dlp
+    #vhs # only install on desktop
     #bitwarden-cli
     #cosmopolitan
     #croc
