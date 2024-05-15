@@ -3,11 +3,11 @@
     "bootdev": {
       "flake": false,
       "locked": {
-        "lastModified": 1714766760,
-        "narHash": "sha256-wjNFYQkwRFTEaEiLxZhEYu7wrgM8kZpxXi6bkNjNJ8w=",
+        "lastModified": 1715713946,
+        "narHash": "sha256-QaVd0U3HaSYgJHuiptDg8k1Ffx/YAXMk4WuDW1TcuDE=",
         "owner": "bootdotdev",
         "repo": "bootdev",
-        "rev": "f1948554ef1c7127962846ed1249454a755fb54e",
+        "rev": "bc132ccd85b92d9561e56dcf1db2f441405fa30a",
         "type": "github"
       },
       "original": {
@@ -668,11 +668,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1714957084,
-        "narHash": "sha256-9wHXbF54SgqANrnDJUZ5XifTlrd0DUPtZAlo1cLJjSs=",
+        "lastModified": 1715731952,
+        "narHash": "sha256-Kax8kCrqKziOvpuskGciV+4onLZGv/r8q1r6FPErK6g=",
         "ref": "refs/heads/main",
-        "rev": "fc29adc34ae93b1568c5982e39d349193eae953d",
-        "revCount": 5,
+        "rev": "a8d0f5afd9fcf241421087edb3ba7a17c22f2c76",
+        "revCount": 6,
         "type": "git",
         "url": "ssh://git@github.com/thevndrew/nix-packages.git"
       },
@@ -715,11 +715,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1714635257,
-        "narHash": "sha256-4cPymbty65RvF1DWQfc+Bc8B233A1BWxJnNULJKQ1EY=",
+        "lastModified": 1715534503,
+        "narHash": "sha256-5ZSVkFadZbFP1THataCaSf0JH2cAH3S29hU9rrxTEqk=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "63c3a29ca82437c87573e4c6919b09a24ea61b0f",
+        "rev": "2057814051972fa1453ddfb0d98badbea9b83c06",
         "type": "github"
       },
       "original": {
