@@ -1,5 +1,5 @@
 {
-  description = "Flake for going-merry";
+  description = "Andrew's nix configuration flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-23.11";
@@ -37,7 +37,7 @@
     };
 
     # Use ssh protocol to authenticate via ssh-agent/ssh-key, and shallow clone
-    mysecrets = { 
+    mysecrets = {
       url = "git+ssh://git@github.com/thevndrew/nix-secrets.git?shallow=1";
       flake = false;
     };
@@ -65,8 +65,13 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
-  let
+  outputs = {
+    self,
+    nixpkgs,
+    nixpkgs-unstable,
+    home-manager,
+    ...
+  } @ inputs: let
     system = "x86_64-linux";
 
     overlays = [
@@ -78,41 +83,44 @@
       inherit nixpkgs overlays inputs;
     };
 
-    homeManagerSetup = { hostname, user }: (
+    homeManagerSetup = {
+      hostname,
+      user,
+    }: (
       let
-        specialArgs = inputs // {
-          inherit hostname user;
-          impurePaths = {
-            workingDir = "/home/${user}/.config/nix";
+        specialArgs =
+          inputs
+          // {
+            inherit hostname user;
+            impurePaths = {
+              workingDir = "/home/${user}/.config/nix";
+            };
           };
-        };
       in
-      home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs { inherit system; };
-        modules = [
-	  inputs.sops-nix.homeManagerModules.sops
-	  ./users/${user}/home-manager.nix
-	];
-        extraSpecialArgs = specialArgs;
-      }
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {inherit system;};
+          modules = [
+            inputs.sops-nix.homeManagerModules.sops
+            ./users/${user}/home-manager.nix
+          ];
+          extraSpecialArgs = specialArgs;
+        }
     );
-
-  in
-  {
+  in {
     nixosConfigurations = {
-
       going-merry = mkSystem "going-merry" rec {
-	inherit system;
+        inherit system;
         user = "andrew";
       };
 
       thousand-sunny = mkSystem "thousand-sunny" rec {
-	inherit system;
+        inherit system;
         user = "andrew";
         desktop = true;
       };
-
     };
+
+    formatter.${system} = nixpkgs.legacyPackages.${system}.alejandra;
 
     homeConfigurations = {
       ubuntu = homeManagerSetup {
@@ -122,4 +130,3 @@
     };
   };
 }
-

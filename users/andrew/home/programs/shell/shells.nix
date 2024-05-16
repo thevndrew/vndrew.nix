@@ -1,5 +1,8 @@
-{ mylib, systemInfo, ... }:
 {
+  mylib,
+  systemInfo,
+  ...
+}: {
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. If you don't want to manage your shell through Home
   # Manager then you have to manually source 'hm-session-vars.sh' located at
@@ -31,11 +34,10 @@
   };
 
   programs = {
-
     bash = {
       enable = true;
       enableCompletion = true;
-      historyControl = [ "ignoredups" "ignorespace" ];
+      historyControl = ["ignoredups" "ignorespace"];
       historyFile = "${systemInfo.home}/.bash_eternal_history";
       historyFileSize = -1;
       historySize = -1;
@@ -55,11 +57,11 @@
         PROMPT_COMMAND = "history -a; $PROMPT_COMMAND";
       };
       initExtra = ''
-	# Bootdev completions
-        source ${mylib.relativeToRoot "config/bash/bootdev.bash"}
+        # Bootdev completions
+               source ${mylib.relativeToRoot "config/bash/bootdev.bash"}
       '';
     };
-  
+
     zsh = {
       enable = true;
       enableAutosuggestions = true;
@@ -77,11 +79,11 @@
       };
 
       initExtra = ''
-	# Bootdev completions
-        source ${mylib.relativeToRoot "config/zsh/bootdev.zsh"}
+        # Bootdev completions
+               source ${mylib.relativeToRoot "config/zsh/bootdev.zsh"}
 
-        ${builtins.readFile (mylib.relativeToRoot "config/zsh/keybinds.zsh")}
-        ${builtins.readFile (mylib.relativeToRoot "config/zsh/functions.zsh")}
+               ${builtins.readFile (mylib.relativeToRoot "config/zsh/keybinds.zsh")}
+               ${builtins.readFile (mylib.relativeToRoot "config/zsh/functions.zsh")}
       '';
 
       historySubstringSearch = {
@@ -98,7 +100,7 @@
 
       oh-my-zsh = {
         enable = true;
-        plugins = [ "git" ];
+        plugins = ["git"];
         theme = "robbyrussell";
       };
 

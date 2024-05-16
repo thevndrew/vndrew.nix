@@ -1,7 +1,6 @@
 # Arion works with Docker, but for NixOS-based containers, you need Podman
 # since NixOS 21.05.
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   virtualisation = {
     containers = {
       enable = true;

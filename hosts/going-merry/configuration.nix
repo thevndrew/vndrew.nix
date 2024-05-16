@@ -1,10 +1,16 @@
-{ config, mylib, lib, pkgs, inputs, systemInfo, ... }:
-
 {
-  imports = [ 
+  config,
+  mylib,
+  lib,
+  pkgs,
+  inputs,
+  systemInfo,
+  ...
+}: {
+  imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    
+
     # Setup WOL systemd service
     (import (mylib.relativeToRoot "users/${systemInfo.user}/system/systemd/wol.nix") {
       wolCommand = "ethtool -s enp1s0 wol g && ethtool -s enp2s0 wol g";
@@ -23,7 +29,7 @@
     };
   };
 
-  users.users."${systemInfo.user}".extraGroups = [ "wheel" "podman" ];
+  users.users."${systemInfo.user}".extraGroups = ["wheel" "podman"];
   #extraGroups = [ "wheel" "docker" ];
 
   networking = {
@@ -33,7 +39,7 @@
   systemd.services."qbittorrent_restart" = {
     enable = true;
     description = "qbittorrent automatic restart";
-    path = [ pkgs.docker-client ];
+    path = [pkgs.docker-client];
     unitConfig = {
       Type = "oneshot";
     };
@@ -43,7 +49,7 @@
       Group = "users";
     };
     startAt = "hourly";
-    wantedBy = [ "multi-user.target" ];
+    wantedBy = ["multi-user.target"];
   };
 
   # Pick only one of the below networking options.
@@ -85,6 +91,4 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "23.11"; # Did you read the comment?
-
 }
-

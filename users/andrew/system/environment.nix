@@ -1,15 +1,14 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   environment = {
     # Add ~/.local/bin to PATH
     localBinInPath = true;
 
-    pathsToLink = [ 
+    pathsToLink = [
       "/share/bash-completion"
       "/share/zsh"
     ];
- 
-    shells = [ pkgs.zsh pkgs.nushell ];
+
+    shells = [pkgs.zsh pkgs.nushell];
     systemPackages = with pkgs; [
       mergerfs
       tmux

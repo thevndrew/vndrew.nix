@@ -1,8 +1,15 @@
-{ config, pkgs, other-pkgs, inputs, systemInfo, isDesktop, ... }:
 {
-  disabledModules = [ "programs/nh.nix" ];
+  config,
+  pkgs,
+  other-pkgs,
+  inputs,
+  systemInfo,
+  isDesktop,
+  ...
+}: {
+  disabledModules = ["programs/nh.nix"];
 
-  imports = [ 
+  imports = [
     "${inputs.nixpkgs-unstable}/nixos/modules/programs/nh.nix"
   ];
 

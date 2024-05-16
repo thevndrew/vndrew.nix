@@ -1,13 +1,22 @@
-{ mylib, lib, config, inputs, pkgs, other-pkgs, systemInfo, isDesktop, ... }:
 {
-  imports = [
-    ./files.nix
-    ./secrets.nix 
-    # ./systemd/clone_repos.nix
-    ./gui_module/default.nix
-  ] ++
-  (mylib.scanPaths ./programs)
-  ;
+  mylib,
+  lib,
+  config,
+  inputs,
+  pkgs,
+  other-pkgs,
+  systemInfo,
+  isDesktop,
+  ...
+}: {
+  imports =
+    [
+      ./files.nix
+      ./secrets.nix
+      # ./systemd/clone_repos.nix
+      ./gui_module/default.nix
+    ]
+    ++ (mylib.scanPaths ./programs);
 
   gui.enable = isDesktop;
 

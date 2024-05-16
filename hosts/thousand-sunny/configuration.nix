@@ -1,7 +1,13 @@
-{ config, inputs, mylib, lib, pkgs, systemInfo, ... }:
-
 {
-  imports = [ 
+  config,
+  inputs,
+  mylib,
+  lib,
+  pkgs,
+  systemInfo,
+  ...
+}: {
+  imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
@@ -23,11 +29,11 @@
 
     kernelParams = ["xhci_hcd.quirks=270336"];
     #kernel.sysctl = { "xhci_hcd.quirks" = 270336; };
-    supportedFilesystems = [ "zfs" ];
+    supportedFilesystems = ["zfs"];
     zfs = {
       forceImportRoot = false;
       extraPools = [
-        "tank00" 
+        "tank00"
         "tank01"
         "tank02"
       ];
@@ -73,7 +79,7 @@
   };
 
   users.groups.storage = {};
-  users.users.${systemInfo.user}.extraGroups = [ "wheel" "podman" "storage" ];
+  users.users.${systemInfo.user}.extraGroups = ["wheel" "podman" "storage"];
 
   networking = {
     hostName = "thousand-sunny";

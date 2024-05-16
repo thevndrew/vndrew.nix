@@ -1,8 +1,13 @@
-{ inputs, lib, mylib, config, pkgs, ... }:
-let
-  cfg = config.gui;
-in
 {
+  inputs,
+  lib,
+  mylib,
+  config,
+  pkgs,
+  ...
+}: let
+  cfg = config.gui;
+in {
   imports = mylib.scanPaths ./.;
 
   options = {

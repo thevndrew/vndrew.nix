@@ -1,9 +1,13 @@
-{ lib, mylib, config, other-pkgs, ... }:
-let
+{
+  lib,
+  mylib,
+  config,
+  other-pkgs,
+  ...
+}: let
   cfg = config.hello;
   unstable = other-pkgs.unstable;
-in
-{
+in {
   options = {
     hello.enable = lib.mkOption {
       type = lib.types.bool;

@@ -1,8 +1,10 @@
-{ systemInfo, other-pkgs, ... }:
-let
-  unstable = other-pkgs.unstable;
-in
 {
+  systemInfo,
+  other-pkgs,
+  ...
+}: let
+  unstable = other-pkgs.unstable;
+in {
   programs.git = {
     enable = true;
     package = unstable.git;
@@ -11,7 +13,7 @@ in
     aliases = {
       an = "commit --amend --no-edit";
       br = "branch";
-      c  = "commit";
+      c = "commit";
       co = "checkout";
       st = "status";
       wt = "worktree";
@@ -52,7 +54,7 @@ in
       git_protocol = "ssh";
       #pager = "";
       aliases = {
-	co = "pr checkout";
+        co = "pr checkout";
         pv = "pr view";
       };
     };

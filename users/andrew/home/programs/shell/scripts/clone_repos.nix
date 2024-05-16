@@ -1,10 +1,13 @@
-{ mylib, systemInfo, pkgs }:
-let
+{
+  mylib,
+  systemInfo,
+  pkgs,
+}: let
   repoList = mylib.relativeToRoot "config/repos/repos.yml";
 in
   pkgs.writeShellApplication {
     name = "clone_repos";
-    runtimeInputs = with pkgs; [ yq git ];
+    runtimeInputs = with pkgs; [yq git];
     text = ''
       set +o errexit
 
@@ -35,7 +38,7 @@ in
           REPO_URL=$(yq -r ".repo_list.$REPO.url" "${repoList}")
           mkdir_if_not_exists "${systemInfo.home}/$REPO_DIR"
           clone_if_not_exists "$REPO_URL" "${systemInfo.home}/$REPO_DIR"
-      done 
+      done
 
       set +o nounset
       set +o pipefail

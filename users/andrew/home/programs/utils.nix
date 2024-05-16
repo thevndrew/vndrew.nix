@@ -1,8 +1,10 @@
-{ pkgs, other-pkgs, ... }:
-let
- unstable = other-pkgs.unstable;
-in
 {
+  pkgs,
+  other-pkgs,
+  ...
+}: let
+  unstable = other-pkgs.unstable;
+in {
   programs = {
     ripgrep = {
       enable = true;

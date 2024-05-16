@@ -1,14 +1,14 @@
-{ nixpkgs, overlays, inputs, ... }:
-
-name:
 {
+  nixpkgs,
+  overlays,
+  inputs,
+  ...
+}: name: {
   system,
   user,
   wsl ? false,
-  desktop ? false
-}:
-
-let
+  desktop ? false,
+}: let
   # True if this is a WSL system.
   isWSL = wsl;
 
@@ -39,7 +39,7 @@ let
     vndrew = inputs.nixpkgs-vndrew.packages.${pkgs.system};
   };
 
-  mylib = import ./mylib.nix { inherit (nixpkgs) lib; };
+  mylib = import ./mylib.nix {inherit (nixpkgs) lib;};
 
   systemInfo = {
     home = "/home/${user}";
@@ -49,42 +49,46 @@ let
   };
 
   moduleArgs = {
-     sopsKey = "/home/${user}/.ssh/${name}";
-     isDesktop = desktop;
-     isWSL = isWSL;
-     inherit inputs;
-     inherit mylib;
-     inherit other-pkgs;
-     inherit systemInfo;
+    sopsKey = "/home/${user}/.ssh/${name}";
+    isDesktop = desktop;
+    isWSL = isWSL;
+    inherit inputs;
+    inherit mylib;
+    inherit other-pkgs;
+    inherit systemInfo;
   };
+in
+  systemFunc rec {
+    inherit system;
 
-in systemFunc rec {
-  inherit system;
+    specialArgs = moduleArgs;
 
-  specialArgs = moduleArgs;
+    modules = [
+      # Apply our overlays. Overlays are keyed by system type so we have
+      # to go through and apply our system type. We do this first so
+      # the overlays are available globally.
+      {nixpkgs.overlays = overlays;}
 
-  modules = [
-    # Apply our overlays. Overlays are keyed by system type so we have
-    # to go through and apply our system type. We do this first so
-    # the overlays are available globally.
-    { nixpkgs.overlays = overlays; }
+      # Bring in WSL if this is a WSL build
+      (
+        if isWSL
+        then inputs.nixos-wsl.nixosModules.wsl
+        else {}
+      )
 
-    # Bring in WSL if this is a WSL build
-    (if isWSL then inputs.nixos-wsl.nixosModules.wsl else {})
-
-    sops-nix.sops
-    machineConfig
-    userOSConfig
-    home-manager.home-manager {
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-      home-manager.extraSpecialArgs = moduleArgs;
-      home-manager.sharedModules = [
-        inputs.sops-nix.homeManagerModules.sops
-        inputs.nix-index-database.hmModules.nix-index
-      ];
-      home-manager.users.${user} = import userHMConfig;
-    }
-  ];
-}
-
+      sops-nix.sops
+      machineConfig
+      userOSConfig
+      home-manager.home-manager
+      {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        home-manager.extraSpecialArgs = moduleArgs;
+        home-manager.sharedModules = [
+          inputs.sops-nix.homeManagerModules.sops
+          inputs.nix-index-database.hmModules.nix-index
+        ];
+        home-manager.users.${user} = import userHMConfig;
+      }
+    ];
+  }

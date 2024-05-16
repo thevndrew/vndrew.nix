@@ -1,10 +1,8 @@
-{ lib, ... }:
-{
+{lib, ...}: {
   # use path relative to the root of the project
   relativeToRoot = lib.path.append ../.;
 
-  scanPaths = path:
-  let
+  scanPaths = path: let
     excludeDirs = [
       "scripts"
       "systemd"
@@ -23,14 +21,16 @@
     (builtins.attrNames
       (lib.attrsets.filterAttrs
         (
-          path: _type: (
-              _type == "directory"       # include directories
-              && filterDir path          # filter excluded dirs
+          path: _type:
+            (
+              _type
+              == "directory" # include directories
+              && filterDir path # filter excluded dirs
             )
             || (
-              (path != "default.nix")    # ignore default.nix
+              (path != "default.nix") # ignore default.nix
               && (filterFileSuffix path) # ignore *settings.nix files
-              && (lib.strings.hasSuffix ".nix" path)  # include .nix files
+              && (lib.strings.hasSuffix ".nix" path) # include .nix files
             )
         )
         (builtins.readDir path)));

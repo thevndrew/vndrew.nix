@@ -1,21 +1,24 @@
-{ pkgs, other-pkgs, ... }:
 {
+  pkgs,
+  other-pkgs,
+  ...
+}: {
   services = {
     openssh = {
       enable = true;
       settings.PasswordAuthentication = false;
       settings.PermitRootLogin = "yes";
-      ports = [ 22 2222 ];
+      ports = [22 2222];
     };
-  
+
     tailscale = {
       enable = true;
       package = other-pkgs.unstable.tailscale;
       useRoutingFeatures = "both";
     };
-  
+
     vnstat.enable = true;
-  
+
     resolved = {
       enable = false;
       fallbackDns = [
