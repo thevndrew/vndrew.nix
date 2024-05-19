@@ -53,6 +53,10 @@
       #inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    #my-neovim-nightly-overlay = {
+    #  url = "github:thevndrew/nix-neovim-overlay";
+    #};
+
     # Other packages
     zig.url = "github:mitchellh/zig-overlay";
 
@@ -72,7 +76,7 @@
     system = "x86_64-linux";
 
     overlays = [
-      inputs.neovim-nightly-overlay.overlay
+      #inputs.neovim-nightly-overlay.overlay
       inputs.zig.overlays.default
     ];
 
