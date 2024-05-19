@@ -76,6 +76,7 @@ in
         else {}
       )
 
+      #inputs.stylix.nixosModules.stylix
       sops-nix.sops
       machineConfig
       userOSConfig
