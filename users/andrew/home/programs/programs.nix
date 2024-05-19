@@ -71,6 +71,7 @@ in {
       shellcheck
       shellharden
       silver-searcher
+      skim
       sops
       ssh-to-age
       tmux
