@@ -48,12 +48,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # I think technically you're not supposed to override the nixpkgs
-    # used by neovim but recently I had failures if I didn't pin to my
-    # own. We can always try to remove that anytime.
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
+      #inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Other packages
@@ -75,7 +72,7 @@
     system = "x86_64-linux";
 
     overlays = [
-      #inputs.neovim-nightly-overlay.overlay
+      inputs.neovim-nightly-overlay.overlay
       inputs.zig.overlays.default
     ];
 
