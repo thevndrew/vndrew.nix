@@ -22,21 +22,45 @@ in {
       type = lib.types.bool;
       default = false;
       example = true;
-      description = "enables GUI related configuration";
+      description = "enable GUI related configuration";
+    };
+
+    gui.wm = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      example = true;
+      description = "enable Window Manager related configuration";
     };
   };
 
   config = lib.mkIf cfg.enable {
     home.packages = [other-pkgs.unstable.wayvnc];
 
-    wayland.windowManager.hyprland = {
+    terminals = {
       enable = true;
+      alacritty = true;
+    };
+
+    #home.pointerCursor = {
+    #  gtk.enable = true;
+    #};
+
+    gtk = {
+      enable = true;
+    };
+
+    wayland.windowManager.hyprland = {
+      enable = cfg.wm;
 
       plugins = [
         inputs.hyprland-plugins.packages."${pkgs.system}".borders-plus-plus
       ];
 
+      extraConfig = builtins.readFile (mylib.relativeToRoot "config/hyprland/config");
+
       settings = {
+        #"$terminal" = "wezterm";
+        #monitor = "DP-1,2560x1440@60,0x0,1";
         "plugin:borders-plus-plus" = {
           add_borders = 1; # 0 - 9
 

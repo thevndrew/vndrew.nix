@@ -18,7 +18,10 @@
     ]
     ++ (mylib.scanPaths ./programs);
 
-  gui.enable = isDesktop;
+  gui = {
+    enable = isDesktop;
+    wm = isDesktop;
+  };
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.

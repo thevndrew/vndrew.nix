@@ -79,7 +79,7 @@
   };
 
   users.groups.storage = {};
-  users.users.${systemInfo.user}.extraGroups = ["wheel" "podman" "storage"];
+  users.users.${systemInfo.user}.extraGroups = ["wheel" "podman" "storage" "input"];
 
   networking = {
     hostName = "thousand-sunny";
