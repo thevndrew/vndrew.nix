@@ -5,11 +5,6 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-23.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
-    # Styling
-    stylix = {
-      url = "github:danth/stylix";
-    };
-
     # Window Manager
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     hyprland-plugins = {
@@ -29,6 +24,9 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Styling
+    stylix.url = "github:danth/stylix?ref=release-23.11";
 
     home-manager = {
       url = "github:nix-community/home-manager?ref=release-23.11";
@@ -106,6 +104,7 @@
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {inherit system;};
           modules = [
+            inputs.stylix.homeManagerModules.stylix
             inputs.sops-nix.homeManagerModules.sops
             ./users/${user}/home-manager.nix
           ];

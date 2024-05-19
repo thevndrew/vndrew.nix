@@ -1,5 +1,13 @@
-{...}: {
+{inputs, ...}: {
   nix = {
+    registry = {
+      nixpkgs = {
+        flake = inputs.nixpkgs;
+      };
+    };
+    nixPath = [
+      "nixpkgs=${inputs.nixpkgs.outPath}"
+    ];
     settings = {
       auto-optimise-store = true;
       builders-use-substitutes = true;
