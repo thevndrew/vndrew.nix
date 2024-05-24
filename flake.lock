@@ -896,11 +896,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1716126467,
-        "narHash": "sha256-sfLAvwykIHG//nGCzpZnxml2ajciU5LTFox4RUQNSeE=",
+        "lastModified": 1716570432,
+        "narHash": "sha256-Fy+mgA/BQp+740GK2hLQxGrbOWYu54JnK1y9nQYHb+Q=",
         "ref": "refs/heads/main",
-        "rev": "60dee8c1cefe486df6a0684512c94b1aba7c356f",
-        "revCount": 8,
+        "rev": "5a537bd9c62466685c3fae262fc1f62354168fca",
+        "revCount": 9,
         "type": "git",
         "url": "ssh://git@github.com/thevndrew/nix-packages.git"
       },

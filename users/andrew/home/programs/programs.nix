@@ -1,17 +1,11 @@
 {
-  inputs,
+  lib,
   mylib,
   pkgs,
   other-pkgs,
-  systemInfo,
+  isWSL,
   ...
 }: let
-  scriptsDir = "config/scripts";
-  streamScriptsDir = "${scriptsDir}/stream_downloader";
-
-  pathTo = mylib.relativeToRoot;
-  readFile = path: builtins.readFile (pathTo path);
-
   inherit (other-pkgs) vndrew unstable nix-alien;
 in {
   home.packages =
@@ -26,17 +20,17 @@ in {
       tdns-cli
       wakeonlan
 
-      # Do install the docker CLI to talk to podman.
-      # Not needed when virtualisation.docker.enable = true;
-      docker-client
-
-      docker-compose
-
       # # It is sometimes useful to fine-tune packages, for example, by applying
       # # overrides. You can do that directly here, just don't forget the
       # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
       # # fonts?
       # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+    ])
+    ++ (lib.optionals (!isWSL) [
+      # Do install the docker CLI to talk to podman.
+      # Not needed when virtualisation.docker.enable = true;
+      pkgs.docker-client
+      pkgs.docker-compose
     ])
     ++ (with unstable; [
       bfs
@@ -100,5 +94,6 @@ in {
     ++ (with vndrew; [
       bootdev
       megadl
+      patreon-dl-fmt
     ]);
 }
