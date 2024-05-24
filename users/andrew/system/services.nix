@@ -1,6 +1,6 @@
 {
-  pkgs,
   other-pkgs,
+  isWSL,
   ...
 }: {
   services = {
@@ -12,7 +12,7 @@
     };
 
     tailscale = {
-      enable = true;
+      enable = !isWSL;
       package = other-pkgs.unstable.tailscale;
       useRoutingFeatures = "both";
     };

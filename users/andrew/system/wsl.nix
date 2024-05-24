@@ -21,6 +21,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     my-networking.enable = false;
+    my-virtualisation.enable = false;
     wsl.enable = true;
     wsl.docker-desktop.enable = true;
   };
