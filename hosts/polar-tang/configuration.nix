@@ -1,15 +1,8 @@
-{
-  config,
-  inputs,
-  mylib,
-  lib,
-  pkgs,
-  systemInfo,
-  ...
-}: {
+{systemInfo, ...}: {
   imports = [];
 
-  users.users.${systemInfo.user}.extraGroups = ["wheel"];
+  users.users.${systemInfo.user}.extraGroups = ["wheel" "docker"];
+  users.extraGroups.docker.members = ["${systemInfo.user}"];
 
   networking = {
     hostName = "polar-tang";
