@@ -113,15 +113,21 @@
     );
   in {
     nixosConfigurations = {
-      going-merry = mkSystem "going-merry" rec {
+      going-merry = mkSystem "going-merry" {
         inherit system;
         user = "andrew";
       };
 
-      thousand-sunny = mkSystem "thousand-sunny" rec {
+      thousand-sunny = mkSystem "thousand-sunny" {
         inherit system;
         user = "andrew";
         desktop = true;
+      };
+
+      polar-tang = mkSystem "polar-tang" {
+        inherit system;
+        user = "andrew";
+        wsl = true;
       };
     };
 

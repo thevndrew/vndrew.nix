@@ -1,10 +1,9 @@
 {
-  config,
-  pkgs,
   other-pkgs,
   inputs,
   systemInfo,
   isDesktop,
+  isWSL,
   ...
 }: {
   disabledModules = ["programs/nh.nix"];
@@ -14,6 +13,7 @@
   ];
 
   gui.enable = isDesktop;
+  wsl-cfg.enable = isWSL;
 
   security.sudo.enable = true;
   security.sudo.wheelNeedsPassword = false;

@@ -50,7 +50,7 @@
   };
 
   moduleArgs = {
-    sopsKey = "/home/${user}/.ssh/${name}";
+    sopsKeys = builtins.map (name: "/home/${user}/.ssh/${name}") ["going-merry" "thousand-sunny" "polar-tang"];
     isDesktop = desktop;
     isWSL = isWSL;
     inherit inputs;
@@ -59,7 +59,7 @@
     inherit systemInfo;
   };
 in
-  systemFunc rec {
+  systemFunc {
     inherit system;
 
     specialArgs = moduleArgs;
@@ -73,7 +73,7 @@ in
       # Bring in WSL if this is a WSL build
       (
         if isWSL
-        then inputs.nixos-wsl.nixosModules.wsl
+        then inputs.nixos-wsl.nixosModules.default
         else {}
       )
 

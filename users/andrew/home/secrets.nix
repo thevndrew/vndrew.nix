@@ -1,11 +1,13 @@
 {
+  lib,
   inputs,
   systemInfo,
-  sopsKey,
+  sopsKeys,
+  isWSL,
   ...
 }: {
   sops = {
-    age.sshKeyPaths = ["${sopsKey}"];
+    age.sshKeyPaths = sopsKeys;
     defaultSopsFile = "${inputs.mysecrets}/secrets/services.yaml";
 
     secrets."services/env" = {
@@ -13,7 +15,7 @@
       path = "${systemInfo.home}/.config/services/services.env";
     };
 
-    secrets."services/${systemInfo.hostname}" = {
+    secrets."services/${systemInfo.hostname}" = lib.mkIf (!isWSL) {
       sopsFile = "${inputs.mysecrets}/secrets/services.yaml";
       path = "${systemInfo.home}/.config/services/${systemInfo.hostname}.yaml";
     };
