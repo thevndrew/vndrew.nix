@@ -1204,11 +1204,11 @@
         "telescope-smart-history-nvim": "telescope-smart-history-nvim"
       },
       "locked": {
-        "lastModified": 1716086383,
-        "narHash": "sha256-0QQH5sTHji5rQis2gBsQl/CYjX3pkfiz3n5TiyjwKIM=",
+        "lastModified": 1716728460,
+        "narHash": "sha256-VfII7l5kiVVtpSHlxPzbKV9/wzh04u+dvRe0O1ctgSo=",
         "ref": "refs/heads/main",
-        "rev": "156c7b02215128cd4c2bdc627c05dd8c2d69f0e9",
-        "revCount": 20,
+        "rev": "8e215050b5014ae0ef26f15ae51bc887a231c2c1",
+        "revCount": 21,
         "type": "git",
         "url": "ssh://git@github.com/thevndrew/vndrew.nvim"
       },
