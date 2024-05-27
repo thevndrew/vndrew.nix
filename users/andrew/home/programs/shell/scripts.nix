@@ -28,6 +28,15 @@ in {
     })
 
     (pkgs.writeShellApplication {
+      name = "zipcbz";
+      runtimeInputs = with other-pkgs.unstable; [zip];
+      text = ''
+        set +o nounset
+        ${readFile "${scriptsDir}/zipcbz.bash"}
+      '';
+    })
+
+    (pkgs.writeShellApplication {
       name = "rip_streams";
       runtimeInputs = with other-pkgs.unstable; [yq];
       text = ''
