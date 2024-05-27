@@ -7,7 +7,36 @@
 }: let
   inherit (builtins) getEnv;
   inherit (lib.modules) mkIf mkMerge;
+
   cfg = config.networking.samba;
+
+  mkShare = {
+    path,
+    user,
+  }: {
+    path = path;
+    browseable = "yes";
+    "read only" = "yes";
+    "guest ok" = "no";
+    "force user" = user;
+    "force group" = "users";
+    "write list" = user;
+    "valid users" = user;
+  };
+
+  mkWriteShare = {
+    path,
+    user,
+  }: {
+    path = path;
+    browseable = "yes";
+    "read only" = "no";
+    "guest ok" = "no";
+    "force user" = user;
+    "force group" = "users";
+    "write list" = user;
+    "valid users" = user;
+  };
 in {
   options.networking.samba = let
     inherit (lib.options) mkEnableOption;
@@ -62,12 +91,12 @@ in {
         '';
 
         # :NOTE for Public| set sudo smbpasswd -a samba-guest -n
-        # :NOTE for Private| set sudo smbpasswd -a $(whoami)
+        # :NOTE for others| set sudo smbpasswd -a $(whoami)
         shares = {
+          # Basic shared folder example
           public = {
             #path = (getEnv "HOME") + "/Public";
-            #path = (getEnv "HOME");
-            path = systemInfo.home;
+            path = systemInfo.home + "/public";
             browseable = "yes";
             "read only" = "yes";
             "guest ok" = "yes";
@@ -75,35 +104,24 @@ in {
             "force group" = "samba-guest";
             "write list" = systemInfo.user;
           };
-          private = {
+
+          home = mkShare {
             path = systemInfo.home;
-            browseable = "yes";
-            "read only" = "no";
-            "guest ok" = "no";
-            "force user" = systemInfo.user;
-            "force group" = "users";
-            "write list" = systemInfo.user;
-            "valid users" = systemInfo.user;
+            user = systemInfo.user;
           };
-          storage = mkIf cfg.storage.enable {
+          home_write = mkWriteShare {
+            path = systemInfo.home;
+            user = systemInfo.user;
+          };
+
+          storage = mkIf cfg.storage.enable (mkShare {
             path = "/mnt/storage";
-            browseable = "yes";
-            "read only" = "yes";
-            "guest ok" = "yes";
-            "force user" = systemInfo.user;
-            "force group" = "samba-guest";
-            "write list" = systemInfo.user;
-          };
-          storage_write = mkIf cfg.storage.enable {
+            user = systemInfo.user;
+          });
+          storage_write = mkIf cfg.storage.enable (mkWriteShare {
             path = "/mnt/storage";
-            browseable = "yes";
-            "read only" = "no";
-            "guest ok" = "no";
-            "force user" = systemInfo.user;
-            "force group" = "users";
-            "write list" = systemInfo.user;
-            "valid users" = systemInfo.user;
-          };
+            user = systemInfo.user;
+          });
         };
       };
     })
