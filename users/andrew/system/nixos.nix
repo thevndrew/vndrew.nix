@@ -13,7 +13,10 @@
   ];
 
   gui.enable = isDesktop;
+
   wsl-cfg.enable = isWSL;
+
+  networking.samba.sharing.enable = !isWSL;
 
   security.sudo.enable = true;
   security.sudo.wheelNeedsPassword = false;
