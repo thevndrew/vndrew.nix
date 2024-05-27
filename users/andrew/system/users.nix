@@ -37,7 +37,7 @@ in {
         hashedPasswordFile = config.sops.secrets."passwords/${systemInfo.user}".path;
       }
       // lib.optionalAttrs isWSL {
-        initialHashedPassword = wslPass;
+        hashedPassword = wslPass;
       };
 
     users.root =
@@ -48,7 +48,7 @@ in {
         hashedPasswordFile = config.sops.secrets."passwords/${systemInfo.user}".path;
       }
       // lib.optionalAttrs isWSL {
-        initialHashedPassword = wslPass;
+        hashedPassword = wslPass;
       };
   };
 }
