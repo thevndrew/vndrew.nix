@@ -20,7 +20,6 @@
     "guest ok" = "no";
     "force user" = user;
     "force group" = "users";
-    "write list" = user;
     "valid users" = user;
   };
 
