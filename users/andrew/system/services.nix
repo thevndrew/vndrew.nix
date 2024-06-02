@@ -1,8 +1,4 @@
-{
-  other-pkgs,
-  isWSL,
-  ...
-}: {
+{other-pkgs, ...}: {
   services = {
     openssh = {
       enable = true;
@@ -12,7 +8,7 @@
     };
 
     tailscale = {
-      enable = !isWSL;
+      enable = true;
       package = other-pkgs.unstable.tailscale;
       useRoutingFeatures = "both";
     };

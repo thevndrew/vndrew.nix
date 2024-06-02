@@ -3,6 +3,7 @@
   lib,
   pkgs,
   systemInfo,
+  isWSL,
   ...
 }: let
   inherit (builtins) getEnv;
@@ -119,6 +120,15 @@ in {
           });
           storage_write = mkIf cfg.storage.enable (mkWriteShare {
             path = "/mnt/storage";
+            user = systemInfo.user;
+          });
+
+          c_drive = mkIf isWSL (mkShare {
+            path = "/mnt/c/Users/AJ-XPS/";
+            user = systemInfo.user;
+          });
+          c_drive_write = mkIf isWSL (mkWriteShare {
+            path = "/mnt/c/Users/AJ-XPS/";
             user = systemInfo.user;
           });
         };

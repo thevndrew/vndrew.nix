@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.wsl-cfg;
@@ -22,7 +23,19 @@ in {
   config = lib.mkIf cfg.enable {
     my-networking.enable = false;
     my-virtualisation.enable = false;
-    wsl.enable = true;
-    wsl.docker-desktop.enable = true;
+    wsl = {
+      enable = true;
+      docker-desktop.enable = true;
+      extraBin = with pkgs; [
+        # Binaries for Docker Desktop wsl-distro-proxy
+        {src = "${coreutils}/bin/mkdir";}
+        {src = "${coreutils}/bin/cat";}
+        {src = "${coreutils}/bin/whoami";}
+        {src = "${coreutils}/bin/ls";}
+        {src = "${busybox}/bin/addgroup";}
+        {src = "${su}/bin/groupadd";}
+        {src = "${su}/bin/usermod";}
+      ];
+    };
   };
 }
