@@ -2,7 +2,7 @@
   description = "Andrew's nix configuration flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-23.11";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
     # Window Manager
@@ -26,10 +26,10 @@
     };
 
     # Styling
-    stylix.url = "github:danth/stylix?ref=release-23.11";
+    #stylix.url = "github:danth/stylix?ref=release-24.05";
 
     home-manager = {
-      url = "github:nix-community/home-manager?ref=release-23.11";
+      url = "github:nix-community/home-manager?ref=release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -104,7 +104,6 @@
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {inherit system;};
           modules = [
-            inputs.stylix.homeManagerModules.stylix
             inputs.sops-nix.homeManagerModules.sops
             ./users/${user}/home-manager.nix
           ];

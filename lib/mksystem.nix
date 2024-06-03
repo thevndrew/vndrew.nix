@@ -20,7 +20,6 @@
   systemFunc = nixpkgs.lib.nixosSystem;
   home-manager = inputs.home-manager.nixosModules;
   sops-nix = inputs.sops-nix.nixosModules;
-  stylix = inputs.stylix.nixosModules;
 
   pkgs = import nixpkgs {
     inherit system;
