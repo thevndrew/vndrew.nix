@@ -11,6 +11,16 @@ in {
       package = other-pkgs.unstable.ripgrep;
     };
 
+    broot =
+      import ./integration_settings.nix
+      // {
+        enable = true;
+        #package = unstable.zoxide;
+        settings = {
+          modal = true;
+        };
+      };
+
     bat = {
       enable = true;
       #package = unstable.bat;
