@@ -31,6 +31,7 @@ in {
       # Not needed when virtualisation.docker.enable = true;
       pkgs.docker-client
       pkgs.docker-compose
+      unstable.wl-clipboard # on WSL just use: winget install win32yank
     ])
     ++ (with unstable; [
       bfs
@@ -74,7 +75,6 @@ in {
       unar
       unzip
       wget
-      wl-clipboard
       xh
       yazi
       yq
