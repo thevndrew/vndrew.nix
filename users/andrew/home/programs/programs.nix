@@ -57,10 +57,12 @@ in {
       lf
       ncdu
       nix-output-monitor
+      nomino
       nvd
       parallel
       procs
       rclone
+      rnr
       rsync
       sd
       shellcheck
@@ -70,8 +72,8 @@ in {
       sops
       ssh-to-age
       tmux
-      tree
       tokei
+      tree
       unar
       unzip
       wget
@@ -94,6 +96,5 @@ in {
     ++ (with vndrew; [
       bootdev
       megadl
-      patreon-dl-fmt
     ]);
 }
