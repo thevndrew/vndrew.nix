@@ -36,7 +36,6 @@ in {
     ++ (with unstable; [
       bfs
       bottom # module avalible
-      broot
       btop
       charm-freeze
       choose

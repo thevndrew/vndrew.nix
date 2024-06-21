@@ -1,21 +1,17 @@
-{
-  pkgs,
-  other-pkgs,
-  ...
-}: let
+{other-pkgs, ...}: let
   unstable = other-pkgs.unstable;
 in {
   programs = {
     ripgrep = {
       enable = true;
-      package = other-pkgs.unstable.ripgrep;
+      package = unstable.ripgrep;
     };
 
     broot =
       import ./integration_settings.nix
       // {
         enable = true;
-        #package = unstable.zoxide;
+        package = unstable.broot;
         settings = {
           modal = true;
         };
@@ -23,8 +19,8 @@ in {
 
     bat = {
       enable = true;
-      #package = unstable.bat;
-      extraPackages = with pkgs.bat-extras; [
+      package = unstable.bat;
+      extraPackages = with unstable.bat-extras; [
         batdiff
         batgrep
         batman
