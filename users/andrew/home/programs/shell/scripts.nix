@@ -30,32 +30,23 @@ in {
     (pkgs.writeShellApplication {
       name = "zipcbz";
       runtimeInputs = with other-pkgs.unstable; [zip];
-      text = ''
-        set +o nounset
-        ${readFile "${scriptsDir}/zipcbz.bash"}
-      '';
+      text = readFile "${scriptsDir}/zipcbz.bash";
     })
 
     (pkgs.writeShellApplication {
       name = "rip_streams";
       runtimeInputs = with other-pkgs.unstable; [yq];
-      text = ''
-        ${readFile "${streamScriptsDir}/rip_streams.sh"}
-      '';
+      text = readFile "${streamScriptsDir}/rip_streams.sh";
     })
     (pkgs.writeShellApplication {
       name = "rip_streams_stop";
       runtimeInputs = with other-pkgs.unstable; [yq];
-      text = ''
-        ${readFile "${streamScriptsDir}/rip_streams_stop.sh"}
-      '';
+      text = readFile "${streamScriptsDir}/rip_streams_stop.sh";
     })
     (pkgs.writeShellApplication {
       name = "rip_stream_helper";
       runtimeInputs = with other-pkgs.unstable; [yq yt-dlp];
-      text = ''
-        ${readFile "${streamScriptsDir}/rip_stream_helper.sh"}
-      '';
+      text = readFile "${streamScriptsDir}/rip_stream_helper.sh";
     })
   ];
 }
