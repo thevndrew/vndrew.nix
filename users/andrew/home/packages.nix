@@ -1,6 +1,5 @@
 {
   lib,
-  mylib,
   pkgs,
   other-pkgs,
   isWSL,
@@ -31,6 +30,8 @@
       # Not needed when virtualisation.docker.enable = true;
       pkgs.docker-client
       pkgs.docker-compose
+
+      pkgs.distrobox
       unstable.wl-clipboard # on WSL just use: winget install win32yank
     ]);
 

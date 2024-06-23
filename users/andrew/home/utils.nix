@@ -8,7 +8,7 @@ in {
     };
 
     broot =
-      import ./integration_settings.nix
+      import ./settings/shell_integrations.nix
       // {
         enable = true;
         package = unstable.broot;

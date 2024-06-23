@@ -36,7 +36,7 @@ in {
         enable = cfg.wezterm;
         package = unstable.wezterm;
       }
-      // import ../programs/integration_settings.nix;
+      // import ../../settings/shell_integrations.nix;
     programs.alacritty = {
       enable = cfg.alacritty;
       package = unstable.alacritty;

@@ -7,5 +7,5 @@ in {
       enable = true;
       package = unstable.nix-index;
     }
-    // import ./integration_settings.nix;
+    // import ./settings/shell_integrations.nix;
 }

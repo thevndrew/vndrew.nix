@@ -4,7 +4,7 @@
   ...
 }: {
   programs.atuin =
-    import ../integration_settings.nix
+    import ./settings/shell_integrations.nix
     // {
       enable = true;
       package = other-pkgs.unstable.atuin;

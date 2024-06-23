@@ -1,10 +1,10 @@
 {other-pkgs, ...}: let
   unstable = other-pkgs.unstable;
 in {
-  programs.yazi =
-    import ../integration_settings.nix
+  programs.zoxide =
+    import ./settings/shell_integrations.nix
     // {
       enable = true;
-      package = unstable.yazi;
+      package = unstable.zoxide;
     };
 }

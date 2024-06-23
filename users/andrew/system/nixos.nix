@@ -1,9 +1,9 @@
 {
-  other-pkgs,
   inputs,
-  systemInfo,
   isDesktop,
   isWSL,
+  other-pkgs,
+  systemInfo,
   ...
 }: {
   disabledModules = ["programs/nh.nix"];

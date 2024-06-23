@@ -4,9 +4,11 @@
 
   scanPaths = path: let
     excludeDirs = [
-      "pkgs"
+      #"modules"
       "packages"
+      "pkgs"
       "scripts"
+      "settings"
       "systemd"
     ];
 
@@ -17,8 +19,6 @@
     excludeNameSuffix = [
       "_settings"
       "_module"
-      "_package"
-      "_pkg"
     ];
 
     filterDir = path: builtins.all (dir: path != dir) excludeDirs;

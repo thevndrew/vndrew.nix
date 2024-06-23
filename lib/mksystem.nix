@@ -15,7 +15,7 @@
   # The config files for this system.
   machineConfig = ../hosts/${name}/configuration.nix;
   userOSConfig = ../users/${user}/system/default.nix;
-  userHMConfig = ../users/${user}/home/home_manager.nix;
+  userHMConfig = ../users/${user}/home;
 
   systemFunc = nixpkgs.lib.nixosSystem;
   home-manager = inputs.home-manager.nixosModules;

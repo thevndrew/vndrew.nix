@@ -1,9 +1,5 @@
 {
-  config,
-  inputs,
   mylib,
-  lib,
-  pkgs,
   systemInfo,
   ...
 }: {
@@ -12,7 +8,7 @@
     ./hardware-configuration.nix
 
     # Setup WOL systemd service
-    (import (mylib.relativeToRoot "users/${systemInfo.user}/system/systemd/wol.nix") {
+    (import (mylib.relativeToRoot "hosts/common/systemd/wol.nix") {
       wolCommand = "ethtool -s eno1 wol g";
     })
   ];
