@@ -12,8 +12,8 @@
     "${inputs.nixpkgs-unstable}/nixos/modules/programs/nh.nix"
   ];
 
+  cockpit.enable = !isWSL;
   gui.enable = isDesktop;
-
   wsl-cfg.enable = isWSL;
 
   networking.samba.sharing.enable = true;
