@@ -67,6 +67,15 @@
       url = "github:jarun/nnn";
       flake = false;
     };
+
+    zsh-completions = {
+      url = "github:zsh-users/zsh-completions";
+      flake = false;
+    };
+    fzf-tab = {
+      url = "github:Aloxaf/fzf-tab";
+      flake = false;
+    };
   };
 
   outputs = {

@@ -2,7 +2,7 @@
 setopt no_flow_control
 
 # enable some bash like bindings such a C-r reverse search
-bindkey -e
+#bindkey -e
 
 # bind start and end keys
 bindkey "^[[1~" beginning-of-line

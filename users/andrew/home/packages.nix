@@ -49,7 +49,6 @@
     dust
     eza
     fd
-    fzf
     glow
     gping
     htop

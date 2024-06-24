@@ -1,8 +1,12 @@
 {
+  inputs,
   mylib,
+  other-pkgs,
   systemInfo,
   ...
-}: {
+}: let
+  unstable = other-pkgs.unstable;
+in {
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. If you don't want to manage your shell through Home
   # Manager then you have to manually source 'hm-session-vars.sh' located at
@@ -58,7 +62,7 @@
       };
       initExtra = ''
         # Bootdev completions
-               source ${mylib.relativeToRoot "config/bash/bootdev.bash"}
+        source ${mylib.relativeToRoot "config/bash/bootdev.bash"}
       '';
     };
 
@@ -66,6 +70,8 @@
       enable = true;
       enableAutosuggestions = true;
       enableCompletion = true;
+      syntaxHighlighting.enable = true;
+      defaultKeymap = "emacs";
       dotDir = ".config/zsh";
 
       history = {
@@ -74,16 +80,16 @@
         ignoreSpace = true;
         save = 1000000000;
         size = 1000000000;
-        #path = "$HOME/.config/zsh/.zsh_history";
         path = "$ZDOTDIR/.zsh_history";
       };
 
       initExtra = ''
         # Bootdev completions
-               source ${mylib.relativeToRoot "config/zsh/bootdev.zsh"}
+        source ${mylib.relativeToRoot "config/zsh/bootdev.zsh"}
 
-               ${builtins.readFile (mylib.relativeToRoot "config/zsh/keybinds.zsh")}
-               ${builtins.readFile (mylib.relativeToRoot "config/zsh/functions.zsh")}
+        ${builtins.readFile (mylib.relativeToRoot "config/zsh/keybinds.zsh")}
+        ${builtins.readFile (mylib.relativeToRoot "config/zsh/functions.zsh")}
+        ${builtins.readFile (mylib.relativeToRoot "config/zsh/config.zsh")}
       '';
 
       historySubstringSearch = {
@@ -100,7 +106,13 @@
 
       oh-my-zsh = {
         enable = true;
-        plugins = ["git"];
+        plugins = [
+          "command-not-found"
+          "git"
+          "kubectl"
+          "kubectx"
+          "sudo"
+        ];
         theme = "robbyrussell";
       };
 
@@ -113,6 +125,14 @@
         #  src = pkgs.zsh-powerlevel10k;
         #  file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
         #}
+        {
+          name = "zsh-completions";
+          src = inputs.zsh-completions;
+        }
+        {
+          name = "fzf-tab";
+          src = inputs.fzf-tab;
+        }
       ];
     };
   };
