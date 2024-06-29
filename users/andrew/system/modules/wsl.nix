@@ -3,6 +3,7 @@
   inputs,
   lib,
   pkgs,
+  systemInfo,
   ...
 }: let
   cfg = config.wsl-cfg;
@@ -25,7 +26,10 @@ in {
     my-virtualisation.enable = false;
     wsl = {
       enable = true;
+
+      defaultUser = systemInfo.user;
       docker-desktop.enable = true;
+
       extraBin = with pkgs; [
         # Binaries for Docker Desktop wsl-distro-proxy
         {src = "${coreutils}/bin/mkdir";}
@@ -36,6 +40,14 @@ in {
         {src = "${su}/bin/groupadd";}
         {src = "${su}/bin/usermod";}
       ];
+
+      startMenuLaunchers = true;
+
+      wslConf = {
+        automount.root = "/mnt";
+        interop.appendWindowsPath = false;
+        network.generateHosts = false;
+      };
     };
   };
 }

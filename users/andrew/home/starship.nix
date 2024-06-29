@@ -22,9 +22,16 @@ in {
           yellow = "#d79921";
         };
 
-        direnv = {
-          disabled = false;
-        };
+        aws.disabled = true;
+        directory.truncate_to_repo = false;
+        directory.truncation_length = 8;
+        direnv.disabled = false;
+        gcloud.disabled = true;
+        git_branch.style = "242";
+        kubernetes.disabled = false;
+        ruby.disabled = true;
+
+        hostname.ssh_only = false;
       };
     };
 }

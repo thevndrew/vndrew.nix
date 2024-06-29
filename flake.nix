@@ -5,16 +5,14 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
+    nur.url = "github:nix-community/NUR";
+
     # Window Manager
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
-
-    # My package repo and neovim config
-    nixpkgs-vndrew.url = "git+ssh://git@github.com/thevndrew/nix-packages.git";
-    vndrew-nvim.url = "git+ssh://git@github.com/thevndrew/vndrew.nvim";
 
     # Tool to run unpatched binaries
     nix-alien.url = "github:thiagokokada/nix-alien";
@@ -38,6 +36,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # My package repo and neovim config
+    nixpkgs-vndrew.url = "git+ssh://git@github.com/thevndrew/nix-packages.git";
+    vndrew-nvim.url = "git+ssh://git@github.com/thevndrew/vndrew.nvim";
 
     # Use ssh protocol to authenticate via ssh-agent/ssh-key, and shallow clone
     mysecrets = {
@@ -89,6 +91,7 @@
 
     overlays = [
       #inputs.neovim-nightly-overlay.overlay
+      inputs.nur.overlay
       inputs.zig.overlays.default
     ];
 

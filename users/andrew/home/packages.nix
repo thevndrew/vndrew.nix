@@ -36,31 +36,37 @@
     ]);
 
   unstable-pkgs = with unstable; [
+    alejandra
     bfs
     bottom # module avalible
     btop
     charm-freeze
     choose
     cht-sh
+    #coreutils
     ctop
     curlie
+    deadnix
     dog
     duf
     dust
     eza
     fd
+    fx
+    gitleaks
     glow
     gping
     htop
     jq
     just
+    killall
     lf
     ncdu
     nix-output-monitor
     nomino
     nvd
-    gitleaks
     parallel
+    plocate
     procs
     rclone
     rnr
@@ -68,20 +74,28 @@
     sd
     shellcheck
     shellharden
+    shfmt
     silver-searcher
     skim
     sops
     ssh-to-age
+    statix
     tmux
     tokei
     tree
     unar
     unzip
+    #uutils-coreutils
+    uutils-coreutils-noprefix
     wget
     xh
     yazi
     yq
     yt-dlp
+    zip
+
+    #findutils
+    #mkcert
     #vhs # only install on desktop
     #bitwarden-cli
     #cosmopolitan

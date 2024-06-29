@@ -6,5 +6,6 @@ in {
     // {
       enable = true;
       package = unstable.zoxide;
+      options = ["--cmd cd"];
     };
 }

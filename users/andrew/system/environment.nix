@@ -1,5 +1,7 @@
 {pkgs, ...}: {
   environment = {
+    enableAllTerminfo = true;
+
     # Add ~/.local/bin to PATH
     localBinInPath = true;
 
@@ -9,6 +11,7 @@
     ];
 
     shells = [pkgs.zsh pkgs.nushell];
+
     systemPackages = with pkgs; [
       mergerfs
       tmux

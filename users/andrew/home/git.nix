@@ -8,43 +8,77 @@ in {
   programs.git = {
     enable = true;
     package = unstable.git;
+
     userEmail = "69527486+thevndrew@users.noreply.github.com";
     userName = "andrew";
+
     aliases = {
       an = "commit --amend --no-edit";
       br = "branch";
+      bump = "commit --amend --no-edit --date=now";
       c = "commit";
       co = "checkout";
       st = "status";
       wt = "worktree";
     };
-    lfs = {
+
+    delta = {
       enable = true;
+      options = {
+        line-numbers = true;
+        side-by-side = true;
+        navigate = true;
+      };
     };
-    delta.enable = true;
+
     extraConfig = {
       branch.sort = "-committerdate";
+      commit.gpgsign = true;
       column.ui = "auto";
+
       core = {
         editor = "nvim";
         fsmonitor = true;
       };
+
+      diff = {
+        colorMoved = "default";
+      };
+
       fetch = {
         prune = true;
         writeCommitGraph = true;
       };
+
       gpg.format = "ssh";
       init.defaultBranch = "main";
+
+      merge = {
+        conflictstyle = "diff3";
+      };
+
       pull.rebase = true;
+      push = {
+        default = "current";
+        autoSetupRemote = true;
+      };
+
       rebase.updateRefs = true;
       rerere.enabled = true;
-      user.signingkey = "${systemInfo.home}/.ssh/${systemInfo.hostname}.pub";
-      user.gpgsign = true;
-      commit.gpgsign = true;
+
+      user = {
+        gpgsign = true;
+        signingkey = "${systemInfo.home}/.ssh/${systemInfo.hostname}.pub";
+      };
     };
+
     ignores = [
       "*.swp"
     ];
+
+    lfs = {
+      enable = true;
+    };
   };
 
   programs.gh = {
