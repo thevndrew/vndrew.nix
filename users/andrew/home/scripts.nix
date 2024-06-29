@@ -1,5 +1,4 @@
 {
-  inputs,
   mylib,
   pkgs,
   other-pkgs,
@@ -12,14 +11,18 @@
   pathTo = mylib.relativeToRoot;
   readFile = path: builtins.readFile (pathTo path);
 
+  get_secrets = import ./scripts/get_secrets_key.nix {pkgs = unstable;};
+  remove_secrets = import ./scripts/remove_secrets_key.nix {pkgs = unstable;};
+
   inherit (other-pkgs) unstable;
 in {
+  home.shellAliases = {
+    get_secrets = "source ${get_secrets}/bin/get_secrets_key";
+    remove_secrets = "source ${remove_secrets}/bin/remove_secrets_key";
+  };
+
   home.packages = [
     (import ./scripts/update_input.nix {pkgs = unstable;})
-
-    (import ./scripts/get_secrets_key.nix {pkgs = unstable;})
-
-    (import ./scripts/remove_secrets_key.nix {pkgs = unstable;})
 
     (import ./scripts/clone_repos.nix {
       inherit mylib;

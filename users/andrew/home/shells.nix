@@ -39,8 +39,8 @@ in {
       gc = "nix-collect-garbage --delete-old";
       ks = "tmux kill-server";
       nb = "nix build --json --no-link --print-build-logs";
-      get_secrets = "source $(which get_secrets_key)";
-      remove_secrets = "source $(which remove_secrets_key)";
+      #get_secrets = "source $(which get_secrets_key)";
+      #remove_secrets = "source $(which remove_secrets_key)";
     }
     // lib.optionalAttrs isWSL {
       pbcopy = "/mnt/c/Windows/System32/clip.exe";
