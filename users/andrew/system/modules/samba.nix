@@ -15,7 +15,7 @@
     path,
     user,
   }: {
-    path = path;
+    inherit path;
     browseable = "yes";
     "read only" = "yes";
     "guest ok" = "no";
@@ -28,7 +28,7 @@
     path,
     user,
   }: {
-    path = path;
+    inherit path;
     browseable = "yes";
     "read only" = "no";
     "guest ok" = "no";
@@ -107,29 +107,29 @@ in {
 
           home = mkShare {
             path = systemInfo.home;
-            user = systemInfo.user;
+            inherit (systemInfo) user;
           };
           home_write = mkWriteShare {
             path = systemInfo.home;
-            user = systemInfo.user;
+            inherit (systemInfo) user;
           };
 
           storage = mkIf cfg.storage.enable (mkShare {
             path = "/mnt/storage";
-            user = systemInfo.user;
+            inherit (systemInfo) user;
           });
           storage_write = mkIf cfg.storage.enable (mkWriteShare {
             path = "/mnt/storage";
-            user = systemInfo.user;
+            inherit (systemInfo) user;
           });
 
           c_drive = mkIf isWSL (mkShare {
             path = "/mnt/c/Users/AJ-XPS/";
-            user = systemInfo.user;
+            inherit (systemInfo) user;
           });
           c_drive_write = mkIf isWSL (mkWriteShare {
             path = "/mnt/c/Users/AJ-XPS/";
-            user = systemInfo.user;
+            inherit (systemInfo) user;
           });
         };
       };

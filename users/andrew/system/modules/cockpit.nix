@@ -4,7 +4,7 @@
   other-pkgs,
   ...
 }: let
-  unstable = other-pkgs.unstable;
+  inherit (other-pkgs) unstable;
   cfg = config.cockpit;
 in {
   options = {

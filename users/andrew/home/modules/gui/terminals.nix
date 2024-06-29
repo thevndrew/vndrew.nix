@@ -5,7 +5,7 @@
   ...
 }: let
   cfg = config.terminals;
-  unstable = other-pkgs.unstable;
+  inherit (other-pkgs) unstable;
 in {
   options = {
     terminals.enable = lib.mkOption {

@@ -1,5 +1,5 @@
 {other-pkgs, ...}: let
-  unstable = other-pkgs.unstable;
+  inherit (other-pkgs) unstable;
 in {
   programs.direnv =
     import ./settings/shell_integrations.nix

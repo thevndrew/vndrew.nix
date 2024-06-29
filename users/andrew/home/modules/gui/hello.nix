@@ -5,7 +5,7 @@
   ...
 }: let
   cfg = config.hello;
-  unstable = other-pkgs.unstable;
+  inherit (other-pkgs) unstable;
 in {
   options = {
     hello.enable = lib.mkOption {

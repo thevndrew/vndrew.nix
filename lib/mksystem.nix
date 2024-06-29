@@ -44,14 +44,14 @@
   systemInfo = {
     home = "/home/${user}";
     hostname = name;
-    user = user;
+    inherit user;
     arch = system;
   };
 
   moduleArgs = {
     sopsKeys = builtins.map (name: "/home/${user}/.ssh/${name}") ["going-merry" "thousand-sunny" "polar-tang"];
     isDesktop = desktop;
-    isWSL = isWSL;
+    inherit isWSL;
     inherit inputs;
     inherit mylib;
     inherit other-pkgs;

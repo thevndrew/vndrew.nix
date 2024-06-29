@@ -1,5 +1,5 @@
 {other-pkgs, ...}: let
-  unstable = other-pkgs.unstable;
+  inherit (other-pkgs) unstable;
 in {
   programs.zoxide =
     import ./settings/shell_integrations.nix

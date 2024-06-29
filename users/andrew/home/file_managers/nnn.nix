@@ -3,7 +3,7 @@
   other-pkgs,
   ...
 }: let
-  unstable = other-pkgs.unstable;
+  inherit (other-pkgs) unstable;
 in {
   programs.nnn = {
     enable = true;

@@ -1,5 +1,5 @@
 {other-pkgs, ...}: let
-  unstable = other-pkgs.unstable;
+  inherit (other-pkgs) unstable;
 in {
   programs.starship =
     import ./settings/shell_integrations.nix
