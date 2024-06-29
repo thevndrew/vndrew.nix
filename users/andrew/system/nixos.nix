@@ -1,15 +1,14 @@
 {
-  inputs,
   isDesktop,
   isWSL,
   other-pkgs,
   systemInfo,
   ...
 }: {
-  disabledModules = ["programs/nh.nix"];
+  disabledModules = [];
 
   imports = [
-    "${inputs.nixpkgs-unstable}/nixos/modules/programs/nh.nix"
+    # "${inputs.nixpkgs-unstable}/nixos/modules/..."
   ];
 
   cockpit.enable = !isWSL;
