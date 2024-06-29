@@ -1,12 +1,4 @@
-{
-  mylib,
-  config,
-  systemInfo,
-  ...
-}: let
-  link = config.lib.file.mkOutOfStoreSymlink;
-  pathTo = mylib.relativeToRoot;
-in {
+{...}: {
   xdg = {
     enable = true;
     configFile = {
@@ -29,3 +21,5 @@ in {
     # '';
   };
 }
+# link = config.lib.file.mkOutOfStoreSymlink;
+

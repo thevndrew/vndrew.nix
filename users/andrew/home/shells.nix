@@ -3,11 +3,9 @@
   isWSL,
   lib,
   mylib,
-  other-pkgs,
   systemInfo,
   ...
 }: let
-  unstable = other-pkgs.unstable;
   zsh_defs = mylib.writeLines {lines = mylib.sourceFiles (mylib.relativeToRoot "config/zsh/source");};
   zsh_config = mylib.writeLines {lines = mylib.readFiles (mylib.relativeToRoot "config/zsh");};
 in {

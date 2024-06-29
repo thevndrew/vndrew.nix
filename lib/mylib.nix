@@ -53,7 +53,7 @@
       (
         lib.attrsets.filterAttrs
         (
-          path: _type: (
+          _path: _type: (
             _type
             != "directory"
           )

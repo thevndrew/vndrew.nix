@@ -1,8 +1,4 @@
-{wolCommand}: {
-  config,
-  pkgs,
-  ...
-}: {
+{wolCommand}: {pkgs, ...}: {
   systemd.services.wol = {
     enable = true;
     description = "Wake-on-LAN service";

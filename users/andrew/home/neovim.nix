@@ -1,7 +1,6 @@
 {
   inputs,
   systemInfo,
-  pkgs,
   other-pkgs,
   ...
 }: {

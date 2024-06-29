@@ -6,7 +6,7 @@
   isWSL,
   ...
 }: let
-  inherit (builtins) getEnv;
+  # inherit (builtins) getEnv;
   inherit (lib.modules) mkIf mkMerge;
 
   cfg = config.networking.samba;
