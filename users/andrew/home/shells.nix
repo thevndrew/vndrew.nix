@@ -6,8 +6,9 @@
   systemInfo,
   ...
 }: let
-  zsh_defs = mylib.writeLines {lines = mylib.sourceFiles (mylib.relativeToRoot "config/zsh/source");};
+  #zsh_defs = mylib.writeLines {lines = mylib.sourceFiles (mylib.relativeToRoot "config/zsh/source");};
   zsh_config = mylib.writeLines {lines = mylib.readFiles (mylib.relativeToRoot "config/zsh");};
+  bash_config = mylib.writeLines {lines = mylib.readFiles (mylib.relativeToRoot "config/bash");};
 in {
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. If you don't want to manage your shell through Home
@@ -37,8 +38,6 @@ in {
       gc = "nix-collect-garbage --delete-old";
       ks = "tmux kill-server";
       nb = "nix build --json --no-link --print-build-logs";
-      #get_secrets = "source $(which get_secrets_key)";
-      #remove_secrets = "source $(which remove_secrets_key)";
     }
     // lib.optionalAttrs isWSL {
       pbcopy = "/mnt/c/Windows/System32/clip.exe";
@@ -70,8 +69,7 @@ in {
         PROMPT_COMMAND = "history -a; $PROMPT_COMMAND";
       };
       initExtra = ''
-        # Bootdev completions
-        source ${mylib.relativeToRoot "config/bash/bootdev.bash"}
+        ${bash_config}
       '';
     };
 
@@ -93,8 +91,7 @@ in {
       };
 
       initExtra = ''
-        ${zsh_defs}
-
+        #$${zsh_defs}
         ${zsh_config}
       '';
 
