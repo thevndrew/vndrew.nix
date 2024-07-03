@@ -4,6 +4,12 @@ zsh_dir := "config/zsh"
 info:
 	nix flake metadata
 
+test flag="":
+	nh os test {{flag}}
+
+switch flag="":
+	nh os switch {{flag}}
+
 update:
 	nix flake update
 

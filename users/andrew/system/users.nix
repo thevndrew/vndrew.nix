@@ -24,6 +24,11 @@ in {
     };
   };
 
+  users.groups = {
+    users.gid = 100;
+    #storage.gid = ???;
+  };
+
   users = {
     mutableUsers = false;
     users.${systemInfo.user} =
@@ -32,6 +37,10 @@ in {
         shell = pkgs.zsh;
         isNormalUser = true;
         openssh.authorizedKeys.keys = keys;
+        uid =
+          if !isWSL
+          then 1001
+          else lib.mkForce 1001;
       }
       // lib.optionalAttrs (!isWSL) {
         hashedPasswordFile = config.sops.secrets."passwords/${systemInfo.user}".path;
