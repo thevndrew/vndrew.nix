@@ -44,7 +44,10 @@ in {
       startMenuLaunchers = true;
 
       wslConf = {
-        automount.root = "/mnt";
+        automount = {
+          root = "/mnt";
+          options = "metadata,uid=1001,gid=100";
+        };
         interop.appendWindowsPath = false;
         network.generateHosts = false;
       };
