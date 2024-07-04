@@ -88,11 +88,6 @@ in {
           hosts allow = 0.0.0.0/0 # only tailscale can access this anyway
           guest account = nobody
           map to guest = bad user
-          ${
-            if isWSL
-            then "smb ports = 3330 3335"
-            else ""
-          }
         '';
 
         # :NOTE for Public| set sudo smbpasswd -a samba-guest -n
