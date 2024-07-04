@@ -15,7 +15,7 @@
   gui.enable = isDesktop;
   wsl-cfg.enable = isWSL;
 
-  networking.samba.sharing.enable = true;
+  networking.samba.sharing.enable = !isWSL;
   networking.samba.storage.enable = systemInfo.hostname == "thousand-sunny";
 
   security.sudo.enable = true;
