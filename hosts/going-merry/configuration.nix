@@ -26,7 +26,7 @@
     };
   };
 
-  users.users."${systemInfo.user}".extraGroups = ["wheel" "podman"];
+  users.users.${systemInfo.user}.extraGroups = ["wheel" "podman"];
   #extraGroups = [ "wheel" "docker" ];
 
   networking = {
@@ -42,7 +42,7 @@
     };
     serviceConfig = {
       ExecStart = "/bin/sh -c '${systemInfo.home}/services/qbittorrent/restart.sh'";
-      User = "${systemInfo.user}";
+      User = systemInfo.user;
       Group = "users";
     };
     startAt = "hourly";

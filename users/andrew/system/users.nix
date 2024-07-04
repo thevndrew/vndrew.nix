@@ -33,7 +33,7 @@ in {
     mutableUsers = false;
     users.${systemInfo.user} =
       {
-        home = "${systemInfo.home}";
+        home = systemInfo.home;
         shell = pkgs.zsh;
         isNormalUser = true;
         openssh.authorizedKeys.keys = keys;
