@@ -31,7 +31,6 @@
       pkgs.docker-client
       pkgs.docker-compose
 
-      pkgs.distrobox
       unstable.wl-clipboard # on WSL just use: winget install win32yank
     ]);
 
@@ -47,6 +46,7 @@
     ctop
     curlie
     deadnix
+    distrobox
     dog
     duf
     dust
