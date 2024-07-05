@@ -18,6 +18,15 @@ switch flag="":
 update:
 	nix flake update
 
+gc-roots:
+	sudo find_gc_roots /nix/store
+
+generations:
+	nix profile history --profile /nix/var/nix/profiles/system
+
+optimise:
+	nix-store --optimise
+
 update-cmp program:
 	{{program}} completion bash > {{bash_dir}}/{{program}}.bash
 	{{program}} completion zsh > {{zsh_dir}}/{{program}}.zsh

@@ -29,8 +29,11 @@
     nh = {
       enable = true;
       package = other-pkgs.unstable.nh;
-      #clean.enable = true;
-      #clean.extraArgs = "--keep-since 4d --keep 3";
+      clean = {
+        enable = true;
+        dates = "weekly";
+        extraArgs = "--keep 3 --keep-since 7d";
+      };
       flake = "${systemInfo.home}/nix-config";
     };
   };

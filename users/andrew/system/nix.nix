@@ -10,6 +10,11 @@
       "nixpkgs=${inputs.nixpkgs.outPath}"
     ];
 
+    optimise = {
+      automatic = true;
+      dates = ["daily"];
+    };
+
     settings = {
       accept-flake-config = true;
       auto-optimise-store = true;
@@ -31,7 +36,7 @@
     };
 
     gc = {
-      automatic = true;
+      automatic = false; # using nh clean instead
       dates = "weekly";
       options = "--delete-older-than 7d";
     };

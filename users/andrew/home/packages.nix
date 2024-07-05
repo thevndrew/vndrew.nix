@@ -62,7 +62,9 @@
     killall
     lf
     ncdu
+    nix-du
     nix-output-monitor
+    nix-tree
     nomino
     nvd
     parallel

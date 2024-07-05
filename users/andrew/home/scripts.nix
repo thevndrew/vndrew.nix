@@ -37,6 +37,11 @@ in {
     })
 
     (pkgs.writeShellApplication {
+      name = "find_gc_roots";
+      text = readFile "${scriptsDir}/find_gc_roots.bash";
+    })
+
+    (pkgs.writeShellApplication {
       name = "rip_streams";
       runtimeInputs = with other-pkgs.unstable; [yq];
       text = readFile "${streamScriptsDir}/rip_streams.sh";
