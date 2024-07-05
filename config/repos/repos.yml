@@ -1,4 +1,7 @@
 repo_list:
+  config:
+    url: "git@github.com:thevndrew/nix-config.git"
+    directory: "nix-config"
   services:
     url: "git@github.com:thevndrew/container-services.git"
     directory: "services"
