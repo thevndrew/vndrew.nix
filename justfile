@@ -1,6 +1,11 @@
 bash_dir := "config/bash"
 zsh_dir := "config/zsh"
 
+wsl-tar hostname="polar-tang":
+	nix build ".#nixosConfigurations.{{hostname}}.config.system.build.tarballBuilder"
+	sudo ./result/bin/nixos-wsl-tarball-builder
+	rm ./result
+
 info:
 	nix flake metadata
 
