@@ -7,7 +7,7 @@ in {
       enable = true;
       package = unstable.starship;
       settings = {
-        palette = "gruvbox_dark";
+        #palette = "gruvbox_dark";
 
         palettes.gruvbox_dark = {
           fg = "#fbf1c7";

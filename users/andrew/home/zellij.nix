@@ -35,7 +35,7 @@ in {
     enable = true;
     package = unstable.zellij;
     settings = {
-      theme = "gruvbox-dark";
+      #theme = "gruvbox-dark";
       #theme = "custom"
       #themes.custom.fg = "#ffffff";
     };
