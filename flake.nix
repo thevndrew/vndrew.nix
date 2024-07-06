@@ -95,8 +95,30 @@
       inputs.zig.overlays.default
     ];
 
+    pkgs = import nixpkgs {
+      inherit system;
+      config = {
+        allowUnfree = true;
+      };
+    };
+
+    other-pkgs = {
+      nix-alien = inputs.nix-alien.packages.${pkgs.system};
+
+      unstable = import inputs.nixpkgs-unstable {
+        inherit system;
+        config = {
+          allowUnfree = true;
+        };
+      };
+
+      vndrew = inputs.nixpkgs-vndrew.packages.${pkgs.system};
+    };
+
+    mylib = import ./lib/mylib.nix {inherit (nixpkgs) lib;};
+
     mkSystem = import ./lib/mksystem.nix {
-      inherit nixpkgs overlays inputs;
+      inherit nixpkgs overlays inputs pkgs other-pkgs mylib;
     };
 
     homeManagerSetup = {
@@ -104,22 +126,31 @@
       user,
     }: (
       let
-        specialArgs =
-          inputs
-          // {
-            inherit hostname user;
-            impurePaths = {
-              workingDir = "/home/${user}/.config/nix";
-            };
-          };
+        systemInfo = {
+          home = "/home/${user}";
+          hostname = hostname;
+          inherit user;
+          arch = system;
+        };
+
+        moduleArgs = {
+          isDesktop = false;
+          isWSL = true;
+          sopsKeys = mylib.getSopsKeys user;
+          inherit inputs;
+          inherit mylib;
+          inherit other-pkgs;
+          inherit systemInfo;
+        };
       in
         home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {inherit system;};
+          inherit pkgs;
+          extraSpecialArgs = moduleArgs;
           modules = [
+            inputs.nix-index-database.hmModules.nix-index
             inputs.sops-nix.homeManagerModules.sops
-            ./users/${user}/home-manager.nix
+            ./users/${user}/home
           ];
-          extraSpecialArgs = specialArgs;
         }
     );
   in {
@@ -145,8 +176,8 @@
     formatter.${system} = nixpkgs.legacyPackages.${system}.alejandra;
 
     homeConfigurations = {
-      ubuntu = homeManagerSetup {
-        hostname = "ubuntu-host";
+      andrew = homeManagerSetup {
+        hostname = "polar-tang";
         user = "andrew";
       };
     };

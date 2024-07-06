@@ -1,7 +1,10 @@
 {
-  nixpkgs,
-  overlays,
   inputs,
+  mylib,
+  nixpkgs,
+  other-pkgs,
+  overlays,
+  pkgs,
   ...
 }: name: {
   system,
@@ -21,26 +24,6 @@
   home-manager = inputs.home-manager.nixosModules;
   sops-nix = inputs.sops-nix.nixosModules;
 
-  pkgs = import nixpkgs {
-    inherit system;
-    config = {
-      allowUnfree = true;
-    };
-  };
-
-  other-pkgs = {
-    nix-alien = inputs.nix-alien.packages.${pkgs.system};
-    unstable = import inputs.nixpkgs-unstable {
-      inherit system;
-      config = {
-        allowUnfree = true;
-      };
-    };
-    vndrew = inputs.nixpkgs-vndrew.packages.${pkgs.system};
-  };
-
-  mylib = import ./mylib.nix {inherit (nixpkgs) lib;};
-
   systemInfo = {
     home = "/home/${user}";
     hostname = name;
@@ -49,8 +32,8 @@
   };
 
   moduleArgs = {
-    sopsKeys = builtins.map (name: "/home/${user}/.ssh/${name}") ["going-merry" "thousand-sunny" "polar-tang"];
     isDesktop = desktop;
+    sopsKeys = mylib.getSopsKeys user;
     inherit isWSL;
     inherit inputs;
     inherit mylib;

@@ -1,4 +1,6 @@
 {lib, ...}: rec {
+  getSopsKeys = user: builtins.map (name: "/home/${user}/.ssh/${name}") ["going-merry" "thousand-sunny" "polar-tang"];
+
   # use path relative to the root of the project
   relativeToRoot = lib.path.append ../.;
 
