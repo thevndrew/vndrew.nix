@@ -16,7 +16,7 @@ n () {
 }
 
 take () {
-    mkdir -p -- "$1" && cd -- "$1"
+    mkdir -p "$1" && cd "$1"
 }
 
 ttake () {
@@ -24,6 +24,6 @@ ttake () {
 }
 
 show_path () {
-    echo $PATH | tr ' ' '\n'
+    echo $PATH | tr ':' '\n'
 }
 
