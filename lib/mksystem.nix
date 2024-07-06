@@ -4,7 +4,6 @@
   nixpkgs,
   other-pkgs,
   overlays,
-  pkgs,
   ...
 }: name: {
   system,
@@ -66,14 +65,16 @@ in
       userOSConfig
       home-manager.home-manager
       {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = moduleArgs;
-        home-manager.sharedModules = [
-          inputs.sops-nix.homeManagerModules.sops
-          inputs.nix-index-database.hmModules.nix-index
-        ];
-        home-manager.users.${user} = import userHMConfig;
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          extraSpecialArgs = moduleArgs;
+          sharedModules = [
+            inputs.sops-nix.homeManagerModules.sops
+            inputs.nix-index-database.hmModules.nix-index
+          ];
+          users.${user} = import userHMConfig;
+        };
       }
     ];
   }

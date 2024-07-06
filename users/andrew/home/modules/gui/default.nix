@@ -7,12 +7,15 @@
   ...
 }: let
   cfg = config.gui;
+
   startupScript = pkgs.writeShellScriptBin "start" ''
     ${pkgs.waybar}/bin/waybar &
     #${pkgs.swww}/bin/swww init &
     sleep 1
     #${pkgs.swww}/bin/swww img ''${./wallpaper.png} &
   '';
+
+  inherit (other-pkgs) unstable;
 in {
   imports = mylib.scanPaths ./.;
 
@@ -33,19 +36,38 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [other-pkgs.unstable.wayvnc];
+    home.packages = [unstable.wayvnc];
 
     terminals = {
       enable = true;
       alacritty = true;
     };
 
-    #home.pointerCursor = {
-    #  gtk.enable = true;
-    #};
+    home.pointerCursor = {
+      gtk.enable = true;
+      # x11.enable = true;
+      package = unstable.bibata-cursors;
+      name = "Bibata-Modern-Classic";
+      size = 16;
+    };
 
     gtk = {
       enable = true;
+
+      theme = {
+        package = unstable.flat-remix-gtk;
+        name = "Flat-Remix-GTK-Grey-Darkest";
+      };
+
+      iconTheme = {
+        package = unstable.gnome.adwaita-icon-theme;
+        name = "Adwaita";
+      };
+
+      font = {
+        name = "Sans";
+        size = 11;
+      };
     };
 
     wayland.windowManager.hyprland = {

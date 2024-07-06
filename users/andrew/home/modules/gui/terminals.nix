@@ -8,25 +8,27 @@
   inherit (other-pkgs) unstable;
 in {
   options = {
-    terminals.enable = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      example = true;
-      description = "Install and configure terminals";
-    };
+    terminals = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        example = true;
+        description = "Install and configure terminals";
+      };
 
-    terminals.wezterm = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
-      example = false;
-      description = "Install and configure wezterm";
-    };
+      wezterm = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        example = false;
+        description = "Install and configure wezterm";
+      };
 
-    terminals.alacritty = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      example = true;
-      description = "Install and configure alacritty";
+      alacritty = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        example = true;
+        description = "Install and configure alacritty";
+      };
     };
   };
 

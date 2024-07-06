@@ -128,7 +128,7 @@
       let
         systemInfo = {
           home = "/home/${user}";
-          hostname = hostname;
+          inherit hostname;
           inherit user;
           arch = system;
         };
