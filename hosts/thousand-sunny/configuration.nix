@@ -78,7 +78,7 @@
   users.users.${systemInfo.user}.extraGroups = ["wheel" "podman" "storage" "input"];
 
   networking = {
-    hostName = "thousand-sunny";
+    hostName = systemInfo.hostname;
     hostId = "4a219e7f";
   };
 

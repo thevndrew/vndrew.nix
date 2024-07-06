@@ -5,7 +5,7 @@
   users.extraGroups.docker.members = ["${systemInfo.user}"];
 
   networking = {
-    hostName = "polar-tang";
+    hostName = systemInfo.hostname;
   };
 
   system.stateVersion = "23.11"; # Did you read the comment?

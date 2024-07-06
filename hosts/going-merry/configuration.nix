@@ -30,7 +30,7 @@
   #extraGroups = [ "wheel" "docker" ];
 
   networking = {
-    hostName = "going-merry";
+    hostName = systemInfo.hostname;
   };
 
   systemd.services."qbittorrent_restart" = {
