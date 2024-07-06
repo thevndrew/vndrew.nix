@@ -1,8 +1,9 @@
 {
-  lib,
-  pkgs,
-  other-pkgs,
+  isStandalone,
   isWSL,
+  lib,
+  other-pkgs,
+  pkgs,
   ...
 }: let
   inherit (other-pkgs) vndrew unstable nix-alien;
@@ -115,6 +116,10 @@
     bootdev
     megadl
   ];
+
+  standalone = with unstable; [
+    nh
+  ];
 in {
-  home.packages = stable-pkgs ++ unstable-pkgs ++ vndrew-pkgs;
+  home.packages = stable-pkgs ++ unstable-pkgs ++ vndrew-pkgs ++ (lib.optionals isStandalone standalone);
 }

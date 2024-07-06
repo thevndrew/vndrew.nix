@@ -33,6 +33,7 @@
 
   moduleArgs = {
     isDesktop = desktop;
+    isStandalone = false;
     sopsKeys = mylib.getSopsKeys user;
     inherit isWSL;
     inherit inputs;

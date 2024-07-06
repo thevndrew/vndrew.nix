@@ -136,6 +136,7 @@
         moduleArgs = {
           isDesktop = false;
           isWSL = true;
+          isStandalone = true;
           sopsKeys = mylib.getSopsKeys user;
           inherit inputs;
           inherit mylib;
