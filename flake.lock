@@ -777,11 +777,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1719180871,
-        "narHash": "sha256-38M83F0Q+uLqcUaWS+lgPEeK9WYcr6JPndp1EVq53BQ=",
+        "lastModified": 1720310424,
+        "narHash": "sha256-lFZycj+Bbrjc+rZOGgKRx2fuwg+moNDT0HYP88qLdqw=",
         "ref": "refs/heads/main",
-        "rev": "3c9919aabbeaf5ff552afee1295a8e3aabe6fd68",
-        "revCount": 11,
+        "rev": "e57d93d76d6da0f1723cd1a41556ae0fbf424f3b",
+        "revCount": 13,
         "type": "git",
         "url": "ssh://git@github.com/thevndrew/nix-packages.git"
       },
