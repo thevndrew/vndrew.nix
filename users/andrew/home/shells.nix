@@ -29,6 +29,8 @@ in {
     EDITOR = "nvim";
     FLAKE = "${systemInfo.home}/nix-config";
     _ZO_ECHO = "1";
+    NIXOS_OZONE_WL = "1"; # This variable fixes electron apps in wayland
+    # WLR_NO_HARDWARE_CURSORS = "1"; # if cursor becomes invisible
   };
 
   home.shellAliases =

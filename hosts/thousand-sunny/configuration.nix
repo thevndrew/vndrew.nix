@@ -74,7 +74,7 @@
     cpufreq.max = 4400000; # 4.4 Ghz
   };
 
-  users.groups.storage = {};
+  users.groups.storage = {gid = 1000;};
   users.users.${systemInfo.user}.extraGroups = ["wheel" "podman" "storage" "input"];
 
   networking = {

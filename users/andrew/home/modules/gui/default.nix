@@ -20,18 +20,27 @@ in {
   imports = mylib.scanPaths ./.;
 
   options = {
-    gui.enable = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      example = true;
-      description = "enable GUI related configuration";
-    };
+    gui = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        example = true;
+        description = "enable GUI related configuration";
+      };
 
-    gui.wm = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      example = true;
-      description = "enable Window Manager related configuration";
+      wm = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        example = true;
+        description = "enable Window Manager related configuration";
+      };
+
+      audio = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        example = true;
+        description = "enable sound relatded configuration";
+      };
     };
   };
 
