@@ -23,6 +23,8 @@
 
   time.timeZone = "America/New_York";
 
+  fonts.enableDefaultPackages = true;
+
   programs = {
     zsh.enable = true;
 

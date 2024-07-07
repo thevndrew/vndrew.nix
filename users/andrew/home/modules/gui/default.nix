@@ -10,9 +10,9 @@
 
   startupScript = pkgs.writeShellScriptBin "start" ''
     ${pkgs.waybar}/bin/waybar &
-    #${pkgs.swww}/bin/swww init &
+    ${pkgs.swww}/bin/swww init &
     sleep 1
-    #${pkgs.swww}/bin/swww img ''${./wallpaper.png} &
+    ${pkgs.swww}/bin/swww img ${mylib.relativeToRoot "config/wallpaper/sci-fi_wallpaper.webp"} &
   '';
 
   inherit (other-pkgs) unstable;
@@ -86,7 +86,7 @@ in {
         #inputs.hyprland-plugins.packages.${pkgs.system}.borders-plus-plus
       ];
 
-      extraConfig = builtins.readFile (mylib.relativeToRoot "config/hyprland/config");
+      #extraConfig = builtins.readFile (mylib.relativeToRoot "config/hyprland/config");
 
       systemd.variables = ["--all"];
 

@@ -50,12 +50,25 @@ in {
       package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
     };
 
+    xdg.portal = {
+      enable = true;
+      extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    };
+
     sound.enable = cfg.audio;
 
     services = {
-      xserver = lib.mkIf cfg.displayManager {
-        displayManager.sddm.enable = true;
-        displayManager.sddm.wayland.enable = true;
+      xserver.enable = true;
+      displayManager = lib.mkIf cfg.displayManager {
+        enable = true;
+        sddm = {
+          enable = true;
+          #package = pkgs-unstable.kdePackages.sddm;
+          #wayland = {
+          #  enable = true;
+          #  compositor = "weston";
+          #};
+        };
       };
 
       pipewire = lib.mkIf cfg.audio {
