@@ -48,7 +48,7 @@ in {
     })
     (pkgs.writeShellApplication {
       name = "rip_streams_stop";
-      runtimeInputs = with other-pkgs.unstable; [yq];
+      runtimeInputs = with other-pkgs.unstable; [yq coreutils];
       text = readFile "${streamScriptsDir}/rip_streams_stop.sh";
     })
     (pkgs.writeShellApplication {
