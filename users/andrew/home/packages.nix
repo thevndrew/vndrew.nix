@@ -43,7 +43,7 @@
     charm-freeze
     choose
     cht-sh
-    #coreutils
+    coreutils
     ctop
     curlie
     deadnix
@@ -88,8 +88,8 @@
     tree
     unar
     unzip
-    #uutils-coreutils
-    uutils-coreutils-noprefix
+    uutils-coreutils
+    #uutils-coreutils-noprefix
     wget
     xh
     yazi
