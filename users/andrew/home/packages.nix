@@ -86,6 +86,7 @@
     tmux
     tokei
     tree
+    trufflehog
     unar
     unzip
     uutils-coreutils
