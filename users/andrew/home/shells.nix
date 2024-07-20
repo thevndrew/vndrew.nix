@@ -26,7 +26,7 @@ in {
   #  /etc/profiles/per-user/andrew/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    EDITOR = "nvim";
+    EDITOR = "vim";
     FLAKE = "${systemInfo.home}/nix-config";
     _ZO_ECHO = "1";
     NIXOS_OZONE_WL = "1"; # This variable fixes electron apps in wayland

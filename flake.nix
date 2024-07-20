@@ -150,6 +150,7 @@
           modules = [
             inputs.nix-index-database.hmModules.nix-index
             inputs.sops-nix.homeManagerModules.sops
+            inputs.vndrew-nvim.homeModule
             ./users/${user}/home
           ];
         }

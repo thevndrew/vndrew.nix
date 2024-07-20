@@ -72,6 +72,7 @@ in
           sharedModules = [
             inputs.sops-nix.homeManagerModules.sops
             inputs.nix-index-database.hmModules.nix-index
+            inputs.vndrew-nvim.homeModule
           ];
           users.${user} = import userHMConfig;
         };

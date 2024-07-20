@@ -37,7 +37,7 @@ in {
       column.ui = "auto";
 
       core = {
-        editor = "nvim";
+        editor = "vim";
         fsmonitor = true;
       };
 
