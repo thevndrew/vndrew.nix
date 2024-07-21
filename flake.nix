@@ -78,6 +78,12 @@
       url = "github:Aloxaf/fzf-tab";
       flake = false;
     };
+
+    wezterm = {
+      url = "github:wez/wezterm?dir=nix";
+    };
+
+    ags.url = "github:Aylur/ags";
   };
 
   outputs = {

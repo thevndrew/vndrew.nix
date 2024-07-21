@@ -38,8 +38,12 @@ in {
 
   config = lib.mkIf cfg.enable {
     hello.enable = cfg.enable;
-    programs.hyprland.enable = true;
-    programs.hyprland.package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+
+    programs.hyprland = {
+      enable = cfg.enable;
+      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      xwayland.enable = cfg.enable;
+    };
 
     # Mesa version fix
     hardware.opengl = {
