@@ -71,6 +71,7 @@ in
           extraSpecialArgs = moduleArgs;
           sharedModules = [
             inputs.ags.homeManagerModules.default
+            inputs.anyrun.homeManagerModules.default
             inputs.sops-nix.homeManagerModules.sops
             inputs.nix-index-database.hmModules.nix-index
             inputs.vndrew-nvim.homeModule

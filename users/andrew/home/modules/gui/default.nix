@@ -11,9 +11,9 @@
 
   startupScript = pkgs.writeShellScriptBin "start" ''
     ${pkgs.waybar}/bin/waybar &
-    ${pkgs.swww}/bin/swww init &
+    swww-daemon &
     sleep 1
-    ${pkgs.swww}/bin/swww img ${mylib.relativeToRoot "config/wallpaper/sci-fi_wallpaper.webp"} &
+    swww img ${mylib.relativeToRoot "config/wallpaper/sci-fi_wallpaper.webp"} &
   '';
 
   inherit (other-pkgs) unstable;
@@ -47,13 +47,63 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = with unstable; [
-      wayvnc
       (nerdfonts.override {fonts = ["FiraCode" "DroidSansMono" "JetBrainsMono"];})
+      clipse
+      hyprpicker
+      hyprshade
+      networkmanagerapplet
+      signal-desktop
+      swww
+      waypaper
+      wayvnc
+      webcord-vencord
     ];
 
-    services.swaync = {
-      enable = true;
-      package = unstable.swaynotificationcenter;
+    programs = {
+      anyrun = {
+        enable = true;
+        config = {
+          plugins = [
+            # An array of all the plugins you want, which either can be paths to the .so files, or their packages
+            inputs.anyrun.packages.${pkgs.system}.applications
+            inputs.anyrun.packages.${pkgs.system}.rink
+            inputs.anyrun.packages.${pkgs.system}.shell
+            inputs.anyrun.packages.${pkgs.system}.translate
+            inputs.anyrun.packages.${pkgs.system}.websearch
+          ];
+          x = {fraction = 0.5;};
+          y = {fraction = 0.3;};
+          width = {fraction = 0.3;};
+          hideIcons = false;
+          ignoreExclusiveZones = false;
+          layer = "overlay";
+          hidePluginInfo = false;
+          closeOnClick = false;
+          showResultsImmediately = false;
+          maxEntries = null;
+        };
+      };
+
+      bemenu = {
+        enable = true;
+        package = unstable.bemenu;
+      };
+    };
+
+    services = {
+      hyprpaper = {
+        enable = false;
+        package = unstable.hyprpaper;
+      };
+
+      swaync = {
+        enable = true;
+        package = unstable.swaynotificationcenter;
+      };
+
+      udiskie = {
+        enable = true;
+      };
     };
 
     terminals = {
@@ -270,6 +320,11 @@ in {
 
         # See https://wiki.hyprland.org/Configuring/Environment-variables/
 
+        windowrulev2 = [
+          "float,class:(clipse)"
+          "size 622 652,class:(clipse)"
+        ];
+
         env = [
           "XCURSOR_SIZE,24"
           "HYPRCURSOR_SIZE,24"
@@ -287,7 +342,7 @@ in {
         # See https://wiki.hyprland.org/Configuring/Keywords/
 
         # Set programs that you use
-        "$terminal" = "kitty";
+        "$terminal" = "alacritty";
         "$fileManager" = "dolphin";
         "$menu" = "wofi --show drun";
 
@@ -300,13 +355,15 @@ in {
 
         bind =
           [
+            "$mod, V, exec, $terminal --class clipse -e clipse"
+
             # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
             "$mod, Q, exec, $terminal"
             "$mod, W, exec, wayvnc 0.0.0.0"
             "$mod, C, killactive,"
             "$mod, M, exit,"
             "$mod, E, exec, $fileManager"
-            "$mod, V, togglefloating,"
+            "$mod, F, togglefloating,"
             "$mod, R, exec, $menu"
             "$mod, P, pseudo, # dwindle"
             "$mod, J, togglesplit, # dwindle"
@@ -371,9 +428,10 @@ in {
         # Or execute your favorite apps at launch like this:
 
         exec-once = [
-          # exec-once = nm-applet &
           # exec-once = waybar & hyprpaper & firefox
-          ''${startupScript}/bin/start''
+          "clipse -listen"
+          "nm-applet &"
+          "${startupScript}/bin/start"
           "kitty"
         ];
       };

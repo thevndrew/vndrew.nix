@@ -14,6 +14,10 @@
       inputs.hyprland.follows = "hyprland";
     };
 
+    ags.url = "github:Aylur/ags";
+    anyrun.url = "github:anyrun-org/anyrun";
+    anyrun.inputs.nixpkgs.follows = "nixpkgs";
+
     # Tool to run unpatched binaries
     nix-alien.url = "github:thiagokokada/nix-alien";
 
@@ -82,8 +86,6 @@
     wezterm = {
       url = "github:wez/wezterm?dir=nix";
     };
-
-    ags.url = "github:Aylur/ags";
   };
 
   outputs = {
