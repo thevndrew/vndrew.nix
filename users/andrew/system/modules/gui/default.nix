@@ -33,6 +33,13 @@ in {
         example = true;
         description = "enable the sddm display manager";
       };
+
+      sunshine = lib.mkOption {
+        type = lib.types.bool;
+        default = cfg.enable;
+        example = true;
+        description = "enable the sunshine server";
+      };
     };
   };
 
@@ -84,6 +91,13 @@ in {
           support32Bit = true;
         };
         jack.enable = true;
+      };
+
+      sunshine = lib.mkIf cfg.sunshine {
+        enable = true;
+        package = pkgs.sunshine;
+        autoStart = true;
+        capSysAdmin = true;
       };
     };
   };
