@@ -8,6 +8,7 @@
 }: let
   cfg = config.gui;
   pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+  my-intel-vaapi-driver = pkgs-unstable.intel-vaapi-driver.override {enableHybridCodec = true;};
 in {
   imports = mylib.scanPaths ./.;
 
@@ -56,10 +57,18 @@ in {
     hardware.opengl = {
       package = pkgs-unstable.mesa.drivers;
 
+      extraPackages = with pkgs-unstable; [
+        intel-media-driver # LIBVA_DRIVER_NAME=iHD
+        my-intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+        libvdpau-va-gl
+      ];
+
       # if you also want 32-bit support (e.g for Steam)
       driSupport32Bit = true;
       package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
     };
+
+    environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";}; # Force intel-media-driver
 
     xdg.portal = {
       enable = true;
@@ -95,8 +104,8 @@ in {
 
       sunshine = lib.mkIf cfg.sunshine {
         enable = true;
-        package = pkgs.sunshine;
-        autoStart = true;
+        package = pkgs-unstable.sunshine;
+        autoStart = false;
         capSysAdmin = true;
       };
     };

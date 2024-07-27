@@ -431,6 +431,7 @@ in {
           # exec-once = waybar & hyprpaper & firefox
           "clipse -listen"
           "nm-applet &"
+          "systemctl --user start sunshine"
           "${startupScript}/bin/start"
           "kitty"
         ];
