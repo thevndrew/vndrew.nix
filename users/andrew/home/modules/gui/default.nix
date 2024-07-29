@@ -433,7 +433,7 @@ in {
           "nm-applet &"
           "systemctl --user start sunshine"
           "${startupScript}/bin/start"
-          "kitty"
+          "$terminal"
         ];
       };
     };
