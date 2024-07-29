@@ -42,8 +42,20 @@
     };
 
     # My package repo and neovim config
-    nixpkgs-vndrew.url = "git+ssh://git@github.com/thevndrew/nix-packages.git";
-    vndrew-nvim.url = "git+ssh://git@github.com/thevndrew/vndrew.nvim";
+    nixpkgs-vndrew = {
+      url = "git+ssh://git@github.com/thevndrew/nix-packages.git";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    nixpkgs-secret = {
+      url = "git+ssh://git@github.com/thevndrew/nix-secret-pkgs.git";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    vndrew-nvim = {
+      url = "git+ssh://git@github.com/thevndrew/vndrew.nvim";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
     # Use ssh protocol to authenticate via ssh-agent/ssh-key, and shallow clone
     mysecrets = {
@@ -121,6 +133,7 @@
       };
 
       vndrew = inputs.nixpkgs-vndrew.packages.${pkgs.system};
+      secret = inputs.nixpkgs-secret.packages.${pkgs.system};
     };
 
     mylib = import ./lib/mylib.nix {inherit (nixpkgs) lib;};

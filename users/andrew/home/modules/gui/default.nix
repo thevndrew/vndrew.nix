@@ -48,6 +48,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with unstable; [
       (nerdfonts.override {fonts = ["FiraCode" "DroidSansMono" "JetBrainsMono"];})
+      other-pkgs.secret.berkeley-mono-nerd
       clipse
       hyprpicker
       hyprshade
@@ -137,7 +138,7 @@ in {
       };
 
       font = {
-        name = "JetBrainsMono";
+        name = "BerkeleyMono";
         size = 12;
       };
     };
@@ -359,7 +360,6 @@ in {
 
             # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
             "$mod, Q, exec, $terminal"
-            "$mod, W, exec, wayvnc 0.0.0.0"
             "$mod, C, killactive,"
             "$mod, M, exit,"
             "$mod, E, exec, $fileManager"
