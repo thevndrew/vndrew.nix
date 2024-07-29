@@ -45,8 +45,7 @@ in {
     programs.wezterm =
       {
         enable = cfg.wezterm;
-        #package = inputs.wezterm.packages.${pkgs.system}.default;
-        package = unstable.wezterm;
+        package = inputs.wezterm.packages.${pkgs.system}.default;
       }
       // import ../../settings/shell_integrations.nix;
     programs.alacritty = {
