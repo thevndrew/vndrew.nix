@@ -52,9 +52,16 @@ in {
       enable = cfg.alacritty;
       package = unstable.alacritty;
     };
-    programs.kitty = {
-      enable = cfg.kitty;
-      package = unstable.kitty;
-    };
+    programs.kitty =
+      {
+        enable = cfg.kitty;
+        package = unstable.kitty;
+        #font = {
+        #  name = "";
+        #  size = 12;
+        #  package = ;
+        #};
+      }
+      // import ../../settings/shell_integrations.nix;
   };
 }

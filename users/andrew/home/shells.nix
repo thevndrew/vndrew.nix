@@ -110,7 +110,7 @@ in {
       };
 
       oh-my-zsh = {
-        enable = true;
+        enable = false;
         plugins = [
           "command-not-found"
           "git"
