@@ -48,7 +48,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with unstable; [
       (nerdfonts.override {fonts = ["FiraCode" "DroidSansMono" "JetBrainsMono"];})
-      other-pkgs.secret.berkeley-mono-nerd
+      other-pkgs.secret.berkeley-mono
       clipse
       hyprpicker
       hyprshade

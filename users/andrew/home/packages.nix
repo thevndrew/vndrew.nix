@@ -19,6 +19,8 @@
       nvme-cli
       tdns-cli
       wakeonlan
+
+      nix-du
     ]
     ++ (lib.optionals (!isWSL) [
       # Do install the docker CLI to talk to podman.
@@ -57,7 +59,6 @@
     killall
     lf
     ncdu
-    nix-du
     nix-output-monitor
     nix-tree
     nomino

@@ -4,6 +4,7 @@
   mylib,
   config,
   pkgs,
+  other-pkgs,
   ...
 }: let
   cfg = config.gui;
@@ -69,6 +70,21 @@ in {
     };
 
     environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";}; # Force intel-media-driver
+
+    #fonts = {
+    #  packages = with other-pkgs.unstable; [
+    #    (nerdfonts.override {fonts = ["FiraCode" "DroidSansMono" "JetBrainsMono"];})
+    #    other-pkgs.secret.berkeley-mono
+    #  ];
+
+    #  fontconfig = {
+    #    defaultFonts = {
+    #      serif = ["Liberation Serif" "Vazirmatn"];
+    #      sansSerif = ["Ubuntu" "Vazirmatn"];
+    #      monospace = ["Ubuntu Mono"];
+    #    };
+    #  };
+    #};
 
     xdg.portal = {
       enable = true;
