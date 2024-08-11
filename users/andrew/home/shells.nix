@@ -35,11 +35,13 @@ in {
 
   home.shellAliases =
     {
-      cat = "bat";
+      cat = "bat --paging never --theme DarkNeon --style plain";
       c = "clear";
+      fzfp = "alias fzfp='fzf --preview \"bat --style numbers --color always {}\"'";
       gc = "nix-collect-garbage --delete-old";
       ks = "tmux kill-server";
       nb = "nix build --json --no-link --print-build-logs";
+      top_used = "fc -ln 0 | sort | uniq -c | sort -nr | head -20";
     }
     // lib.optionalAttrs isWSL {
       pbcopy = "/mnt/c/Windows/System32/clip.exe";
