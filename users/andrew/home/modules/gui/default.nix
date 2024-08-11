@@ -49,9 +49,12 @@ in {
     home.packages = with unstable; [
       (nerdfonts.override {fonts = ["FiraCode" "DroidSansMono" "JetBrainsMono"];})
       other-pkgs.secret.berkeley-mono
+      bustle
       clipse
+      dbeaver-bin
       hyprpicker
       hyprshade
+      mullvad-browser
       networkmanagerapplet
       signal-desktop
       swww

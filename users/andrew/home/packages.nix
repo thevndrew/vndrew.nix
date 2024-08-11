@@ -45,6 +45,7 @@
     deadnix
     distrobox
     dog
+    dotenvx
     duf
     dust
     eza
@@ -54,6 +55,7 @@
     glow
     gping
     htop
+    hub
     jq
     just
     killall
@@ -78,6 +80,8 @@
     sops
     ssh-to-age
     statix
+    teller
+    termscp
     tmux
     tokei
     tree
