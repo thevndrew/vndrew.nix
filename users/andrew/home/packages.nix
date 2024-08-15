@@ -55,7 +55,6 @@
     glow
     gping
     htop
-    hub
     jq
     just
     killall
