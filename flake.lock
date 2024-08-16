@@ -77,11 +77,11 @@
     "bootdev": {
       "flake": false,
       "locked": {
-        "lastModified": 1720456063,
-        "narHash": "sha256-SAZnNBV1o/kbitR3ypsW5mdhnOkq39PtkVnJs05Wicc=",
+        "lastModified": 1722279344,
+        "narHash": "sha256-0vC+T5uCJVb6yKNWA+V4eitwNzuHZQIj3CnIR+5TBSs=",
         "owner": "bootdotdev",
         "repo": "bootdev",
-        "rev": "bffa00a434550a9fee87351054cbb7989db57eb6",
+        "rev": "071eb59a1bbd9b7d38ada1ae1bad02853ae95b29",
         "type": "github"
       },
       "original": {
@@ -271,11 +271,11 @@
         "nixpkgs-lib": "nixpkgs-lib_2"
       },
       "locked": {
-        "lastModified": 1719994518,
-        "narHash": "sha256-pQMhCCHyQGRzdfAkdJ4cIWiw+JNuWsTX7f0ZYSyz0VY=",
+        "lastModified": 1722555600,
+        "narHash": "sha256-XOQkdLafnb/p9ij77byFQjDf5m5QYl9b2REiVClC+x4=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "9227223f6d922fee3c7b190b2cc238a99527bbb7",
+        "rev": "8471fe90ad337a8074e957b69ca4d0089218391d",
         "type": "github"
       },
       "original": {
@@ -914,14 +914,14 @@
     },
     "nixpkgs-lib_2": {
       "locked": {
-        "lastModified": 1719876945,
-        "narHash": "sha256-Fm2rDDs86sHy0/1jxTOKB1118Q0O3Uc7EC0iXvXKpbI=",
+        "lastModified": 1722555339,
+        "narHash": "sha256-uFf2QeW7eAHlYXuDktm9c25OxOyCoUOQmh5SZ9amE5Q=",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/5daf0514482af3f97abaefc78a6606365c9108e2.tar.gz"
+        "url": "https://github.com/NixOS/nixpkgs/archive/a5d394176e64ab29c852d03346c1fc9b0b7d33eb.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/5daf0514482af3f97abaefc78a6606365c9108e2.tar.gz"
+        "url": "https://github.com/NixOS/nixpkgs/archive/a5d394176e64ab29c852d03346c1fc9b0b7d33eb.tar.gz"
       }
     },
     "nixpkgs-secret": {
@@ -986,11 +986,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1720655128,
-        "narHash": "sha256-VP/otRdpJMDL3bU9/nG/htmQW7/4Anu+bbGSdXZPgi4=",
+        "lastModified": 1723753073,
+        "narHash": "sha256-eX1s8dfUkGfaC2qyL4AibsSS89mlz518/Zxv0GWV+6Q=",
         "ref": "refs/heads/main",
-        "rev": "5b75f047d0fac3eea8e68b813f476c0aaf61891c",
-        "revCount": 14,
+        "rev": "3f47ca0acb942ea82a0850ff068bdc179ababa58",
+        "revCount": 17,
         "type": "git",
         "url": "ssh://git@github.com/thevndrew/nix-packages.git"
       },
