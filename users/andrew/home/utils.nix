@@ -1,4 +1,8 @@
-{other-pkgs, ...}: let
+{
+  other-pkgs,
+  pkgs,
+  ...
+}: let
   inherit (other-pkgs) unstable;
 in {
   programs = {
@@ -21,7 +25,7 @@ in {
       enable = true;
       package = unstable.bat;
       extraPackages = with unstable.bat-extras; [
-        batdiff
+        #batdiff
         batgrep
         batman
         batpipe
