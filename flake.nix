@@ -204,5 +204,11 @@
         user = "andrew";
       };
     };
+
+    devShells.${system} = {
+      default = pkgs.mkShell {
+        nativeBuildInputs = with other-pkgs.unstable; [just];
+      };
+    };
   };
 }

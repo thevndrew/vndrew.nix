@@ -11,7 +11,7 @@ repo_list:
   packages:
     url: "git@github.com:thevndrew/nix-packages.git"
     directory: "repos/nix-packages"
-  secret-packages:
+  secret_packages:
     url: "git@github.com:thevndrew/nix-secret-pkgs.git"
     directory: "repos/nix-secret-pkgs"
   neovim:

@@ -56,7 +56,6 @@
     gping
     htop
     jq
-    just
     killall
     lf
     ncdu
