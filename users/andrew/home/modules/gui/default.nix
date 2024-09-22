@@ -58,6 +58,7 @@ in {
       networkmanagerapplet
       signal-desktop
       swww
+      # waycheck
       waypaper
       wayvnc
       webcord-vencord
