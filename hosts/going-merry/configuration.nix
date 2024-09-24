@@ -41,7 +41,7 @@
       Type = "oneshot";
     };
     serviceConfig = {
-      ExecStart = "/bin/sh -c '${systemInfo.home}/services/qbittorrent/restart.sh'";
+      ExecStart = "/bin/sh -c '${systemInfo.home}/repos/services/qbittorrent/restart.sh'";
       User = systemInfo.user;
       Group = "users";
     };
