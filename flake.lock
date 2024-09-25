@@ -865,11 +865,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1721487752,
-        "narHash": "sha256-bRn0SH398n0ZKnS9t1zGxIugoZpZjeODDBqEeMugM00=",
+        "lastModified": 1726523552,
+        "narHash": "sha256-RqOJeQlX2+H5j+RdFzTc7QSf4/qK4Oe01KpE2713Cws=",
         "owner": "BirdeeHub",
         "repo": "nixCats-nvim",
-        "rev": "d4a33fe8fe465c3f0269caa9077656626a51c0a8",
+        "rev": "2b455dab0eee7484ce7c956dccda0a7c2111c18b",
         "type": "github"
       },
       "original": {
@@ -1342,11 +1342,11 @@
         "telescope-smart-history-nvim": "telescope-smart-history-nvim"
       },
       "locked": {
-        "lastModified": 1727144088,
-        "narHash": "sha256-1i1MYhJv7OrZnuyc8L4RpC8Y13YkZ8JuZUUeWUWGf0Y=",
+        "lastModified": 1727222396,
+        "narHash": "sha256-BWEZdk95A7xEtUi6rcZHgHghLUsW6MRtB3e7zxGVajk=",
         "ref": "refs/heads/main",
-        "rev": "4c1fc1549a09e85a8097a05c19021fab11b65dbd",
-        "revCount": 28,
+        "rev": "be776c28b2e169f4cfaa7d19baf28e1c57d46090",
+        "revCount": 31,
         "type": "git",
         "url": "ssh://git@github.com/thevndrew/vndrew.nvim"
       },

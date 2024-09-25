@@ -207,7 +207,12 @@
 
     devShells.${system} = {
       default = pkgs.mkShell {
-        nativeBuildInputs = with other-pkgs.unstable; [just];
+        nativeBuildInputs = with other-pkgs.unstable; [
+          alejandra
+          deadnix
+          just
+          statix
+        ];
       };
     };
   };

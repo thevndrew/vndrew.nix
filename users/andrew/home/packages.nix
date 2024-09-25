@@ -32,7 +32,6 @@
     ]);
 
   unstable-pkgs = with unstable; [
-    alejandra
     bfs
     bottom # module avalible
     btop
@@ -42,7 +41,6 @@
     coreutils
     ctop
     curlie
-    deadnix
     distrobox
     dog
     dotenvx
@@ -77,7 +75,6 @@
     skim
     sops
     ssh-to-age
-    statix
     teller
     termscp
     tmux
