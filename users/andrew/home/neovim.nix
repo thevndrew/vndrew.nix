@@ -1,5 +1,5 @@
 {...}: {
-  vndrew-neovim = {
+  nvim = {
     enable = true;
   };
 }
