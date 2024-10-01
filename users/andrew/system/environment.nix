@@ -10,7 +10,7 @@
       "/share/zsh"
     ];
 
-    shells = [pkgs.zsh pkgs.nushell];
+    shells = [pkgs.zsh];
 
     systemPackages = with pkgs; [
       mergerfs

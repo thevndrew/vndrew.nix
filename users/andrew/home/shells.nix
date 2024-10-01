@@ -4,6 +4,7 @@
   lib,
   mylib,
   systemInfo,
+  other-pkgs,
   ...
 }: let
   #zsh_defs = mylib.writeLines {lines = mylib.sourceFiles (mylib.relativeToRoot "config/zsh/source");};
@@ -141,6 +142,11 @@ in {
           src = inputs.fzf-tab;
         }
       ];
+    };
+
+    nushell = {
+      enable = true;
+      package = other-pkgs.unstable.nushell;
     };
   };
 }
