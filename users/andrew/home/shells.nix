@@ -43,6 +43,7 @@ in {
       ks = "tmux kill-server";
       nb = "nix build --json --no-link --print-build-logs";
       top_used = "fc -ln 0 | sort | uniq -c | sort -nr | head -20";
+      dugood = ''${other-pkgs.unstable.writeShellScript "dugood" ''du -hd1 $@ | sort -hr''}'';
     }
     // lib.optionalAttrs isWSL {
       pbcopy = "/mnt/c/Windows/System32/clip.exe";

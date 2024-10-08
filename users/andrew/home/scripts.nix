@@ -56,5 +56,42 @@ in {
       runtimeInputs = with other-pkgs.unstable; [yq yt-dlp];
       text = readFile "${streamScriptsDir}/rip_stream_helper.sh";
     })
+
+    (pkgs.writeShellApplication {
+      name = "spkgname";
+      runtimeInputs = with other-pkgs.unstable; [nix-search-cli];
+      text = (
+        /*
+        bash
+        */
+        ''
+          nix-search -n "$@"
+        ''
+      );
+    })
+    (pkgs.writeShellApplication {
+      name = "spkgprog";
+      runtimeInputs = with other-pkgs.unstable; [nix-search-cli];
+      text = (
+        /*
+        bash
+        */
+        ''
+          nix-search -q  "package_programs:($*)"
+        ''
+      );
+    })
+    (pkgs.writeShellApplication {
+      name = "spkgdesc";
+      runtimeInputs = with other-pkgs.unstable; [nix-search-cli];
+      text = (
+        /*
+        bash
+        */
+        ''
+          nix-search -q  "package_description:($*)"
+        ''
+      );
+    })
   ];
 }
