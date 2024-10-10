@@ -111,6 +111,8 @@
   vndrew-pkgs = with vndrew; [
     bootdev
     megadl
+    yt-dlp-youtube-oauth2
+    yt-dlp-get-pot
   ];
 
   standalone = with unstable; [

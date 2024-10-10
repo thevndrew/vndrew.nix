@@ -43,17 +43,32 @@ in {
 
     (pkgs.writeShellApplication {
       name = "rip_streams";
-      runtimeInputs = with other-pkgs.unstable; [yq];
+      runtimeInputs =
+        (with other-pkgs.unstable; [yq])
+        ++ (with other-pkgs.vndrew; [
+          yt-dlp-youtube-oauth2
+          yt-dlp-get-pot
+        ]);
       text = readFile "${streamScriptsDir}/rip_streams.sh";
     })
     (pkgs.writeShellApplication {
       name = "rip_streams_stop";
-      runtimeInputs = with other-pkgs.unstable; [yq coreutils];
+      runtimeInputs =
+        (with other-pkgs.unstable; [yq coreutils])
+        ++ (with other-pkgs.vndrew; [
+          yt-dlp-youtube-oauth2
+          yt-dlp-get-pot
+        ]);
       text = readFile "${streamScriptsDir}/rip_streams_stop.sh";
     })
     (pkgs.writeShellApplication {
       name = "rip_stream_helper";
-      runtimeInputs = with other-pkgs.unstable; [yq yt-dlp];
+      runtimeInputs =
+        (with other-pkgs.unstable; [yq yt-dlp])
+        ++ (with other-pkgs.vndrew; [
+          yt-dlp-youtube-oauth2
+          yt-dlp-get-pot
+        ]);
       text = readFile "${streamScriptsDir}/rip_stream_helper.sh";
     })
 

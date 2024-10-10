@@ -21,11 +21,6 @@
         path = "${systemInfo.home}/.config/services/${systemInfo.hostname}.yaml";
       };
 
-      "ytdl" = {
-        sopsFile = "${inputs.mysecrets}/secrets/ytdl.yaml";
-        path = "${systemInfo.home}/.config/ytdl/streams.yaml";
-      };
-
       "atuin_key" = {
         sopsFile = "${inputs.mysecrets}/secrets/atuin.yaml";
       };
