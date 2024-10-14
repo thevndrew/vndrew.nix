@@ -33,6 +33,9 @@
 
   unstable-pkgs = with unstable; [
     # pueue
+    # pprof
+    # perf
+    # buf
     bfs
     bottom # module avalible
     btop
