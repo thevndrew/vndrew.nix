@@ -71,7 +71,7 @@
     cpuFreqGovernor = "powersave";
     powertop.enable = true;
     cpufreq.min = 800000; # 800 Mhz
-    cpufreq.max = 4400000; # 4.4 Ghz
+    cpufreq.max = 3400000; # 3.5 Ghz
   };
 
   users.groups.storage = {gid = 1000;};
