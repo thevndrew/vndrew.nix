@@ -36,6 +36,7 @@
     # pprof
     # perf
     # buf
+    # srgn
     bfs
     bottom # module avalible
     btop
