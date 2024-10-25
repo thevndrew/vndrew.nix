@@ -32,6 +32,7 @@
         "tank00"
         "tank01"
         "tank02"
+        "tank03"
       ];
     };
   };
@@ -43,7 +44,7 @@
 
   fileSystems."/mnt/storage" = {
     fsType = "fuse.mergerfs";
-    device = "/mnt/tank00/storage:/mnt/tank01/storage:/mnt/tank02/storage";
+    device = "/mnt/tank00/storage:/mnt/tank01/storage:/mnt/tank02/storage:/mnt/tank03/storage";
     options = [
       "cache.files=off"
       "dropcacheonclose=true"
