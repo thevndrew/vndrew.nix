@@ -1,6 +1,6 @@
 {...}: {
   nvim = {
     enable = true;
-    packageNames = ["nvim" "pvim"];
+    packageNames = ["nvim-nightly" "pvim"];
   };
 }
