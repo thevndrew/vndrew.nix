@@ -19,12 +19,10 @@
       enable = false;
       fallbackDns = [
         "100.100.100.100"
-        "10.89.0.1"
         "9.9.9.9"
       ];
       domains = [
         "ainu-kanyu.ts.net"
-        "dns.podman"
       ];
     };
   };
