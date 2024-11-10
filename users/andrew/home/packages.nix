@@ -81,7 +81,7 @@
     sops
     ssh-to-age
     teller
-    termscp
+    # termscp
     tmux
     tokei
     tree
