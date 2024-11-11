@@ -54,11 +54,9 @@ in {
     };
     programs.alacritty = {
       enable = cfg.alacritty;
-      package = unstable.alacritty;
     };
     programs.kitty = {
       enable = cfg.kitty;
-      package = unstable.kitty;
       #font = {
       #  name = "";
       #  size = 12;
