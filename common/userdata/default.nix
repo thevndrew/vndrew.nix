@@ -20,7 +20,7 @@ in rec {
       extraGroups = ["networkmanager" "wheel" "podman" "storage" "docker" "vboxusers" "input"];
       # this is packages for nixOS user config.
       # packages = []; # empty because that is managed by home-manager
-      uid = lib.mkForce 1001;
+      uid = 1001;
       openssh.authorizedKeys.keys = keys;
     };
 
