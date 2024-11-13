@@ -51,9 +51,6 @@
     monitorCFG ? null,
     username,
     hmCFGmodMAIN,
-    isWSL ? false,
-    isDesktop ? false,
-    isStandalone ? false,
     hostname,
   }: {pkgs, ...}: {
     nixpkgs.overlays = overlayList;
@@ -70,9 +67,6 @@
           users
           monitorCFG
           my-utils
-          isWSL
-          isDesktop
-          isStandalone
           hostname
           ;
       };
@@ -187,7 +181,7 @@ in
           };
           inherit pkgs;
           modules = [
-            ./homes/andrew.nix
+            ./homes/main
             (
               {pkgs, ...}: {
                 nix.package = pkgs.nix;
@@ -454,7 +448,7 @@ in
               inherit users;
               hostname = "going-merry";
               username = "andrew";
-              hmCFGmodMAIN = import ./homes/andrew.nix;
+              hmCFGmodMAIN = import ./homes/main;
             })
           ];
         };
@@ -482,8 +476,7 @@ in
               inherit users;
               hostname = "thousand-sunny";
               username = "andrew";
-              isDesktop = true;
-              hmCFGmodMAIN = import ./homes/andrew.nix;
+              hmCFGmodMAIN = import ./homes/main;
             })
           ];
         };
@@ -512,8 +505,7 @@ in
               inherit users;
               hostname = "polar-tang";
               username = "andrew";
-              isWSL = true;
-              hmCFGmodMAIN = import ./homes/andrew.nix;
+              hmCFGmodMAIN = import ./homes/main;
             })
           ];
         };
