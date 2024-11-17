@@ -18,9 +18,11 @@
   zsh_config = my-utils.writeLines {lines = my-utils.readFiles ./zsh;};
   bash_config = my-utils.writeLines {lines = my-utils.readFiles ./bash;};
 
+  config-path = ./hosts/${hostname}/default.nix;
+
   host-config =
-    if lib.pathExists ./${hostname}/default.nix
-    then [./${hostname}/default.nix]
+    if lib.pathExists config-path
+    then [config-path]
     else [];
 in {
   imports = with home-modules;

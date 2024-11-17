@@ -3,6 +3,7 @@
 {moduleNamespace, ...}: {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.${moduleNamespace}.virtualisation;
@@ -63,5 +64,12 @@ in {
         # extraPackages = [ pkgs.zfs ]; # Required if the host is running ZFS
       };
     };
+
+    environment.systemPackages = [
+      # Do install the docker CLI to talk to podman.
+      # Not needed when virtualisation.docker.enable = true;
+      pkgs.docker-client
+      pkgs.docker-compose
+    ];
   };
 }
