@@ -333,13 +333,13 @@ in {
 
       '';
 
-      # systemd = {
-      #   enable = cfg.wm.enable;
-      #   variables = [
-      #     "--all"
-      #   ];
-      # };
-      #
+      systemd = {
+        enable = cfg.wm.enable;
+        variables = [
+          "--all"
+        ];
+      };
+
       settings = {
         #############################
         ### ENVIRONMENT VARIABLES ###
