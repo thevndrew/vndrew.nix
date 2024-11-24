@@ -1557,11 +1557,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1732460552,
-        "narHash": "sha256-xGM5IEZslc3/MpIn4nrTFaRTnHwZNRWvqt37eYa9aXw=",
+        "lastModified": 1732482361,
+        "narHash": "sha256-7+DyShtT53aiDPsyW/t+YzvCsezAGBqbm5NaxPYGs14=",
         "ref": "refs/heads/main",
-        "rev": "b9c870098c2bc4767acd3af88d4fad0d3cc0404d",
-        "revCount": 7,
+        "rev": "d8283db9fcfb8aa06887868bab70d8b91d55787b",
+        "revCount": 8,
         "type": "git",
         "url": "ssh://git@github.com/thevndrew/nix-secret-pkgs.git"
       },

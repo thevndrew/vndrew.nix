@@ -6,6 +6,6 @@ pkgs.writeShellApplication {
     input=$(nix flake metadata --json                \
          | jq -r ".locks.nodes.root.inputs | keys[]" \
          | fzf)
-    nix flake lock --update-input "$input"
+    nix flake update "$input"
   '';
 }

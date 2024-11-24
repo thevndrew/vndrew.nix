@@ -51,6 +51,20 @@ in {
       package = inputs.wezterm.packages.${pkgs.system}.default;
       enableBashIntegration = true;
       enableZshIntegration = true;
+      extraConfig = ''
+        return {
+          font = wezterm.font_with_fallback {
+            'BerkeleyMono',
+            { family = 'JetBrains Mono'},
+          },
+          -- font_size = 16.0,
+          -- hide_tab_bar_if_only_one_tab = true,
+          -- default_prog = { "zsh", "--login", "-c", "tmux attach -t dev || tmux new -s dev" },
+          keys = {
+            {key="n", mods="SHIFT|CTRL", action="ToggleFullScreen"},
+          },
+        }
+      '';
     };
     programs.alacritty = {
       enable = cfg.alacritty;
