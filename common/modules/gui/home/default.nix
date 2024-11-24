@@ -411,7 +411,7 @@ in {
           ++ (
             # workspaces
             # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
-            builtins.concatLists (builtins.genList (
+            (builtins.genList (
                 x: let
                   ws = let
                     c = (x + 1) / 10;
@@ -423,7 +423,8 @@ in {
                 ]
               )
               10)
-          );
+            |> builtins.concatLists)
+          ;
 
         bindm = [
           # Move/resize windows with mainMod + LMB/RMB and dragging

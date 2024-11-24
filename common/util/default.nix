@@ -85,12 +85,7 @@ with builtins; rec {
     filterDir = path: builtins.all (dir: path != dir) excludeDirs;
     filterFileSuffix = path: builtins.all (suffix: !lib.strings.hasSuffix "${suffix}.nix" path) excludeNameSuffix;
     filterFilePrefix = path: builtins.all (prefix: !lib.strings.hasPrefix "${prefix}" path) excludeNamePrefix;
-  in
-    builtins.map
-    (f: (path + "/${f}"))
-    (builtins.attrNames
-      (lib.attrsets.filterAttrs
-        (
+    filter_fn = (
           path: _type:
             (
               _type
@@ -103,23 +98,19 @@ with builtins; rec {
               && (filterFilePrefix path) # ignore files starting with exluded prefixes
               && (lib.strings.hasSuffix ".nix" path) # include .nix files
             )
-        )
-        (builtins.readDir path)));
+        );
+
+  in
+    builtins.readDir path
+    |> lib.attrsets.filterAttrs filter_fn
+    |> builtins.attrNames
+    |> builtins.map (f: (path + "/${f}"));
 
   operateOnFiles = path: op:
-    builtins.map
-    (f: (op (path + "/${f}")))
-    (builtins.attrNames
-      (
-        lib.attrsets.filterAttrs
-        (
-          _path: _type: (
-            _type
-            != "directory"
-          )
-        )
-        (builtins.readDir path)
-      ));
+    builtins.readDir path
+    |> lib.attrsets.filterAttrs   (path: _type: (_type != "directory"))
+    |> builtins.attrNames
+    |> builtins.map (f: (op (path + "/${f}")));
 
   # Get a list of strings containing the contents of each file
   # in a directory
