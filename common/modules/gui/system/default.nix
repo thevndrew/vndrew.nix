@@ -90,8 +90,6 @@ in {
       extraPortals = [pkgs.xdg-desktop-portal-gtk];
     };
 
-    sound.enable = cfg.audio;
-
     services = {
       xserver.enable = true;
       displayManager = lib.mkIf cfg.displayManager {
@@ -127,7 +125,6 @@ in {
   };
 }
 # # Enable sound with pipewire.
-# # sound.enable = true;
 # hardware.pulseaudio.enable = false;
 # hardware.pulseaudio.package = pkgs.pulseaudioFull;
 # security.rtkit.enable = true;
