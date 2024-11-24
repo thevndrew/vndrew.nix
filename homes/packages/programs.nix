@@ -174,7 +174,7 @@ in {
       enable = true;
     };
 
-    nix-index-database.comma.enable = true;
+    #nix-index-database.comma.enable = true;
 
     nix-index = {
       enableBashIntegration = true;
