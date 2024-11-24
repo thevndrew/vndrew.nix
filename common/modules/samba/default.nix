@@ -86,29 +86,29 @@ in {
       services.samba = {
         enable = true;
         openFirewall = false; # tailscale handles the connections
-        extraConfig = ''
-          server string = ${config.networking.hostName}
-          netbios name = ${config.networking.hostName}
-          workgroup = WORKGROUP
-          security = user
-
-          create mask = 0664
-          force create mode = 0664
-          directory mask = 0775
-          force directory mode = 0775
-          follow symlinks = yes
-
-          # :NOTE| localhost is the ipv6 localhost ::1
-          # hosts allow = 192.168.0.0/16 localhost
-          # hosts deny = 0.0.0.0/0
-          hosts allow = 0.0.0.0/0 # only tailscale can access this anyway
-          guest account = nobody
-          map to guest = bad user
-        '';
 
         # :NOTE for Public| set sudo smbpasswd -a samba-guest -n
         # :NOTE for others| set sudo smbpasswd -a $(whoami)
-        shares = {
+        settings = {
+          global = {
+            "server string" = "${config.networking.hostName}";
+            "netbios name" = "${config.networking.hostName}";
+            "workgroup" = "WORKGROUP";
+            "security" = "user";
+
+            "create mask" = "0664";
+            "force create mode" = "0664";
+            "directory mask" = "0775";
+            "force directory mode" = "0775";
+            "follow symlinks" = "yes";
+
+            # :NOTE| localhost is the ipv6 localhost ::1
+            # hosts allow" = "192.168.0.0/16 localhost
+            # hosts deny" = "0.0.0.0/0
+            "hosts allow" = "0.0.0.0/0"; # only tailscale can access this anyway
+            "guest account" = "nobody";
+            "map to guest" = "bad user";
+          };
           # Basic shared folder example
           public = {
             #path = (getEnv "HOME") + "/Public";
