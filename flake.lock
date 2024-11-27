@@ -1209,10 +1209,10 @@
     "mysecrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1726938734,
-        "narHash": "sha256-QLSi/oLMbAfIRIhh5KWhe9wZptNovDHb1kMf9Hk5+KY=",
+        "lastModified": 1732676047,
+        "narHash": "sha256-SwqAkd8d3pvobl/MlU+3/rwp+a71hrS5G2QH0Be6Pgg=",
         "ref": "refs/heads/main",
-        "rev": "60069306c78de4c6362f2f13f11cdd6671909ef9",
+        "rev": "d36675f9e746a3fca5897527216b7540208163c1",
         "shallow": true,
         "type": "git",
         "url": "ssh://git@github.com/thevndrew/nix-secrets.git"
