@@ -72,8 +72,12 @@ in {
     environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";}; # Force intel-media-driver
 
     fonts = {
-      packages = with pkgs.unstable; [
-        (nerdfonts.override {fonts = ["FiraCode" "DroidSansMono" "JetBrainsMono"];})
+      packages = with pkgs.unstable.nerd-fonts; [
+        fira-code
+        droid-sans-mono
+        jetbrains-mono
+        # for all fonts
+        # font.packages = [ ... ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts)
         pkgs.secret.berkeley-mono
       ];
       fontconfig = {

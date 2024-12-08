@@ -27,7 +27,7 @@ overlay
   overlaySet =
     overlaySetMapped
     // {
-      nur = inputs.nur.overlay;
+      nur = inputs.nur.overlays.default;
       minesweeper = inputs.minesweeper.overlays.default;
       vndrew-nvim = inputs.vndrew-nvim.overlays.default;
     };

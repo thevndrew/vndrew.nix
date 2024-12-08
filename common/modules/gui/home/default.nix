@@ -49,7 +49,11 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = with unstable; [
-      (nerdfonts.override {fonts = ["FiraCode" "DroidSansMono" "JetBrainsMono"];})
+      nerd-fonts.fira-code
+      nerd-fonts.droid-sans-mono
+      nerd-fonts.jetbrains-mono
+      # for all fonts
+      # font.packages = [ ... ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts)
       pkgs.secret.berkeley-mono
       bustle
       clipse

@@ -41,7 +41,7 @@
         my_pkgs = packages_func final.system;
       })
 
-      inputs.nur.overlay
+      inputs.nur.overlays.default
       inputs.zig.overlays.default
     ];
 

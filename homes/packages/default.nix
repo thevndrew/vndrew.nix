@@ -52,7 +52,7 @@
     ncdu
     nix-output-monitor
     nix-tree
-    nomino
+    # nomino
     nvd
     parallel
     plocate
