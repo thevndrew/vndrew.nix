@@ -1245,10 +1245,10 @@
     "mysecrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1735970054,
-        "narHash": "sha256-OlAXE6zdKo4a/X+i4621hurtx6zgntWL0KMuIR+rATM=",
+        "lastModified": 1736013058,
+        "narHash": "sha256-eonB4DFAXGwT7MwzfckclcHWmieDqlp4vlM9fdX6AiM=",
         "ref": "refs/heads/main",
-        "rev": "624de6b77d71ba8c9bff511403ac4e33af3823d6",
+        "rev": "25c0c7620f6f0482482af7afc96aec7580d75aa8",
         "shallow": true,
         "type": "git",
         "url": "ssh://git@github.com/thevndrew/nix-secrets.git"
