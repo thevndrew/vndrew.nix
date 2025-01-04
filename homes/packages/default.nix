@@ -8,6 +8,7 @@
 
   stable-pkgs = with pkgs; [
     dig
+    dog
     hddtemp
     iotop
     lsof
@@ -35,7 +36,6 @@
     ctop
     curlie
     distrobox
-    dog
     dotenvx
     duf
     dust
