@@ -10,7 +10,7 @@
 
   home.packages = [
     # on WSL just use: winget install win32yank
-    pkgs.unstable.wl-clipboard
+    pkgs.wl-clipboard
   ];
 
   sops = {

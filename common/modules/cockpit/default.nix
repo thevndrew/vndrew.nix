@@ -21,7 +21,7 @@ in {
     services = {
       cockpit = {
         enable = true;
-        package = pkgs.unstable.cockpit;
+        package = pkgs.cockpit;
         port = 8085;
       };
     };

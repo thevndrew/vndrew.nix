@@ -36,6 +36,13 @@
           };
         };
 
+        stable = import inputs.nixpkgs-stable {
+          inherit (final) system;
+          config = {
+            allowUnfree = true;
+          };
+        };
+
         ghostty = inputs.ghostty.packages.${final.system}.default;
         wezterm = inputs.wezterm.packages.${final.system}.default;
         hyprland = inputs.hyprland.packages.${final.system}.hyprland;
@@ -128,7 +135,6 @@ in
       # final, # Only with easyOverlay imported
       ...
     }: {
-      # _module.args.pkgs = import inputs.nixpkgs-unstable {
       _module.args.pkgs = import inputs.nixpkgs {
         inherit system;
         overlays = overlayList;
@@ -391,7 +397,7 @@ in
             })
           ];
         };
-        "installer_mine" = inputs.nixpkgs-unstable.lib.nixosSystem {
+        "installer_mine" = inputs.nixpkgs.lib.nixosSystem {
           specialArgs = {
             hostname = "installer_mine";
             is_minimal = true;
@@ -419,7 +425,7 @@ in
             # })
           ];
         };
-        "installer" = inputs.nixpkgs-unstable.lib.nixosSystem {
+        "installer" = inputs.nixpkgs.lib.nixosSystem {
           specialArgs = {
             my_pkgs = packages_func system;
             inherit self inputs system-modules my-utils;

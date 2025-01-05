@@ -86,7 +86,7 @@
 
     nh = {
       enable = true;
-      package = pkgs.unstable.nh;
+      package = pkgs.nh;
       clean = {
         enable = true;
         dates = "weekly";
@@ -233,7 +233,7 @@
 
     tailscale = {
       enable = true;
-      package = pkgs.unstable.tailscale;
+      package = pkgs.tailscale;
       useRoutingFeatures = "both";
     };
 

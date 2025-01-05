@@ -19,12 +19,14 @@
   # };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs?ref=nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nur.url = "github:nix-community/NUR";
 
     home-manager = {
-      url = "github:nix-community/home-manager?ref=release-24.11";
+      # url = "github:nix-community/home-manager?ref=release-24.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -51,12 +53,12 @@
       url = "github:nix-community/manix";
       inputs = {
         flake-utils.follows = "flake-utils";
-        nixpkgs.follows = "nixpkgs-unstable";
+        nixpkgs.follows = "nixpkgs";
       };
     };
     minesweeper = {
       url = "github:BirdeeHub/minesweeper";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-appimage.url = "github:ralismark/nix-appimage";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
@@ -109,17 +111,17 @@
     # My package repo(s) and neovim config
     nixpkgs-vndrew = {
       url = "git+ssh://git@github.com/thevndrew/nix-packages.git";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixpkgs-secret = {
       url = "git+ssh://git@github.com/thevndrew/nix-secret-pkgs.git";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     vndrew-nvim = {
       url = "git+ssh://git@github.com/thevndrew/vndrew.nvim";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # sops and sops encrypted secrets

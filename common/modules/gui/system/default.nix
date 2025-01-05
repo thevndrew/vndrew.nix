@@ -75,7 +75,7 @@ in {
     environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";}; # Force intel-media-driver
 
     fonts = {
-      packages = with pkgs.unstable.nerd-fonts; [
+      packages = with pkgs.nerd-fonts; [
         fira-code
         droid-sans-mono
         jetbrains-mono
@@ -103,7 +103,7 @@ in {
         enable = true;
         sddm = {
           enable = true;
-          #package = pkgs-unstable.kdePackages.sddm;
+          #package = pkgs.kdePackages.sddm;
           #wayland = {
           #  enable = true;
           #  compositor = "weston";
@@ -124,7 +124,7 @@ in {
 
       sunshine = lib.mkIf cfg.sunshine {
         enable = true;
-        package = pkgs.unstable.sunshine;
+        package = pkgs.sunshine;
         autoStart = false;
         capSysAdmin = true;
       };

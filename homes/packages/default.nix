@@ -4,11 +4,14 @@
   my-utils,
   ...
 }: let
-  inherit (pkgs) vndrew unstable nix-alien;
+  inherit (pkgs) vndrew unstable stable nix-alien;
 
-  stable-pkgs = with pkgs; [
-    dig
+  stable-pkgs = with stable; [
     dog
+  ];
+
+  unstable-pkgs = with unstable; [
+    dig
     hddtemp
     iotop
     lsof
@@ -18,9 +21,7 @@
     tdns-cli
     wakeonlan
     nix-du
-  ];
 
-  unstable-pkgs = with unstable; [
     # pueue
     # pprof
     # perf

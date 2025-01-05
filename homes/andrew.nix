@@ -57,7 +57,7 @@ in {
   };
 
   nix.registry = {
-    # nixpkgs.flake = inputs.nixpkgs-unstable;
+    # nixpkgs.flake = inputs.nixpkgs;
     home-manager.flake = inputs.home-manager;
     gomod2nix.to = {
       type = "github";
