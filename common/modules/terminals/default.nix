@@ -48,7 +48,7 @@ in {
   config = lib.mkIf cfg.enable {
     programs.wezterm = {
       enable = cfg.wezterm;
-      package = inputs.wezterm.packages.${pkgs.system}.default;
+      package = pkgs.wezterm;
       enableBashIntegration = true;
       enableZshIntegration = true;
       extraConfig = ''
@@ -66,9 +66,16 @@ in {
         }
       '';
     };
+
+    programs.ghostty = {
+      enable = cfg.enable;
+      package = pkgs.ghostty;
+    };
+
     programs.alacritty = {
       enable = cfg.alacritty;
     };
+
     programs.kitty = {
       enable = cfg.kitty;
       #font = {

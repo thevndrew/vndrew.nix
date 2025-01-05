@@ -28,6 +28,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     # Build a custom WSL installer
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
@@ -75,6 +80,7 @@
       inputs.hyprland.follows = "hyprland";
     };
     wezterm.url = "github:wez/wezterm?dir=nix";
+    ghostty.url = "github:ghostty-org/ghostty";
     zen-browser.url = "github:MarceColl/zen-browser-flake";
 
     # Tool to run unpatched binaries

@@ -36,6 +36,9 @@
           };
         };
 
+        ghostty = inputs.ghostty.packages.${final.system}.default;
+        wezterm = inputs.wezterm.packages.${final.system}.default;
+
         vndrew = inputs.nixpkgs-vndrew.packages.${final.system};
         secret = inputs.nixpkgs-secret.packages.${final.system};
         my_pkgs = packages_func final.system;
@@ -74,6 +77,7 @@
         inputs.ags.homeManagerModules.default
         inputs.anyrun.homeManagerModules.default
         inputs.sops-nix.homeManagerModules.sops
+        "${inputs.home-manager-unstable}/modules/programs/ghostty.nix"
         # inputs.nix-index-database.hmModules.nix-index
       ];
       useGlobalPkgs = true;

@@ -374,7 +374,7 @@ in {
 
         # Set programs that you use
         # "$terminal" = "kitty";
-        "$terminal" = "wezterm";
+        "$terminal" = "ghostty";
         "$fileManager" = "dolphin";
         "$menu" = "wofi --show drun";
 
