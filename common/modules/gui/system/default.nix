@@ -10,8 +10,6 @@
   ...
 }: let
   cfg = config.${moduleNamespace}.gui-system;
-  pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-  my-intel-vaapi-driver = pkgs-unstable.intel-vaapi-driver.override {enableHybridCodec = true;};
 in {
   _file = ./default.nix;
 
@@ -50,23 +48,28 @@ in {
   config = lib.mkIf cfg.enable {
     programs.hyprland = {
       enable = cfg.enable;
-      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      package = pkgs.hyprland;
       xwayland.enable = cfg.enable;
     };
 
+    environment.systemPackages = [
+      pkgs.hyprland-pkgs.mesa
+    ];
+
     # Mesa version fix
     hardware.graphics = {
-      package = pkgs-unstable.mesa.drivers;
+      package = pkgs.hyprland-pkgs.mesa.drivers;
 
-      extraPackages = with pkgs-unstable; [
+      extraPackages = with pkgs.hyprland-pkgs; [
         intel-media-driver # LIBVA_DRIVER_NAME=iHD
-        my-intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+        # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+        (intel-vaapi-driver.override {enableHybridCodec = true;})
         libvdpau-va-gl
       ];
 
       # if you also want 32-bit support (e.g for Steam)
       enable32Bit = true;
-      package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
+      package32 = pkgs.hyprland-pkgs.pkgsi686Linux.mesa.drivers;
     };
 
     environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";}; # Force intel-media-driver
@@ -121,7 +124,7 @@ in {
 
       sunshine = lib.mkIf cfg.sunshine {
         enable = true;
-        package = pkgs-unstable.sunshine;
+        package = pkgs.unstable.sunshine;
         autoStart = false;
         capSysAdmin = true;
       };

@@ -38,6 +38,8 @@
 
         ghostty = inputs.ghostty.packages.${final.system}.default;
         wezterm = inputs.wezterm.packages.${final.system}.default;
+        hyprland = inputs.hyprland.packages.${final.system}.hyprland;
+        hyprland-pkgs = inputs.hyprland.inputs.nixpkgs.legacyPackages.${final.system};
 
         vndrew = inputs.nixpkgs-vndrew.packages.${final.system};
         secret = inputs.nixpkgs-secret.packages.${final.system};
