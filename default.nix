@@ -20,8 +20,6 @@
 
   inherit (my_common_hub) system-modules home-modules overlaySet flakeModules diskoCFG templates userdata;
 
-  packages_func = my_common_hub.packages;
-
   overlayList =
     (builtins.attrValues overlaySet)
     ++ [
@@ -48,9 +46,7 @@
         hyprland = inputs.hyprland.packages.${final.system}.hyprland;
         hyprland-pkgs = inputs.hyprland.inputs.nixpkgs.legacyPackages.${final.system};
 
-        vndrew = inputs.nixpkgs-vndrew.packages.${final.system};
-        secret = inputs.nixpkgs-secret.packages.${final.system};
-        my_pkgs = packages_func final.system;
+        private = inputs.nixpkgs-private.packages.${final.system};
       })
 
       inputs.nur.overlays.default
@@ -86,7 +82,6 @@
         inputs.ags.homeManagerModules.default
         inputs.anyrun.homeManagerModules.default
         inputs.sops-nix.homeManagerModules.sops
-        "${inputs.home-manager-unstable}/modules/programs/ghostty.nix"
         # inputs.nix-index-database.hmModules.nix-index
       ];
       useGlobalPkgs = true;
@@ -143,28 +138,26 @@ in
         };
       };
 
-      formatter = nixpkgs.legacyPackages.${system}.alejandra;
+      # formatter = nixpkgs.legacyPackages.${system}.alejandra;
 
-      packages =
-        (packages_func system)
-        // {
-          # footy = pkgs.foot.override {
-          #   wrapZSH = true;
-          #   extraPATH = [
-          #   ];
-          # };
-          # wezshterm = pkgs.wezterm.override {
-          #   wrapZSH = true;
-          #   extraPATH = [
-          #   ];
-          # };
-          # alakitty = pkgs.alakazam.override {
-          #   wrapZSH = true;
-          #   extraPATH = [
-          #   ];
-          # };
-          inherit (pkgs) dep-tree; # minesweeper nops manix tmux alakazam wezterm foot;
-        };
+      packages = {
+        # footy = pkgs.foot.override {
+        #   wrapZSH = true;
+        #   extraPATH = [
+        #   ];
+        # };
+        # wezshterm = pkgs.wezterm.override {
+        #   wrapZSH = true;
+        #   extraPATH = [
+        #   ];
+        # };
+        # alakitty = pkgs.alakazam.override {
+        #   wrapZSH = true;
+        #   extraPATH = [
+        #   ];
+        # };
+        inherit (pkgs) dep-tree podcast-dl megadl crx-dl clone_repos chrome-wrapper;
+      };
 
       app-images = let
         bundle = nix-appimage.bundlers.${system}.default;
@@ -179,7 +172,6 @@ in
         "andrew@dustbook" = home-manager.lib.homeManagerConfiguration {
           extraSpecialArgs = {
             username = "andrew";
-            my_pkgs = packages_func system;
             inherit
               stateVersion
               self
@@ -205,7 +197,6 @@ in
           extraSpecialArgs = {
             username = "andrew";
             monitorCFG = ./homes/monitors_by_hostname/nestOS;
-            my_pkgs = packages_func system;
             inherit
               stateVersion
               self
@@ -239,6 +230,22 @@ in
             statix
           ];
         };
+
+        repo-clone = pkgs.mkShell {
+          nativeBuildInputs = self'.packages.clone_repos;
+        };
+
+        podcast-dl = pkgs.mkShell {
+          nativeBuildInputs = self'.packages.podcast-dl ++ (with pkgs; [python3Packages.black pyright isort]);
+        };
+
+        yt-dlp = pkgs.mkShell {
+          nativeBuildInputs = with self'.packages; [
+            pkgs.yt-dlp
+            yt-dlp-youtube-oauth2
+            yt-dlp-get-pot
+          ];
+        };
       };
 
       # NOTE: outputs to legacyPackages.${system}.nixosConfigurations.<name>
@@ -248,7 +255,6 @@ in
         "vndrew@nestOS" = nixpkgs.lib.nixosSystem {
           specialArgs = {
             hostname = "nestOS";
-            my_pkgs = packages_func system;
             inherit
               stateVersion
               self
@@ -276,7 +282,6 @@ in
         "vndrew@dustbook" = nixpkgs.lib.nixosSystem {
           specialArgs = {
             hostname = "dustbook";
-            my_pkgs = packages_func system;
             inherit
               stateVersion
               users
@@ -304,7 +309,6 @@ in
         "nestOS" = nixpkgs.lib.nixosSystem {
           specialArgs = {
             hostname = "nestOS";
-            my_pkgs = packages_func system;
             inherit
               stateVersion
               self
@@ -326,7 +330,6 @@ in
         "dustbook" = nixpkgs.lib.nixosSystem {
           specialArgs = {
             hostname = "dustbook";
-            my_pkgs = packages_func system;
             inherit
               stateVersion
               self
@@ -348,7 +351,6 @@ in
         "vmware-vm" = nixpkgs.lib.nixosSystem {
           specialArgs = {
             hostname = "virtbird";
-            my_pkgs = packages_func system;
             inherit
               stateVersion
               self
@@ -375,7 +377,6 @@ in
         "my-qemu-vm" = nixpkgs.lib.nixosSystem {
           specialArgs = {
             hostname = "virtbird";
-            my_pkgs = packages_func system;
             inherit
               stateVersion
               self
@@ -402,7 +403,6 @@ in
             hostname = "installer_mine";
             is_minimal = true;
             use_alacritty = true;
-            my_pkgs = packages_func system;
             inherit
               stateVersion
               self
@@ -427,7 +427,6 @@ in
         };
         "installer" = inputs.nixpkgs.lib.nixosSystem {
           specialArgs = {
-            my_pkgs = packages_func system;
             inherit self inputs system-modules my-utils;
           };
           inherit system;

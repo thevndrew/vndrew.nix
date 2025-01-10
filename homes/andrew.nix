@@ -157,8 +157,8 @@ in {
     nb = "nix build --json --no-link --print-build-logs";
     top_used = "fc -ln 0 | sort | uniq -c | sort -nr | head -20";
     dugood = ''${unstable.writeShellScript "dugood" ''du -hd1 $@ | sort -hr''}'';
-    get_secrets = "source ${pkgs.my_pkgs.sops_secrets_key}/bin/get_sops_key";
-    remove_secrets = "source ${pkgs.my_pkgs.sops_secrets_key}/bin/remove_sops_key";
+    get_secrets = "source ${pkgs.sops_secrets_key}/bin/get_sops_key";
+    remove_secrets = "source ${pkgs.sops_secrets_key}/bin/remove_sops_key";
 
     flakeUpAndAddem = ''${pkgs.writeShellScript "flakeUpAndAddem.sh"
         /*

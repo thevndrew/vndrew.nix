@@ -15,8 +15,6 @@ in {
     userdata ? true,
     ...
   }: let
-    vndrew-nvim = inputs.vndrew-nvim;
-
     nixosMods = import ./modules {
       inherit inputs my-utils;
       homeManager = false;

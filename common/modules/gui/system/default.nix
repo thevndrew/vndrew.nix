@@ -81,7 +81,7 @@ in {
         jetbrains-mono
         # for all fonts
         # font.packages = [ ... ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts)
-        pkgs.secret.berkeley-mono
+        pkgs.private.berkeley-mono
       ];
       fontconfig = {
         defaultFonts = {

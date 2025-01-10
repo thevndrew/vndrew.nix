@@ -108,14 +108,9 @@
       flake = false;
     };
 
-    # My package repo(s) and neovim config
-    nixpkgs-vndrew = {
-      url = "git+ssh://git@github.com/thevndrew/nix-packages.git";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixpkgs-secret = {
-      url = "git+ssh://git@github.com/thevndrew/nix-secret-pkgs.git";
+    # My private package repo and neovim config
+    nixpkgs-private = {
+      url = "git+ssh://git@github.com/thevndrew/private-pkgs.nix.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -129,10 +124,31 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     # Use ssh protocol to authenticate via ssh-agent/ssh-key, and shallow clone
     mysecrets = {
-      url = "git+ssh://git@github.com/thevndrew/nix-secrets.git?shallow=1";
+      url = "git+ssh://git@github.com/thevndrew/secrets.nix.git?shallow=1";
       flake = false;
+    };
+
+    bootdev = {
+      url = "github:bootdotdev/bootdev";
+      flake = false;
+    };
+
+    yt-dlp-youtube-oauth2 = {
+      url = "github:coletdjnz/yt-dlp-youtube-oauth2";
+      flake = false;
+    };
+
+    yt-dlp-get-pot = {
+      url = "github:coletdjnz/yt-dlp-get-pot";
+      flake = false;
+    };
+
+    tailscale = {
+      flake = false;
+      url = "github:tailscale/tailscale";
     };
   };
 

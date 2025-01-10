@@ -1,0 +1,16 @@
+repo_list:
+  config:
+    url: "git@github.com:thevndrew/vndrew.nix.git"
+    directory: "vndrew.nix"
+  services:
+    url: "git@github.com:thevndrew/container-services.git"
+    directory: "repos/services"
+  secrets:
+    url: "git@github.com:thevndrew/secrets.nix.git"
+    directory: "repos/secrets.nix"
+  secret_packages:
+    url: "git@github.com:thevndrew/private-pkgs.nix.git"
+    directory: "repos/private-pkgs.nix"
+  neovim:
+    url: "git@github.com:thevndrew/vndrew.nvim.git"
+    directory: "repos/vndrew.nvim"

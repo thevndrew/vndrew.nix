@@ -26,7 +26,7 @@ in {
       };
     };
     environment.systemPackages = [
-      pkgs.vndrew.cockpit-podman
+      pkgs.cockpit-podman
     ];
   };
 }

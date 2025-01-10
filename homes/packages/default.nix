@@ -4,7 +4,7 @@
   my-utils,
   ...
 }: let
-  inherit (pkgs) vndrew unstable stable nix-alien;
+  inherit (pkgs) unstable stable nix-alien;
 
   stable-pkgs = with stable; [
     dog
@@ -101,13 +101,6 @@
     nix-alien.nix-alien
   ];
 
-  vndrew-pkgs = with vndrew; [
-    bootdev
-    megadl
-    yt-dlp-youtube-oauth2
-    yt-dlp-get-pot
-  ];
-
   zja = {pkgs}:
     pkgs.writeShellApplication {
       name = "zja";
@@ -142,11 +135,15 @@ in {
 
   home.packages =
     [
-      (zja {pkgs = unstable;})
+      pkgs.bootdev
+      pkgs.clone_repos
+      pkgs.megadl
+      pkgs.sops_secrets_key
+      pkgs.update_input
+      pkgs.yt-dlp-get-pot
+      pkgs.yt-dlp-youtube-oauth2
 
-      pkgs.my_pkgs.clone_repos
-      pkgs.my_pkgs.sops_secrets_key
-      pkgs.my_pkgs.update_input
+      (zja {pkgs = unstable;})
 
       (pkgs.writeShellApplication {
         name = "zipcbz";
@@ -163,7 +160,7 @@ in {
         name = "rip_streams";
         runtimeInputs =
           (with unstable; [yq])
-          ++ (with pkgs.vndrew; [
+          ++ (with pkgs; [
             yt-dlp-youtube-oauth2
             yt-dlp-get-pot
           ]);
@@ -173,7 +170,7 @@ in {
         name = "rip_streams_stop";
         runtimeInputs =
           (with unstable; [yq coreutils])
-          ++ (with pkgs.vndrew; [
+          ++ (with pkgs; [
             yt-dlp-youtube-oauth2
             yt-dlp-get-pot
           ]);
@@ -183,7 +180,7 @@ in {
         name = "rip_stream_helper";
         runtimeInputs =
           (with unstable; [yq yt-dlp])
-          ++ (with pkgs.vndrew; [
+          ++ (with pkgs; [
             yt-dlp-youtube-oauth2
             yt-dlp-get-pot
           ]);
@@ -228,6 +225,5 @@ in {
       })
     ]
     ++ stable-pkgs
-    ++ unstable-pkgs
-    ++ vndrew-pkgs;
+    ++ unstable-pkgs;
 }
