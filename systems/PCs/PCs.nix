@@ -92,7 +92,7 @@
         dates = "weekly";
         extraArgs = "--keep 3 --keep-since 7d";
       };
-      flake = "/home/${username}/nix-config";
+      flake = "/home/${username}/vndrew.nix/";
     };
   };
 

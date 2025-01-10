@@ -29,6 +29,13 @@ in {
         description = "Install and configure wezterm";
       };
 
+      ghostty = lib.mkOption {
+        type = lib.types.bool;
+        default = cfg.enable;
+        example = false;
+        description = "Install and configure ghostty";
+      };
+
       alacritty = lib.mkOption {
         type = lib.types.bool;
         default = false;
@@ -68,7 +75,7 @@ in {
     };
 
     programs.ghostty = {
-      enable = cfg.enable;
+      enable = cfg.ghostty;
       package = pkgs.ghostty;
     };
 

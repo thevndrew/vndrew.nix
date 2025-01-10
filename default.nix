@@ -8,7 +8,7 @@
   ...
 } @ inputs: let
   # NOTE: setup
-  flake-path = "/home/andrew/nix-config";
+  flake-path = "/home/andrew/vndrew.nix/";
 
   stateVersion = "23.11";
 

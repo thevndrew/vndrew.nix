@@ -11,7 +11,7 @@ nix-shell '<home-manager>' -A install
 # enable flakes
 echo "experimental-features = nix-command flakes" | sudo tee -a /etc/nix/nix.conf
 
-pushd ~/nix-config/ || exit 1
+pushd ~/vndrew.nix/ || exit 1
 
 # build flake and switch to it
 home-manager build --flake .#andrew

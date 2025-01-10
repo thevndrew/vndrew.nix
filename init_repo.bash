@@ -13,7 +13,7 @@ Host github.com
 EOL
 
 # pull config flake
-git clone git@github.com:thevndrew/nix-config.git ~/nix-config
+git clone git@github.com:thevndrew/vndrew.nix.git ~/vndrew.nix
 
 if ! grep -q systemd /etc/wsl.conf; then
 	# enable systemd

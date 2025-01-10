@@ -139,7 +139,7 @@ in {
   #
   home.sessionVariables = {
     EDITOR = "vim";
-    FLAKE = "/home/${username}/nix-config";
+    FLAKE = "/home/${username}/vndrew.nix/";
     _ZO_ECHO = "1";
     NIXOS_OZONE_WL = "1"; # This variable fixes electron apps in wayland
     # WLR_NO_HARDWARE_CURSORS = "1"; # if cursor becomes invisible
