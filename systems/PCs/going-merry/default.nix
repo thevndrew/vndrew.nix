@@ -36,22 +36,6 @@
     };
   };
 
-  systemd.services."qbittorrent_restart" = {
-    enable = true;
-    description = "qbittorrent automatic restart";
-    path = [pkgs.docker-client];
-    unitConfig = {
-      Type = "oneshot";
-    };
-    serviceConfig = {
-      ExecStart = "/bin/sh -c '/home/${username}/repos/services/qbittorrent/restart.sh'";
-      User = username;
-      Group = "users";
-    };
-    startAt = "hourly";
-    wantedBy = ["multi-user.target"];
-  };
-
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
