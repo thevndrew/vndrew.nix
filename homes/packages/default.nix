@@ -69,6 +69,7 @@
     skim
     sops
     ssh-to-age
+    tea
     teller
     # termscp
     tmux
