@@ -40,8 +40,8 @@ in {
     bat = {
       enable = true;
       package = unstable.bat;
-      extraPackages = with unstable.bat-extras; [
-        #batdiff
+      extraPackages = with pkgs.stable.bat-extras; [
+        batdiff
         batgrep
         batman
         batpipe
@@ -212,6 +212,10 @@ in {
       extraConfig = ''
         Host github.com
             HostName github.com
+            PreferredAuthentications publickey
+            IdentityFile ~/.ssh/${hostname}
+        Host gitea.local.vndrew.com
+            HostName gitea.local.vndrew.com
             PreferredAuthentications publickey
             IdentityFile ~/.ssh/${hostname}
       '';

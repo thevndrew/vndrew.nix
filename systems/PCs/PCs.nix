@@ -229,6 +229,11 @@
       settings.PasswordAuthentication = false;
       settings.PermitRootLogin = "yes";
       ports = [22 2222];
+      extraConfig = ''
+        Match User git
+          AuthorizedKeysCommandUser git
+          AuthorizedKeysCommand ${pkgs.docker-client}/bin/docker exec -i gitea /usr/local/bin/gitea keys -e git -u %u -t %t -k %k
+      '';
     };
 
     tailscale = {
