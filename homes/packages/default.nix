@@ -22,6 +22,17 @@
     wakeonlan
     nix-du
 
+    wavemon
+    linuxKernel.packages.linux_zen.perf
+    iotop
+    nvtop
+    iftop
+    atop
+    s-tui
+    tcpdump
+    iperf
+    # kubectx
+
     # pueue
     # pprof
     # perf
