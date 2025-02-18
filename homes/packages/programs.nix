@@ -1,4 +1,5 @@
 {
+  lib,
   config,
   hostname,
   inputs,
@@ -89,8 +90,104 @@ in {
           bump = "commit --amend --no-edit --date=now";
           c = "commit";
           co = "checkout";
-          st = "status";
           wt = "worktree";
+          ragequit = "!sh -c 'git commit -am wip && shutdown -h now'";
+          tree = "log --all --graph --decorate --oneline";
+          fix = "!f() { $EDITOR -p `git diff --name-only --diff-filter=U`; }; f";
+          stsh = "stash --keep-index";
+          staash = "stash --include-untracked"; # include untracked
+          staaash = "stash --all"; # include staged
+          which = "!git branch | grep -i"; # quick grep to find by ticket number
+          lucky = "!sh -c 'git checkout $(git which $1 -m1)' - "; # checkout by ticket number
+          revrt = "!sh -c 'git clean -df && git checkout -- '"; # undoes all local uncommitted changes
+          clean = "gc --aggressive --prune";
+          purge = "remote prune origin"; # looks at any remote branches deleted and asks to delete the related locals
+
+          # Report all aliases.
+          alias = "config --get-regexp alias\\\\.";
+
+          # List info about all branches
+          branches = "!git branch -a -vv | cut -c -119";
+
+          # Used for other aliases. Determine the name of the current branch
+          branch-name = "!git rev-parse --abbrev-ref @";
+
+          # Concise status comment
+          st = "status --short --branch";
+
+          # List all known tags
+          tags = "tag --list --format '%(refname:short)  %(align:18)%(\*authorname)%(end)  %(subject)'";
+
+          # Display current feature branch status and commits relative to the parent (default "master") branch
+          changes = lib.concatStrings [
+            "!git status && echo -- "
+            "&& (git log -n 1 --format=format:'   @\~0  \[%h\] %s' @) "
+            "&& (git log --format=format:'\[%h\] %s' \${1-main}..@\~1 | cat -n) "
+            "&& echo "
+            "&& echo>/dev/null"
+          ];
+
+          # Print files in the tree that are not under source control
+          ignored = "clean -ndX";
+
+          # Show local branches that have been merged into main
+          merged = "!git branch --all --merged origin/main | cut -c3- | grep -v main";
+
+          # Pretty log format
+          plog = "log --decorate --oneline --graph";
+
+          # Show the overall shape of the repo branches through simplified graph
+          shape = "log --decorate --all --graph --simplify-by-decoration --topo-order --date=short --format='%h \[%cd\]%d %s'";
+
+          # Show status log with changed-files summary
+          slog = "log --name-status";
+
+          lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+          sl = "stash list --pretty=format:'%C(red)%h%C(reset) - %C(yellow)(%gd%C(yellow))%C(reset) %<(70,trunc)%s %C(green)(%cr) %C(bold blue)<%an>%C(reset)'";
+          rl = "reflog --pretty=format:'%Cred%h%Creset %C(yellow)%gd%C(reset) %C(auto)%gs%C(reset) %C(green)(%cr)%C(reset) %C(bold blue)<%an>%Creset' --abbrev-commit";
+          diff-all = "!\"for name in $(git diff --name-only $1); do git difftool -y $1 $name & done\"";
+          diff-changes = "diff --name-status -r";
+          diff-stat = "diff --stat --ignore-space-change -r";
+          diff-staged = "diff --cached";
+          diff-upstream = "!git fetch origin && git diff main origin/main";
+          fixup = "!git log --oneline --decorate @{u}.. | fzf | awk '{ print $1 }' | xargs -I{} git commit --fixup={}";
+          fixup2 = "!f() { git commit --fixup \":/$1\"; }; f";
+          bsort = ''
+            !git branch --sort=-committerdate --format="%(committerdate:format:%Y-%m-%d %H:%M) %(refname:short)" | awk "{printf \"\033[32m%s %s \033[33m%s\033[0m\n\", \$1, \$2, \$3}"
+          '';
+
+          # ask politely
+          please = "push --force-with-lease";
+
+          # useful when leaving or starting a refactoring or before popping a stash
+          wip = "commit --no-verify --message 'wip'";
+
+          # work on last commit
+          append = "commit --amend --no-edit";
+          amend = "commit --amend --edit";
+          unamend = "reset --soft \"HEAD@{1}\"";
+          uncommit = "!f() { git log --format=%B -n 1; git reset --soft HEAD~1 ; }; f";
+
+          # interactive rebase
+          ir = "rebase --interactive";
+          ic = "rebase --continue";
+          ia = "rebase --abort";
+
+          # patching
+          padd = "add -p";
+          prestore = "restore -p";
+          preset = "reset -p";
+          puncommit = "reset -p HEAD~1";
+
+          discard = "reset HEAD --hard";
+          discardchunk = "checkout -p";
+          ol = "log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+          others = "ls-files --others --ignored --exclude-from=.gitignore";
+          rmuntracked = "clean -df";
+          root = "rev-parse --show-toplevel";
+          searchfiles = "log --name-status --source --all -S";
+          searchtext = "!f() { git grep \"$*\" $(git rev-list --all); }; f";
+          unstage = "reset HEAD --";
         };
 
         delta = {
@@ -136,6 +233,8 @@ in {
 
           rebase.updateRefs = true;
           rerere.enabled = true;
+
+          help.autocorrect = true;
 
           user = {
             gpgsign = true;

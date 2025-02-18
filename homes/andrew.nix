@@ -159,6 +159,7 @@ in {
     dugood = ''${unstable.writeShellScript "dugood" ''du -hd1 $@ | sort -hr''}'';
     get_secrets = "source ${pkgs.sops_secrets_key}/bin/get_sops_key";
     remove_secrets = "source ${pkgs.sops_secrets_key}/bin/remove_sops_key";
+    glp = "git log --pretty=format:\"%C(yellow)%h%Creset - %C(green)%an%Creset, %ar : %s\"";
 
     flakeUpAndAddem = ''${pkgs.writeShellScript "flakeUpAndAddem.sh"
         /*
