@@ -20,19 +20,14 @@ except FileNotFoundError:
     print(f"Error: Command file '{COMMANDS_FILE}' not found!")
     sys.exit(1)
 
-# # Get the actual PS1 prompt
-# REAL_PS1 = subprocess.run(
-#     ["bash", "--rcfile", "/dev/stdin"],
-#     input='echo "$PS1"; exit\n',
-#     capture_output=True,
-#     text=True,
-#     shell=True,
-# ).stdout.strip()
+# ps1_raw = subprocess.run("zsh -i -c 'echo $PS1'", shell=True, capture_output=True, text=True).stdout.strip()
+# PS1 = subprocess.run(f"zsh -i -c 'print -r -- {ps1_raw}'", shell=True, capture_output=True, text=True).stdout.strip()
+# PS1 = PS1.replace("%{%}", "")
 
 user = getpass.getuser()
 host = socket.gethostname()
 cwd = os.getcwd()
-TERMINAL_PROMPT = f"{user}@{host}:{cwd}$ "  # Simulates a standard Linux prompt
+TERMINAL_PROMPT = f"{user}@{host}:{cwd}\n> "  # Simulates a standard Linux prompt
 
 
 def type_command(cmd):
@@ -41,12 +36,17 @@ def type_command(cmd):
         sys.stdout.flush()
         time.sleep(0.05)
 
+subprocess.run("clear")
 
 for cmd in commands:
     sys.stdout.write(TERMINAL_PROMPT)
     sys.stdout.flush()
+    _ = input()
+    sys.stdout.write("\033[1A\033[2K")
+    sys.stdout.write("> ")
+    sys.stdout.flush()
     type_command(cmd)
-    input()
+    _ = input()
     subprocess.run(
         cmd, shell=True, stdin=sys.stdin, stdout=sys.stdout, stderr=sys.stderr
     )

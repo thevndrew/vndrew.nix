@@ -154,6 +154,8 @@ in {
       pkgs.update_input
       pkgs.yt-dlp-get-pot
       pkgs.yt-dlp-youtube-oauth2
+      pkgs.run_commands_py
+      pkgs.run_commands_sh
 
       (zja {pkgs = unstable;})
 

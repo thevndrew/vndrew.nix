@@ -30,6 +30,8 @@ This file imports overlays defined in the following format.
       "crx-dl"
       "megadl"
       "podcast-dl"
+      "run_commands_py"
+      "run_commands_sh"
       "sops_secrets_key"
       "update_input"
       "yt-dlp-get-pot"
