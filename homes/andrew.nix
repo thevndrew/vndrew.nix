@@ -241,7 +241,7 @@ in {
         path = "$ZDOTDIR/.zsh_history";
       };
 
-      initExtra = ''
+      initContent = ''
         #$${zsh_defs}
         ${zsh_config}
       '';

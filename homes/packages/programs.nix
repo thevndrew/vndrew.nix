@@ -271,6 +271,8 @@ in {
 
     lsd = {
       enable = true;
+      enableBashIntegration = false;
+      enableZshIntegration = false;
     };
 
     #nix-index-database.comma.enable = true;
