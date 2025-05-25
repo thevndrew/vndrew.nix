@@ -238,7 +238,7 @@
 
     tailscale = {
       enable = true;
-      package = pkgs.tailscale;
+      package = pkgs.unstable.tailscale;
       useRoutingFeatures = "both";
     };
 
