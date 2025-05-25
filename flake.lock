@@ -2702,10 +2702,10 @@
     "mysecrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1736816308,
-        "narHash": "sha256-Ft+OYFa08xjGJltS6Xld5hEd3Edy5+6KFuaLKnxuAuE=",
+        "lastModified": 1748140726,
+        "narHash": "sha256-XwEqqzRWdjUdE4YFwSVgmf4bQDraAntrIGI9y5fbd1g=",
         "ref": "refs/heads/main",
-        "rev": "fc65832983b023473e9583021ed39886d2a6c9d3",
+        "rev": "8f704851062ff62daedbe2d6e0fe528060a330a7",
         "shallow": true,
         "type": "git",
         "url": "ssh://git@github.com/thevndrew/secrets.nix.git"
