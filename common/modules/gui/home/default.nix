@@ -151,7 +151,7 @@ in {
       enable = cfg.wm.enable;
       xwayland.enable = cfg.wm.enable;
 
-      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      # package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
 
       plugins = [
         #inputs.hyprland-plugins.packages.${pkgs.system}.borders-plus-plus

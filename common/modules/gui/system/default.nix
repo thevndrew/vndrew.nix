@@ -48,19 +48,21 @@ in {
   config = lib.mkIf cfg.enable {
     programs.hyprland = {
       enable = cfg.enable;
-      package = pkgs.hyprland;
+      # package = pkgs.hyprland;
+      portalPackage = pkgs.xdg-desktop-portal-hyprland; # xdph none git
       xwayland.enable = cfg.enable;
     };
 
     environment.systemPackages = [
-      pkgs.hyprland-pkgs.mesa
+      # pkgs.hyprland-pkgs.mesa
     ];
 
     # Mesa version fix
     hardware.graphics = {
-      package = pkgs.hyprland-pkgs.mesa.drivers;
+      # package = pkgs.hyprland-pkgs.mesa.drivers;
 
-      extraPackages = with pkgs.hyprland-pkgs; [
+      # extraPackages = with pkgs.hyprland-pkgs; [
+      extraPackages = with pkgs; [
         intel-media-driver # LIBVA_DRIVER_NAME=iHD
         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
         (intel-vaapi-driver.override {enableHybridCodec = true;})
@@ -69,7 +71,8 @@ in {
 
       # if you also want 32-bit support (e.g for Steam)
       enable32Bit = true;
-      package32 = pkgs.hyprland-pkgs.pkgsi686Linux.mesa.drivers;
+      # package32 = pkgs.hyprland-pkgs.pkgsi686Linux.mesa.drivers;
+      package32 = pkgs.pkgsi686Linux.mesa;
     };
 
     environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";}; # Force intel-media-driver
