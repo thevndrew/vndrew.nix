@@ -351,6 +351,8 @@ in {
         git_branch.style = "242";
         kubernetes.disabled = false;
         ruby.disabled = true;
+        character.success_symbol = "[;](bold green) ";
+        character.error_symbol = "[;](bold red) ";
 
         hostname.ssh_only = false;
       };
