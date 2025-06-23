@@ -358,11 +358,8 @@ in {
       };
     };
 
-    thefuck = {
+    pay-respects = {
       enable = true;
-      enableBashIntegration = true;
-      enableZshIntegration = true;
-      package = unstable.thefuck;
     };
 
     yazi = {
