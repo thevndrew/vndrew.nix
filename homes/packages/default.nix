@@ -152,8 +152,6 @@ in {
       pkgs.megadl
       pkgs.sops_secrets_key
       pkgs.update_input
-      pkgs.yt-dlp-get-pot
-      pkgs.yt-dlp-youtube-oauth2
       pkgs.run_commands_py
       pkgs.run_commands_sh
 
@@ -173,31 +171,19 @@ in {
       (pkgs.writeShellApplication {
         name = "rip_streams";
         runtimeInputs =
-          (with unstable; [yq])
-          ++ (with pkgs; [
-            yt-dlp-youtube-oauth2
-            yt-dlp-get-pot
-          ]);
+          (with unstable; [yq]);
         text = builtins.readFile ./rip_streams.bash;
       })
       (pkgs.writeShellApplication {
         name = "rip_streams_stop";
         runtimeInputs =
-          (with unstable; [yq coreutils])
-          ++ (with pkgs; [
-            yt-dlp-youtube-oauth2
-            yt-dlp-get-pot
-          ]);
+          (with unstable; [yq coreutils]);
         text = builtins.readFile ./rip_streams_stop.bash;
       })
       (pkgs.writeShellApplication {
         name = "rip_stream_helper";
         runtimeInputs =
-          (with unstable; [yq yt-dlp])
-          ++ (with pkgs; [
-            yt-dlp-youtube-oauth2
-            yt-dlp-get-pot
-          ]);
+          (with unstable; [yq yt-dlp]);
         text = builtins.readFile ./rip_stream_helper.bash;
       })
 

@@ -240,10 +240,8 @@ in
         };
 
         yt-dlp = pkgs.mkShell {
-          nativeBuildInputs = with self'.packages; [
+          nativeBuildInputs = [
             pkgs.yt-dlp
-            yt-dlp-youtube-oauth2
-            yt-dlp-get-pot
           ];
         };
       };

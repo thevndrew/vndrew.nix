@@ -34,8 +34,6 @@ This file imports overlays defined in the following format.
       "run_commands_sh"
       "sops_secrets_key"
       "update_input"
-      "yt-dlp-get-pot"
-      "yt-dlp-youtube-oauth2"
   ];
 
   overlaySet =
