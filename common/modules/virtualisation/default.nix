@@ -39,8 +39,6 @@ in {
             engine = {
               network_cmd_options = [
                 "mtu=1280"
-                # "outbound_addr=tailscale0"
-                # "outbound_addr6=tailscale0"
               ];
             };
           };
@@ -70,6 +68,7 @@ in {
       # Not needed when virtualisation.docker.enable = true;
       pkgs.docker-client
       pkgs.docker-compose
+      pkgs.aardvark-dns
     ];
   };
 }

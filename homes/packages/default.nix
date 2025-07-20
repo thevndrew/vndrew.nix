@@ -25,7 +25,7 @@
     wavemon
     linuxKernel.packages.linux_zen.perf
     iotop
-    nvtopPackages.full
+    # nvtopPackages.full
     iftop
     atop
     s-tui
