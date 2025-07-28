@@ -27,7 +27,7 @@ in {
         show_preview = true;
         show_tabs = true;
         store_failed = true;
-        sync_address = "http://going-merry.ainu-kanyu.ts.net:9085";
+        sync_address = "http://going-merry.ainu-kanyu.ts.net:9009";
         #sync_address = "https://atuin.local.vndrew.com";
         sync_frequency = "15m";
         update_check = true;
