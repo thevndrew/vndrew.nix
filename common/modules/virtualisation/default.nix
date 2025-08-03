@@ -36,11 +36,6 @@ in {
               # pihole container that I use for DNS
               dns_bind_port = 54;
             };
-            engine = {
-              network_cmd_options = [
-                "mtu=1280"
-              ];
-            };
           };
         };
       };
@@ -59,6 +54,7 @@ in {
         };
         dockerSocket.enable = true;
         defaultNetwork.settings.dns_enable = true;
+        defaultNetwork.settings.dns_bind_port = 54;
         # extraPackages = [ pkgs.zfs ]; # Required if the host is running ZFS
       };
     };
