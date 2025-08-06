@@ -35,11 +35,15 @@ in {
         ];
       };
       nameservers = [
-        "100.100.100.100"
-        "9.9.9.9"
-      ];
-      search = [
-        "ainu-kanyu.ts.net"
+        "9.9.9.9"              # Quad9 malware blocking
+        "1.1.1.1"              # Cloudflare
+        "1.1.1.2"              # Cloudflare with malware blocking
+        "1.0.0.2"              # Cloudflare with malware blocking
+        "194.242.2.2"       # Mullvad no filtering
+        "2620:fe::fe"          # Quad9 IPv6
+        "2606:4700:4700::1112" # Cloudflare IPV6 with malware blocking
+        "2606:4700:4700::1002" # Cloudflare IPV6 with malware blocking
+        "2a07:e340::2"      # Mullvad IPv6
       ];
     };
   };
