@@ -36,6 +36,11 @@ in {
               # pihole container that I use for DNS
               dns_bind_port = 54;
             };
+            engine = {
+              network_cmd_options = [
+                "mtu=1280"
+              ];
+            };
           };
         };
       };
