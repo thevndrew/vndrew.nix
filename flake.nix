@@ -22,6 +22,7 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05";
     nixpkgs-stable.url = "github:nixos/nixpkgs?ref=nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs-master.url = "github:nixos/nixpkgs?ref=master";
     nur.url = "github:nix-community/NUR";
 
     home-manager = {

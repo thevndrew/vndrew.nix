@@ -4,7 +4,7 @@
   my-utils,
   ...
 }: let
-  inherit (pkgs) unstable stable nix-alien;
+  inherit (pkgs) unstable stable nix-alien master;
 
   stable-pkgs = with stable; [
     dog
@@ -95,7 +95,7 @@
     xh
     yazi
     yq
-    yt-dlp
+    master.yt-dlp
     zip
 
     #findutils

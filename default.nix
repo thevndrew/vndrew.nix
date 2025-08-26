@@ -34,6 +34,13 @@
           };
         };
 
+        master = import inputs.nixpkgs-master {
+          inherit (final) system;
+          config = {
+            allowUnfree = true;
+          };
+        };
+
         stable = import inputs.nixpkgs-stable {
           inherit (final) system;
           config = {

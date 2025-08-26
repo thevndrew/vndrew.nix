@@ -7,16 +7,19 @@ args=$(yq -r ".streams.$stream.args // \"\"" "$config_yaml")
 
 if [[ -z $(echo "$args" | tr -d '"') ]]; then
    args=""
-   if [[ $url == *"youtube"* ]]; then
-	args=$(yq -r ".youtube.default_args" "$config_yaml")
-   fi
+   for name in youtube twitch; do
+      if [[ $url == *"$name"* ]]; then
+	   args=$(yq -r ".$name.default_args" "$config_yaml")
+      fi
+   done
 fi
+
 
 set +o errexit
 
 while true;
 do
     # shellcheck disable=SC2086
-    eval yt-dlp $args "$url";
+    eval "$args '$url'";
     sleep 60;
 done

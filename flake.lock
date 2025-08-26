@@ -5212,6 +5212,22 @@
         "url": "https://github.com/NixOS/nixpkgs/archive/e9b51731911566bbf7e4895475a87fe06961de0b.tar.gz"
       }
     },
+    "nixpkgs-master": {
+      "locked": {
+        "lastModified": 1756172202,
+        "narHash": "sha256-VXPzFDCcOQwymcP3OFU+zJxefuAi/777qtyS65QYcqo=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "15a4a61d1eb64f34ab69b6d23f35df49d17bf7fd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "master",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-private": {
       "inputs": {
         "deemon": "deemon",
@@ -6707,6 +6723,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_9",
+        "nixpkgs-master": "nixpkgs-master",
         "nixpkgs-private": "nixpkgs-private",
         "nixpkgs-stable": "nixpkgs-stable_5",
         "nixpkgs-unstable": "nixpkgs-unstable_7",
