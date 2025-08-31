@@ -183,7 +183,7 @@ in {
       (pkgs.writeShellApplication {
         name = "rip_stream_helper";
         runtimeInputs =
-          (with unstable; [yq yt-dlp]);
+          (with unstable; [yq]);
         text = builtins.readFile ./rip_stream_helper.bash;
       })
 
