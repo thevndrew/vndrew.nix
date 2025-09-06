@@ -432,11 +432,11 @@
     "bootdev": {
       "flake": false,
       "locked": {
-        "lastModified": 1755105083,
-        "narHash": "sha256-fjXMaK6Mz38FJNrR+lVDi0EMxMoCTnC1q0wDQS1Mab8=",
+        "lastModified": 1757000866,
+        "narHash": "sha256-TjldTmLX6H0k5mvq0SXoEuoFVxcmg+hMIXpCIVk1m3g=",
         "owner": "bootdotdev",
         "repo": "bootdev",
-        "rev": "8ccc01ef67c5e483a6a7fbf007bd5f90e260911b",
+        "rev": "decacd95bee4c9cb15f1e272e1b3eee090d6f13d",
         "type": "github"
       },
       "original": {
@@ -5214,11 +5214,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1756172202,
-        "narHash": "sha256-VXPzFDCcOQwymcP3OFU+zJxefuAi/777qtyS65QYcqo=",
+        "lastModified": 1757169752,
+        "narHash": "sha256-eFOXUvcP8n502sCimCHmoTlSZd7bQMjQPttKnLtt/E0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "15a4a61d1eb64f34ab69b6d23f35df49d17bf7fd",
+        "rev": "d75077afa733833a8e8f85be96ac8c57e2985e83",
         "type": "github"
       },
       "original": {
