@@ -60,7 +60,8 @@ def call_megatools(url, output_dir, proxy):
                 "HTTP POST failed",
                 "over quota",
                 "Couldn't resolve host name",
-                "Could not resolve proxy name"
+                "Could not resolve proxy name",
+                "Could not connect to server"
             ]
 
             if any(error.lower() in line.lower() for error in errors):
