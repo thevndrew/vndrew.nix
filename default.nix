@@ -163,7 +163,7 @@ in
         #   extraPATH = [
         #   ];
         # };
-        inherit (pkgs) dep-tree podcast-dl megadl crx-dl clone_repos chrome-wrapper;
+        inherit (pkgs) dep-tree podcast-dl megadl clone_repos chrome-wrapper;
       };
 
       app-images = let

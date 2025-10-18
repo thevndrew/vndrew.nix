@@ -27,7 +27,6 @@ This file imports overlays defined in the following format.
       "chrome-wrapper"
       "clone_repos"
       "cockpit-podman"
-      "crx-dl"
       "megadl"
       "podcast-dl"
       "run_commands_py"
