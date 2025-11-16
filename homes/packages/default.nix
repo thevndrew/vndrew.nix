@@ -96,6 +96,7 @@
     yazi
     yq
     master.yt-dlp
+    ffmpeg
     zip
 
     #findutils

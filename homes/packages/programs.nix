@@ -9,6 +9,8 @@
   ...
 }: let
   inherit (pkgs) unstable;
+
+  gallerydl-config = builtins.fromJSON (builtins.readFile ./gallery-dl.json);
 in {
   programs = {
     atuin = {
@@ -73,6 +75,11 @@ in {
       enableBashIntegration = true;
       enableZshIntegration = true;
       package = unstable.fzf;
+    };
+
+    gallery-dl = {
+      enable = true;
+      settings = gallerydl-config;
     };
 
     git =
