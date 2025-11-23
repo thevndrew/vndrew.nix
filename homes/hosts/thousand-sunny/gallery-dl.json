@@ -10,7 +10,7 @@
         "#": "====    General Extractor Options    ==========================",
         "#": "(these can be set as site-specific extractor options as well)  ",
 
-        "base-directory": "~/downloads/gallery-dl/",
+        "base-directory": "/mnt/storage/gallery-dl",
         "postprocessors": null,
         "skip"          : true,
         "skip-filter"   : null,
@@ -987,7 +987,7 @@
         },
         "ytdl":
         {
-            "cmdline-args": "--write-sub --all-subs --limit-rate 15M --retries 10 --fragment-retries 100 --merge-output-format mkv -P 'temp:/tmp'",
+            "cmdline-args": "--write-sub --all-subs --limit-rate 15M --retries 10 --fragment-retries 100 --merge-output-format mkv -P 'temp:/tmp/%(id)s/'",
             "config-file" : null,
             "deprecations": false,
             "enabled"     : true,
@@ -1218,11 +1218,13 @@
 
         "ytdl":
         {
-            "cmdline-args"   : null,
-            "config-file"    : null,
-            "deprecations"   : false,
-            "enabled"        : true,
-            "format"         : null,
+            "cmdline-args": "--write-sub --all-subs --limit-rate 15M --retries 10 --fragment-retries 100 --merge-output-format mkv -P 'temp:/tmp/%(id)s/'",
+            "config-file" : null,
+            "deprecations": false,
+            "enabled"     : true,
+            "format"      : "bestvideo*+bestaudio/best",
+            "generic"     : true,
+            "generic-category": true,
             "forward-cookies": true,
             "logging"        : true,
             "module"         : null,
