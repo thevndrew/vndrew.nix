@@ -584,7 +584,7 @@
             "directory": [
                 "{category}",
                 "{creator[vanity]}",
-                "{published_at[:10]}_{published_at[11:13]}-{published_at[14:16]}-{published_at[17:19]}_{id}_{title}"
+                "{published_at[:10]}_{published_at[11:13]}-{published_at[14:16]}-{published_at[17:19]}_{id}_{title[:150]}"
             ],
             "filename": {
                 "type == 'embed'": "{num:>03}_{title}.{extension}",
@@ -608,6 +608,13 @@
                     "module": "gallery_dl.postprocessors",
                     "text": "{content}",
                     "filename": "post.txt"
+                },
+                {
+                        "name": "metadata",
+                        "mode": "custom",
+                        "event": "post",
+                        "filename": "{id}.html",
+                        "content-format": "{content}\n"
                 }
             ],
 

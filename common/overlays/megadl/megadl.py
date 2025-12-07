@@ -135,6 +135,8 @@ def main():
             res = call_megatools(url=link, output_dir=f"{args.directory}/{subdir}", proxy=random.choice(proxies))
             if res == False:
                 used.add(proxy)
+            from time import sleep
+            sleep(2)
             if len(used) == len(proxies):
                 logger.info("All proxies used.")
                 exit(1)
